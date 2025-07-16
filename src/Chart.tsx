@@ -260,7 +260,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({
           <iframe 
             ref={iframeRef}
             key={`frame-${iframeKey}`}
-            src={`https://frame.fury.bot/?tokenMint=${tokenAddress}&theme=green`}
+            src={`https://frame.fury.bot/?tokenMint=${tokenAddress}&theme=blue`}
             className="absolute inset-0 w-full h-full border-0"
             style={{ 
               WebkitOverflowScrolling: 'touch',
