@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Wallet, LineChart, Cog, LucideIcon } from 'lucide-react';
+import { Monitor, AlertTriangle } from 'lucide-react';
 
 interface MobileLayoutProps {
   currentPage: 'wallets' | 'chart' | 'actions';
@@ -18,223 +18,132 @@ interface NavItem {
   component: React.ReactNode;
 }
 
-const MobileLayout: React.FC<MobileLayoutProps> = ({ 
-  currentPage, 
-  setCurrentPage,
-  children: {
-    WalletsPage,
-    ChartPage,
-    ActionsPage
-  }
-}) => {
+const MobileLayout: React.FC<MobileLayoutProps> = () => {
   useEffect(() => {
-    // Set viewport meta tag for mobile optimization
-    const viewportMeta = document.querySelector('meta[name="viewport"]');
-    if (viewportMeta) {
-      viewportMeta.setAttribute(
-        'content',
-        'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
-      );
-    }
-
-    // Add touch handling styles
-    const touchStyle = document.createElement('style');
-    touchStyle.textContent = `
-      * {
-        touch-action: pan-x pan-y;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-      }
-      input, textarea {
-        touch-action: auto;
-        user-select: text;
-        -webkit-user-select: text;
-      }
-    `;
-    document.head.appendChild(touchStyle);
-
-    // Add cyberpunk-specific styles
+    // Add cyberpunk-specific styles for desktop-only message
     const cyberpunkStyle = document.createElement('style');
     cyberpunkStyle.textContent = `
-      @keyframes mobile-nav-pulse {
-        0% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.2); }
-        50% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 15px rgba(59, 130, 246, 0.4); }
-        100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.2); }
+      @keyframes desktop-glow {
+        0% { text-shadow: 0 0 4px rgba(2, 179, 109, 0.7); }
+        50% { text-shadow: 0 0 8px rgba(2, 179, 109, 0.9), 0 0 12px rgba(2, 179, 109, 0.5); }
+        100% { text-shadow: 0 0 4px rgba(2, 179, 109, 0.7); }
       }
       
-      @keyframes mobile-nav-scan {
+      @keyframes desktop-pulse {
+        0% { box-shadow: 0 0 10px rgba(2, 179, 109, 0.3), 0 0 20px rgba(2, 179, 109, 0.1); }
+        50% { box-shadow: 0 0 20px rgba(2, 179, 109, 0.6), 0 0 30px rgba(2, 179, 109, 0.3); }
+        100% { box-shadow: 0 0 10px rgba(2, 179, 109, 0.3), 0 0 20px rgba(2, 179, 109, 0.1); }
+      }
+      
+      @keyframes desktop-scan {
         0% { transform: translateY(-100%); opacity: 0.3; }
         100% { transform: translateY(100%); opacity: 0; }
       }
       
-      @keyframes mobile-nav-glow {
-        0% { text-shadow: 0 0 4px rgba(59, 130, 246, 0.7); }
-        50% { text-shadow: 0 0 8px rgba(59, 130, 246, 0.9), 0 0 12px rgba(59, 130, 246, 0.5); }
-        100% { text-shadow: 0 0 4px rgba(59, 130, 246, 0.7); }
+      @keyframes desktop-grid {
+        0% { background-position: 0% 0%; }
+        100% { background-position: 20px 20px; }
       }
       
-      @keyframes mobile-nav-active {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+      .desktop-only-grid {
+        background-image: linear-gradient(rgba(2, 179, 109, 0.1) 1px, transparent 1px), 
+                         linear-gradient(90deg, rgba(2, 179, 109, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+        background-position: center center;
+        opacity: 0.2;
+        animation: desktop-grid 20s linear infinite;
       }
       
-      .mobile-nav-active {
-        position: relative;
-        background: linear-gradient(45deg, #050a0e, #091217, #0a1419);
-        background-size: 200% 200%;
-        animation: mobile-nav-active 8s ease infinite;
-        border: 1px solid rgba(59, 130, 246, 0.3);
-      }
-      
-      .mobile-nav-active::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 0.5rem;
-        padding: 1px;
-        background: linear-gradient(45deg, rgba(59, 130, 246, 0.6), rgba(147, 197, 253, 0.3), rgba(59, 130, 246, 0.6));
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        background-size: 200% 200%;
-        animation: mobile-nav-active 4s linear infinite;
-        pointer-events: none;
-      }
-      
-      .mobile-nav-scan::before {
+      .desktop-only-scan::before {
         content: "";
         position: absolute;
         width: 100%;
         height: 4px;
         background: linear-gradient(to bottom, 
-            transparent 0%,
-            rgba(59, 130, 246, 0.2) 50%,
-            transparent 100%);
+          transparent 0%,
+          rgba(2, 179, 109, 0.3) 50%,
+          transparent 100%);
         z-index: 10;
-        animation: mobile-nav-scan 8s linear infinite;
+        animation: desktop-scan 6s linear infinite;
         pointer-events: none;
       }
       
-      .mobile-nav-button:active {
-        transform: scale(0.95);
+      .desktop-only-glow {
+        animation: desktop-glow 3s infinite;
       }
       
-      .mobile-nav-icon-active {
-        animation: mobile-nav-glow 2s infinite;
-      }
-      
-      .mobile-nav-label-active {
-        animation: mobile-nav-glow 2s infinite;
-      }
-      
-      .mobile-nav-grid {
-        background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
-                         linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-        background-size: 20px 20px;
-        background-position: center center;
-        opacity: 0.1;
+      .desktop-only-pulse {
+        animation: desktop-pulse 4s infinite;
       }
     `;
     document.head.appendChild(cyberpunkStyle);
 
     return () => {
       // Clean up on unmount
-      if (viewportMeta) {
-        viewportMeta.setAttribute(
-          'content',
-          'width=device-width, initial-scale=1.0'
-        );
-      }
-      document.head.removeChild(touchStyle);
       document.head.removeChild(cyberpunkStyle);
     };
   }, []);
 
-  const navItems: NavItem[] = [
-    { id: 'wallets', label: 'WALLETS', Icon: Wallet, component: WalletsPage },
-    { id: 'chart', label: 'CHARTS', Icon: LineChart, component: ChartPage },
-    { id: 'actions', label: 'SYSTEM', Icon: Cog, component: ActionsPage }
-  ];
-
   return (
-    <div className="md:hidden flex flex-col h-[100dvh] max-h-[100dvh] select-none bg-slate-900/90 backdrop-blur-md" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
-      {/* Main content area */}
-      <div className="flex-1 overflow-hidden relative">
-        {/* Grid background */}
-        <div className="absolute inset-0 mobile-nav-grid"></div>
-        
-        {/* Content container */}
-        <div className="absolute inset-0">
-          <div className="h-full overflow-y-auto overscroll-contain pb-16 touch-pan-y" style={{ WebkitOverflowScrolling: 'touch' }}>
-            {navItems.map(({ id, component }) => (
-              currentPage === id && (
-                <div 
-                  key={id}
-                  className="min-h-full w-full"
-                >
-                  {component}
-                </div>
-              )
-            ))}
+    <div className="md:hidden flex flex-col h-[100dvh] max-h-[100dvh] select-none bg-[#050a0e] relative overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      {/* Grid background */}
+      <div className="absolute inset-0 desktop-only-grid"></div>
+      
+      {/* Scanning line effect */}
+      <div className="absolute inset-0 desktop-only-scan"></div>
+      
+      {/* Main content */}
+      <div className="flex-1 flex items-center justify-center p-6 relative z-10">
+        <div className="text-center max-w-md mx-auto">
+          {/* Warning icon with glow effect */}
+          <div className="mb-8 flex justify-center">
+            <div className="relative desktop-only-pulse rounded-full p-4 border border-[#02b36d40] bg-[#050a0e]">
+              <Monitor 
+                size={48} 
+                className="text-[#02b36d] desktop-only-glow" 
+              />
+              <AlertTriangle 
+                size={20} 
+                className="absolute -top-1 -right-1 text-[#ff6b6b] desktop-only-glow" 
+              />
+            </div>
+          </div>
+          
+          {/* Main message */}
+          <h1 className="text-2xl font-bold text-[#02b36d] mb-4 font-mono tracking-wider desktop-only-glow">
+            DESKTOP REQUIRED
+          </h1>
+          
+          {/* Subtitle */}
+          <p className="text-[#7ddfbd] text-lg mb-6 font-mono leading-relaxed">
+            You must use app from a desktop for an enhanced experience
+          </p>
+          
+          {/* Additional info */}
+          <div className="text-[#7ddfbd80] text-sm font-mono space-y-2">
+            <p>• Advanced trading features</p>
+            <p>• Multi-wallet management</p>
+            <p>• Real-time analytics</p>
+            <p>• Enhanced security protocols</p>
+          </div>
+          
+          {/* Decorative elements */}
+          <div className="mt-8 flex justify-center space-x-4">
+            <div className="w-2 h-2 rounded-full bg-[#02b36d] desktop-only-pulse"></div>
+            <div className="w-2 h-2 rounded-full bg-[#02b36d] desktop-only-pulse" style={{ animationDelay: '0.5s' }}></div>
+            <div className="w-2 h-2 rounded-full bg-[#02b36d] desktop-only-pulse" style={{ animationDelay: '1s' }}></div>
           </div>
         </div>
       </div>
-
-      {/* Navigation bar */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-md border-t border-blue-500/40 z-50 glass-shimmer" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
-        {/* Ambient glow from below */}
-        <div 
-          className="absolute bottom-0 left-0 right-0 h-1 opacity-60"
-          style={{
-            background: 'linear-gradient(to top, rgba(59, 130, 246, 0.5), transparent 100%)',
-          }}
-        ></div>
-        
-        {/* Nav items */}
-        <div className="flex justify-around items-center h-16 px-4 max-w-md mx-auto" style={{ paddingLeft: 'max(1rem, env(safe-area-inset-left))', paddingRight: 'max(1rem, env(safe-area-inset-right))' }}>
-          {navItems.map(({ id, label, Icon }) => (
-            <button
-              key={id}
-              onClick={() => setCurrentPage(id)}
-              className={`
-                flex flex-col items-center justify-center py-1 px-3
-                rounded-lg transition-all duration-300 mobile-nav-button
-                ${currentPage === id ? 'glassmorphism-btn' : 'hover:bg-slate-800/60 active:bg-slate-700/60'}
-              `}
-            >
-              <Icon 
-                size={20} 
-                className={`transition-colors duration-300 ${
-                  currentPage === id 
-                    ? 'text-blue-400 mobile-nav-icon-active' 
-                    : 'text-blue-200/50'
-                }`} 
-              />
-              <span 
-                className={`text-xs mt-1 transition-colors duration-300 font-mono tracking-wider ${
-                  currentPage === id 
-                    ? 'text-blue-400 mobile-nav-label-active' 
-                    : 'text-blue-200/50'
-                }`}
-              >
-                {label}
-              </span>
-              
-              {/* Indicator dot for active tab */}
-              {currentPage === id && (
-                <div className="absolute -top-1 w-1 h-1 rounded-full bg-blue-400"></div>
-              )}
-            </button>
-          ))}
-        </div>
-        
-        {/* Decorative corner elements */}
-        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-blue-500 opacity-70"></div>
-                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-blue-500 opacity-70"></div>
-      </nav>
+      
+      {/* Bottom border with glow */}
+      <div className="h-1 bg-gradient-to-r from-transparent via-[#02b36d] to-transparent opacity-60"></div>
+      
+      {/* Corner decorations */}
+      <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-[#02b36d] opacity-70"></div>
+      <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-[#02b36d] opacity-70"></div>
+      <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-[#02b36d] opacity-70"></div>
+      <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-[#02b36d] opacity-70"></div>
     </div>
   );
 };

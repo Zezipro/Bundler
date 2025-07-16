@@ -7,6 +7,7 @@ import { executeBonkCreate, WalletForBonkCreate, TokenMetadata, BonkCreateConfig
 
 const STEPS_DEPLOY = ["Token Details", "Select Wallets", "Review"];
 const MAX_WALLETS = 5; // Maximum number of wallets that can be selected
+const MIN_WALLETS = 2; // Minimum number of wallets required (developer + 1 buyer)
 
 interface BaseModalProps {
   isOpen: boolean;
@@ -250,8 +251,8 @@ export const DeployBonkModal: React.FC<DeployBonkModalProps> = ({
         }
         break;
       case 1:
-        if (selectedWallets.length === 0) {
-          showToast("Please select at least one wallet", "error");
+        if (selectedWallets.length < MIN_WALLETS) {
+          showToast("Please select at least 2 wallets (developer + 1 buyer)", "error");
           return false;
         }
         if (selectedWallets.length > MAX_WALLETS) {
@@ -332,22 +333,36 @@ export const DeployBonkModal: React.FC<DeployBonkModalProps> = ({
       );
       
       if (result.success && result.mintAddress && result.poolId) {
-        showToast(`Token deployment successful!`, "success");
+        showToast(`Token deployment successful! Mint: ${result.mintAddress}`, "success");
         
-        // Store the deployment success data
-        setDeploymentSuccessData({
-          mintAddress: result.mintAddress,
-          poolId: result.poolId
+        // Reset form states
+        setSelectedWallets([]);
+        setWalletAmounts({});
+        setTokenData({
+          name: '',
+          symbol: '',
+          description: '',
+          decimals: 6,
+          supply: '1000000000000000',
+          totalSellA: '793100000000000',
+          telegram: '',
+          twitter: '',
+          website: '',
+          createdOn: 'https://bonk.fun',
+          uri: '',
+          type: 'meme'
         });
+        setIsConfirmed(false);
+        setCurrentStep(0);
         
-        // Move to success step (step 4)
-        setCurrentStep(3);
+        // Close modal
+        onClose();
         
-        // Pass result to onDeploy callback
-        onDeploy({
-          mintAddress: result.mintAddress,
-          poolId: result.poolId
-        });
+        // Set tokenAddress in URL and reload page
+        const url = new URL(window.location.href);
+        url.searchParams.set('tokenAddress', result.mintAddress);
+        window.history.pushState({}, '', url);
+        window.location.reload();
       } else {
         throw new Error(result.error || "Token deployment failed");
       }

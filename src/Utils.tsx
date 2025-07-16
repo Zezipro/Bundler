@@ -1,6 +1,7 @@
 import { Connection, Keypair, PublicKey } from '@solana/web3.js';
 import bs58 from 'bs58';
 import Cookies from 'js-cookie';
+import CryptoJS from 'crypto-js';
 
 export interface WalletType {
   id: number;
@@ -51,12 +52,113 @@ request.onsuccess = (event: Event) => {
 request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
   db = request.result;
   if (!db.objectStoreNames.contains(WALLET_STORE)) {
+    // Create object store for encrypted wallet data
     db.createObjectStore(WALLET_STORE, { keyPath: 'id' });
   }
+};
+
+// Function to load wallets from IndexedDB with encryption support
+const loadWalletsFromIndexedDB = (): Promise<WalletType[]> => {
+  return new Promise((resolve) => {
+    if (!db) {
+      resolve([]);
+      return;
+    }
+
+    try {
+      const transaction = db.transaction(WALLET_STORE, 'readonly');
+      const store = transaction.objectStore(WALLET_STORE);
+      const request = store.get('encrypted_wallets');
+
+      request.onsuccess = () => {
+        try {
+          if (request.result && request.result.data) {
+            const decryptedData = decryptData(request.result.data);
+            const wallets = JSON.parse(decryptedData);
+            resolve(wallets);
+          } else {
+            resolve([]);
+          }
+        } catch (error) {
+          console.error('Error decrypting IndexedDB data:', error);
+          resolve([]);
+        }
+      };
+
+      request.onerror = () => {
+        console.error('Error loading from IndexedDB:', request.error);
+        resolve([]);
+      };
+    } catch (error) {
+      console.error('Error accessing IndexedDB:', error);
+      resolve([]);
+    }
+  });
 };
 const WALLET_COOKIE_KEY = 'wallets';
 const CONFIG_COOKIE_KEY = 'config';
 const QUICK_BUY_COOKIE_KEY = 'quickBuyPreferences';
+
+// Encryption setup
+const ENCRYPTION_KEY = 'raze-bot-wallet-encryption-key';
+const ENCRYPTED_STORAGE_KEY = 'encrypted_wallets';
+
+// Encryption helper functions
+const encryptData = (data: string): string => {
+  try {
+    return CryptoJS.AES.encrypt(data, ENCRYPTION_KEY).toString();
+  } catch (error) {
+    console.error('Error encrypting data:', error);
+    throw new Error('Failed to encrypt data');
+  }
+};
+
+const decryptData = (encryptedData: string): string => {
+  try {
+    const bytes = CryptoJS.AES.decrypt(encryptedData, ENCRYPTION_KEY);
+    const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+    if (!decryptedData) {
+      throw new Error('Failed to decrypt data - invalid key or corrupted data');
+    }
+    return decryptedData;
+  } catch (error) {
+    console.error('Error decrypting data:', error);
+    throw new Error('Failed to decrypt data');
+  }
+};
+
+// Export encryption utilities for potential external use
+export const encryptWalletData = (data: string): string => {
+  return encryptData(data);
+};
+
+export const decryptWalletData = (encryptedData: string): string => {
+  return decryptData(encryptedData);
+};
+
+// Function to check if wallet data is encrypted
+export const isWalletDataEncrypted = (): boolean => {
+  const encryptedData = localStorage.getItem(ENCRYPTED_STORAGE_KEY);
+  const unencryptedData = localStorage.getItem('wallets');
+  return !!encryptedData && !unencryptedData;
+};
+
+// Function to migrate unencrypted data to encrypted storage
+export const migrateToEncryptedStorage = (): boolean => {
+  try {
+    const unencryptedData = localStorage.getItem('wallets');
+    if (unencryptedData) {
+      const wallets = JSON.parse(unencryptedData);
+      saveWalletsToCookies(wallets);
+      console.log('Successfully migrated wallet data to encrypted storage');
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error('Error migrating to encrypted storage:', error);
+    return false;
+  }
+};
 
 export const createNewWallet = async (): Promise<WalletType> => {
   const keypair = Keypair.generate();
@@ -143,15 +245,9 @@ export const getActiveWalletPrivateKeys = (): string => {
   }
 };
 export const getWallets = (): WalletType[] => {
-
   try {
-    // First try to get from localStorage
-    const savedWallets = localStorage.getItem('wallets');
-    if (savedWallets) {
-      const parsedWallets = JSON.parse(savedWallets);
-      return parsedWallets;
-    }
-    return [];
+    // Use the encrypted loading function
+    return loadWalletsFromCookies();
   } catch (error) {
     console.error('Error loading wallets:', error);
     return [];
@@ -235,9 +331,16 @@ export const refreshWalletBalance = async (
 
 export const saveWalletsToCookies = (wallets: WalletType[]): void => {
   try {
+    // Encrypt wallet data before storing
+    const walletData = JSON.stringify(wallets);
+    const encryptedData = encryptData(walletData);
+    console.log('🔐 Wallet data encrypted and saved successfully');
+    
     if (!db) {
       // Fallback to localStorage if DB is not ready
-      localStorage.setItem('wallets', JSON.stringify(wallets));
+      localStorage.setItem(ENCRYPTED_STORAGE_KEY, encryptedData);
+      // Remove old unencrypted data
+      localStorage.removeItem('wallets');
       return;
     }
 
@@ -245,25 +348,67 @@ export const saveWalletsToCookies = (wallets: WalletType[]): void => {
     const store = transaction.objectStore(WALLET_STORE);
     
     store.clear();
-    wallets.forEach(wallet => store.add(wallet));
+    // Store encrypted wallet data in IndexedDB
+    const encryptedWallet = {
+      id: 'encrypted_wallets',
+      data: encryptedData
+    };
+    store.add(encryptedWallet);
     
-    // Also save to localStorage as backup
-    localStorage.setItem('wallets', JSON.stringify(wallets));
+    // Also save encrypted data to localStorage as backup
+    localStorage.setItem(ENCRYPTED_STORAGE_KEY, encryptedData);
+    // Remove old unencrypted data
+    localStorage.removeItem('wallets');
   } catch (error) {
-    console.error('Error saving wallets:', error);
-    // Fallback to localStorage
-    localStorage.setItem('wallets', JSON.stringify(wallets));
+    console.error('Error saving encrypted wallets:', error);
+    // Fallback to localStorage with encryption
+    try {
+      const walletData = JSON.stringify(wallets);
+      const encryptedData = encryptData(walletData);
+      localStorage.setItem(ENCRYPTED_STORAGE_KEY, encryptedData);
+      localStorage.removeItem('wallets');
+    } catch (encryptError) {
+      console.error('Error with encryption fallback:', encryptError);
+      // Last resort: save unencrypted (should rarely happen)
+      localStorage.setItem('wallets', JSON.stringify(wallets));
+    }
   }
 };
 
 export const loadWalletsFromCookies = (): WalletType[] => {
   try {
-    // First try to get from localStorage
-    const savedWallets = localStorage.getItem('wallets');
-    if (savedWallets) {
-      const parsedWallets = JSON.parse(savedWallets);
+    // First try to get encrypted data from localStorage
+    const encryptedData = localStorage.getItem(ENCRYPTED_STORAGE_KEY);
+    if (encryptedData) {
+      try {
+        const decryptedData = decryptData(encryptedData);
+        const parsedWallets = JSON.parse(decryptedData);
+        return parsedWallets;
+      } catch (decryptError) {
+        console.error('Error decrypting wallet data:', decryptError);
+        // If decryption fails, try to load old unencrypted data as fallback
+        const oldWallets = localStorage.getItem('wallets');
+        if (oldWallets) {
+          console.log('🔄 Loading from old unencrypted storage and migrating...');
+          const parsedWallets = JSON.parse(oldWallets);
+          // Migrate to encrypted storage
+          saveWalletsToCookies(parsedWallets);
+          return parsedWallets;
+        }
+      }
+    }
+    
+    // Fallback to old unencrypted data if no encrypted data exists
+    const oldWallets = localStorage.getItem('wallets');
+    if (oldWallets) {
+      console.log('🔄 Migrating from unencrypted to encrypted storage...');
+      const parsedWallets = JSON.parse(oldWallets);
+      // Migrate to encrypted storage
+      saveWalletsToCookies(parsedWallets);
       return parsedWallets;
     }
+    
+    console.log('📝 No wallet data found, starting fresh');
     return [];
   } catch (error) {
     console.error('Error loading wallets:', error);

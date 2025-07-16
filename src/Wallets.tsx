@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { RefreshCw, ExternalLink, Wallet, CheckSquare, Square, DollarSign, Coins, ArrowDownAZ, ArrowUpAZ, Activity, DollarSignIcon, Zap } from 'lucide-react';
 import { saveWalletsToCookies, WalletType, formatAddress, formatTokenBalance, copyToClipboard, toggleWallet, fetchSolBalance, getWalletDisplayName } from './Utils';
 import { useToast } from "./Notifications";
@@ -259,6 +259,7 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
   const [showingTokenWallets, setShowingTokenWallets] = useState(true);
   const [hoverRow, setHoverRow] = useState<number | null>(null);
   const [buyingWalletId, setBuyingWalletId] = useState<number | null>(null);
+  const [recentlyUpdatedWallets, setRecentlyUpdatedWallets] = useState<Set<string>>(new Set());
   
   // Use internal state if external state is not provided
   const [internalSolBalances, setInternalSolBalances] = useState<Map<string, number>>(new Map());
@@ -301,6 +302,59 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
   useEffect(() => {
     fetchSolBalances();
   }, [wallets.length, connection]);
+
+  // Use refs to track previous balance values
+  const prevSolBalancesRef = useRef<Map<string, number>>(new Map());
+  const prevTokenBalancesRef = useRef<Map<string, number>>(new Map());
+
+  // Monitor balance changes to show visual feedback for trade updates
+  useEffect(() => {
+    const prevSolBalances = prevSolBalancesRef.current;
+    const prevTokenBalances = prevTokenBalancesRef.current;
+    
+    // Create a serialized version of current balances to compare
+    const currentSolString = JSON.stringify(Array.from(solBalances.entries()).sort());
+    const currentTokenString = JSON.stringify(Array.from(tokenBalances.entries()).sort());
+    const prevSolString = JSON.stringify(Array.from(prevSolBalances.entries()).sort());
+    const prevTokenString = JSON.stringify(Array.from(prevTokenBalances.entries()).sort());
+    
+    // Only proceed if balances actually changed
+    if (currentSolString === prevSolString && currentTokenString === prevTokenString) {
+      return;
+    }
+    
+    // Check for balance changes and mark wallets as recently updated
+    const updatedWallets = new Set<string>();
+    
+    wallets.forEach(wallet => {
+      const currentSol = solBalances.get(wallet.address) || 0;
+      const currentToken = tokenBalances.get(wallet.address) || 0;
+      const prevSol = prevSolBalances.get(wallet.address) || 0;
+      const prevToken = prevTokenBalances.get(wallet.address) || 0;
+      
+      // Check if balances changed significantly (to avoid minor rounding differences)
+      const solChanged = Math.abs(currentSol - prevSol) > 0.001;
+      const tokenChanged = Math.abs(currentToken - prevToken) > 0.001;
+      
+      if ((solChanged || tokenChanged) && (prevSol > 0 || prevToken > 0)) {
+        updatedWallets.add(wallet.address);
+        console.log(`Balance updated for wallet ${wallet.address}: SOL ${prevSol.toFixed(4)} → ${currentSol.toFixed(4)}, Tokens ${prevToken.toFixed(4)} → ${currentToken.toFixed(4)}`);
+      }
+    });
+    
+    if (updatedWallets.size > 0) {
+      setRecentlyUpdatedWallets(updatedWallets);
+      
+      // Clear the visual indicator after 1 seconds
+      setTimeout(() => {
+        setRecentlyUpdatedWallets(new Set());
+      }, 1000);
+    }
+    
+    // Update previous balance references only after processing
+    prevSolBalancesRef.current = new Map(solBalances);
+    prevTokenBalancesRef.current = new Map(tokenBalances);
+  }, [solBalances, tokenBalances]); // Removed wallets from dependency array to prevent triggering on selection changes
 
   // Calculate balances and update external state
   useEffect(() => {
@@ -406,10 +460,6 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
       
       if (result.success) {
         showToast('Quick buy executed successfully!', 'success');
-        // Refresh balances after successful buy
-        setTimeout(() => {
-          handleRefreshAll();
-        }, 2000);
       } else {
         showToast(result.error || 'Quick buy failed', 'error');
       }
@@ -503,6 +553,7 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
                     ${hoverRow === wallet.id ? 'bg-blue-500/15' : ''}
                     ${wallet.isActive ? 'bg-blue-500/10' : ''}
                     ${refreshingWalletId === wallet.id ? 'bg-blue-500/20' : ''}
+                    ${recentlyUpdatedWallets.has(wallet.address) ? 'bg-green-500/20 animate-pulse-quick' : ''}
                   `}
                 >
                   {/* Quick Buy Button or Indicator */}
@@ -530,14 +581,9 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
                           `}
                         >
                           {buyingWalletId === wallet.id ? (
-                            <RefreshCw size={10} className="text-blue-400 animate-spin" />
+                            <RefreshCw size={10} className="text-blue-300 animate-spin" />
                           ) : (
-                            <Zap size={10} className={`
-                              ${!tokenAddress || (solBalances.get(wallet.address) || 0) < quickBuyAmount
-                                ? 'text-blue-400/40'
-                                : 'text-blue-400'
-                              }
-                            `} />
+                            <Zap size={10} className="text-blue-300" />
                           )}
                         </button>
                       </Tooltip>
@@ -545,7 +591,7 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
                       <div className="w-6 h-6 flex items-center justify-center">
                         <div className={`
                           w-2 h-2 rounded-full transition-all duration-200
-                          ${wallet.isActive ? 'bg-blue-400' : 'bg-blue-400/40'}
+                          ${wallet.isActive ? 'bg-[#02b36d]' : 'bg-[#02b36d40]'}
                         `} />
                       </div>
                     )}
@@ -555,15 +601,15 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
                   <td className="py-2.5 px-2 font-mono">
                     <div className="flex items-center">
                       {refreshingWalletId === wallet.id && (
-                        <RefreshCw size={12} className="text-blue-400 mr-2 animate-spin" />
+                        <RefreshCw size={12} className="text-[#02b36d] mr-2 animate-spin" />
                       )}
                       <Tooltip 
                         content={wallet.label ? `${wallet.label} (${formatAddress(wallet.address)})` : `Click to copy: ${wallet.address}`}
                         position="top"
                       >
                         <span 
-                          className={`text-sm font-mono cursor-pointer hover:text-blue-400 transition-colors duration-200 tracking-wide ${
-                            wallet.isActive ? 'text-blue-300' : 'text-slate-100'
+                          className={`text-sm font-mono cursor-pointer hover:text-blue-300 transition-colors duration-200 tracking-wide ${
+                            wallet.isActive ? 'text-slate-100' : 'text-slate-400'
                           }`}
                           onClick={async (e) => {
                             e.stopPropagation();
@@ -586,8 +632,8 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
                   </td>
                   
                   {/* SOL balance */}
-                  <td className="py-2.5 px-2 text-right font-mono text-slate-100">
-                    <span className={`${(solBalances.get(wallet.address) || 0) > 0 ? 'text-blue-200' : 'text-blue-200/60'}`}>
+                  <td className="py-2.5 px-2 text-right font-mono text-slate-300">
+                    <span className={`${(solBalances.get(wallet.address) || 0) > 0 ? 'text-slate-100' : 'text-slate-500'}`}>
                       {(solBalances.get(wallet.address) || 0).toFixed(3)}
                     </span>
                   </td>
@@ -608,7 +654,7 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
                         e.stopPropagation();
                         window.open(`https://solscan.io/account/${wallet.address}`, '_blank');
                       }}
-                      className="text-blue-200/60 hover:text-blue-400 transition-colors duration-200"
+                      className="text-slate-500 hover:text-blue-400 transition-colors duration-200"
                     >
                       <ExternalLink size={14} />
                     </button>

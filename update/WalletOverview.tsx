@@ -351,7 +351,7 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
         {/* Table Container */}
         <div className="flex-1 overflow-hidden">
           <div className="h-[calc(90vh-320px)] overflow-auto border border-blue-500/40 rounded-lg">
-            <table className="w-full text-sm font-mono">
+            <table className="w-full text-sm font-mono min-w-max">
               {/* Header */}
               <thead className="sticky top-0 bg-slate-700/80 backdrop-blur-md border-b border-blue-500/40">
                 <tr>
@@ -414,7 +414,7 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
                         isSelected ? 'bg-blue-400/20' : ''
                       }`}
                     >
-                      <td className="p-3 whitespace-nowrap">
+                      <td className="p-3">
                         <button
                           onClick={() => toggleWalletSelection(wallet.id)}
                           className="text-blue-400 hover:text-slate-100 transition-colors"
@@ -493,7 +493,7 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
                           </button>
                         </WalletTooltip>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 whitespace-nowrap">
                         <div className="flex gap-1">
 
                           <WalletTooltip content="Download Private Key" position="top">

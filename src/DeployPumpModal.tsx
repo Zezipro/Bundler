@@ -6,6 +6,7 @@ import { useToast } from "./Notifications";
 import { executePumpCreate, WalletForPumpCreate, TokenCreationConfig } from './utils/pumpcreate';
 
 const STEPS_DEPLOY = ["Token Details", "Select Wallets", "Review"];
+const MIN_WALLETS = 2; // Minimum number of wallets required (developer + 1 buyer)
 const MAX_WALLETS = 5; // Maximum number of wallets that can be selected
 
 interface BaseModalProps {
@@ -217,8 +218,8 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
         }
         break;
       case 1:
-        if (selectedWallets.length === 0) {
-          showToast("Please select at least one wallet", "error");
+        if (selectedWallets.length < MIN_WALLETS) {
+          showToast("Please select at least 2 wallets (developer + 1 buyer)", "error");
           return false;
         }
         if (selectedWallets.length > MAX_WALLETS) {
@@ -314,6 +315,17 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
         setIsConfirmed(false);
         setCurrentStep(0);
         onClose();
+        
+        // Set tokenAddress in URL and reload
+        const url = new URL(window.location.href);
+        url.searchParams.set('tokenAddress', result.mintAddress);
+        window.history.pushState({}, '', url.toString());
+        window.location.reload();
+        
+        // Pass result to onDeploy callback
+        onDeploy({
+          mintAddress: result.mintAddress
+        });
       } else {
         throw new Error(result.error || "Token deployment failed");
       }

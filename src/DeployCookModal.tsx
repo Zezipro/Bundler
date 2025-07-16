@@ -6,6 +6,7 @@ import { useToast } from "./Notifications";
 import { executeCookCreate, WalletForCookCreate, TokenMetadata, CookCreateConfig } from './utils/cookcreate';
 
 const STEPS_DEPLOY = ["Token Details", "Select Wallets", "Review"];
+const MIN_WALLETS = 2; // Minimum number of wallets required (developer + 1 buyer)
 const MAX_WALLETS = 5; // Maximum number of wallets that can be selected
 
 interface BaseModalProps {
@@ -249,8 +250,8 @@ export const DeployCookModal: React.FC<DeployCookModalProps> = ({
         }
         break;
       case 1:
-        if (selectedWallets.length === 0) {
-          showToast("Please select at least one wallet", "error");
+        if (selectedWallets.length < MIN_WALLETS) {
+          showToast("Please select at least 2 wallets (developer + 1 buyer)", "error");
           return false;
         }
         if (selectedWallets.length > MAX_WALLETS) {
@@ -332,16 +333,34 @@ export const DeployCookModal: React.FC<DeployCookModalProps> = ({
       );
       
       if (result.success && result.mintAddress && result.poolId) {
-        showToast(`Token deployment successful!`, "success");
+        showToast(`Token deployment successful! Mint Address: ${result.mintAddress}`, "success");
         
-        // Store the deployment success data
-        setDeploymentSuccessData({
-          mintAddress: result.mintAddress,
-          poolId: result.poolId
+        // Reset form states
+        setSelectedWallets([]);
+        setWalletAmounts({});
+        setTokenData({
+          name: '',
+          symbol: '',
+          description: '',
+          decimals: 6,
+          telegram: '',
+          twitter: '',
+          website: '',
+          discord: '',
+          uri: ''
         });
+        setIsConfirmed(false);
+        setCurrentStep(0);
+        setDeploymentSuccessData(null);
         
-        // Move to success step (step 4)
-        setCurrentStep(3);
+        // Close modal
+        onClose();
+        
+        // Set tokenAddress in URL and reload
+        const url = new URL(window.location.href);
+        url.searchParams.set('tokenAddress', result.mintAddress);
+        window.history.pushState({}, '', url.toString());
+        window.location.reload();
         
         // Pass result to onDeploy callback
         onDeploy({

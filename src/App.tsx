@@ -18,7 +18,7 @@ import {
   copyToClipboard,
   ConfigType,
 } from './Utils';
-// Removed Split import - no longer using 3-column layout
+
 import { useToast } from "./Notifications";
 import {
   fetchSolBalances,
@@ -31,7 +31,7 @@ import { executeTrade } from './TradingLogic';
 
 // Lazy loaded components
 const EnhancedSettingsModal = lazy(() => import('./SettingsModal'));
-const EnhancedWalletOverview = lazy(() => import('./WalletOverview'));
+const EnhancedWalletOverview = lazy(() => import('./WalletOverview.tsx'));
 const WalletsPage = lazy(() => import('./Wallets').then(module => ({ default: module.WalletsPage })));
 const ChartPage = lazy(() => import('./Chart').then(module => ({ default: module.ChartPage })));
 const ActionsPage = lazy(() => import('./Actions').then(module => ({ default: module.ActionsPage })));
@@ -94,6 +94,27 @@ const WalletManager: React.FC = () => {
     quickBuyMinAmount: number;
     quickBuyMaxAmount: number;
     useQuickBuyRange: boolean;
+    iframeData: {
+    tradingStats: any;
+    solPrice: number | null;
+    currentWallets: any[];
+    recentTrades: {
+      type: 'buy' | 'sell';
+      address: string;
+      tokensAmount: number;
+      avgPrice: number;
+      solAmount: number;
+      timestamp: number;
+      signature: string;
+    }[];
+    tokenPrice: {
+      tokenPrice: number;
+      tokenMint: string;
+      timestamp: number;
+      tradeType: 'buy' | 'sell';
+      volume: number;
+    } | null;
+  } | null;
   }
 
   type AppAction = 
@@ -124,7 +145,8 @@ const WalletManager: React.FC = () => {
     | { type: 'SET_QUICK_BUY_AMOUNT'; payload: number }
     | { type: 'SET_QUICK_BUY_MIN_AMOUNT'; payload: number }
     | { type: 'SET_QUICK_BUY_MAX_AMOUNT'; payload: number }
-    | { type: 'SET_USE_QUICK_BUY_RANGE'; payload: boolean };
+    | { type: 'SET_USE_QUICK_BUY_RANGE'; payload: boolean }
+    | { type: 'SET_IFRAME_DATA'; payload: { tradingStats: any; solPrice: number | null; currentWallets: any[]; recentTrades: { type: 'buy' | 'sell'; address: string; tokensAmount: number; avgPrice: number; solAmount: number; timestamp: number; signature: string; }[]; tokenPrice: { tokenPrice: number; tokenMint: string; timestamp: number; tradeType: 'buy' | 'sell'; volume: number; } | null; } | null };
 
   const initialState: AppState = {
     copiedAddress: null,
@@ -169,7 +191,8 @@ const WalletManager: React.FC = () => {
     quickBuyAmount: 0.01,
     quickBuyMinAmount: 0.01,
     quickBuyMaxAmount: 0.05,
-    useQuickBuyRange: false
+    useQuickBuyRange: false,
+    iframeData: null
   };
 
   const appReducer = (state: AppState, action: AppAction): AppState => {
@@ -261,6 +284,8 @@ const WalletManager: React.FC = () => {
         return { ...state, quickBuyMaxAmount: action.payload };
       case 'SET_USE_QUICK_BUY_RANGE':
         return { ...state, useQuickBuyRange: action.payload };
+      case 'SET_IFRAME_DATA':
+        return { ...state, iframeData: action.payload };
       default:
         return state;
     }
@@ -313,7 +338,8 @@ const WalletManager: React.FC = () => {
     setQuickBuyAmount: (amount: number) => dispatch({ type: 'SET_QUICK_BUY_AMOUNT', payload: amount }),
     setQuickBuyMinAmount: (amount: number) => dispatch({ type: 'SET_QUICK_BUY_MIN_AMOUNT', payload: amount }),
     setQuickBuyMaxAmount: (amount: number) => dispatch({ type: 'SET_QUICK_BUY_MAX_AMOUNT', payload: amount }),
-    setUseQuickBuyRange: (useRange: boolean) => dispatch({ type: 'SET_USE_QUICK_BUY_RANGE', payload: useRange })
+    setUseQuickBuyRange: (useRange: boolean) => dispatch({ type: 'SET_USE_QUICK_BUY_RANGE', payload: useRange }),
+    setIframeData: (data: { tradingStats: any; solPrice: number | null; currentWallets: any[]; recentTrades: { type: 'buy' | 'sell'; address: string; tokensAmount: number; avgPrice: number; solAmount: number; timestamp: number; signature: string; }[]; tokenPrice: { tokenPrice: number; tokenMint: string; timestamp: number; tradeType: 'buy' | 'sell'; volume: number; } | null; } | null) => dispatch({ type: 'SET_IFRAME_DATA', payload: data })
   }), []);
 
   // Separate callbacks for config updates to prevent unnecessary re-renders
@@ -323,6 +349,50 @@ const WalletManager: React.FC = () => {
     setSelectedDex: (dex: string) => dispatch({ type: 'SET_CONFIG', payload: { ...state.config, selectedDex: dex } }),
     setIsDropdownOpen: (open: boolean) => dispatch({ type: 'SET_CONFIG', payload: { ...state.config, isDropdownOpen: open } })
   }), [state.config]);
+
+  // Monitor iframe data for whitelist trades and update wallet balances
+  useEffect(() => {
+    if (state.iframeData?.recentTrades && state.iframeData.recentTrades.length > 0) {
+      const latestTrade = state.iframeData.recentTrades[0];
+      
+      // Find the wallet that made the trade
+      const tradingWallet = state.wallets.find(wallet => wallet.address === latestTrade.address);
+      
+      if (tradingWallet) {
+        // Get current balances
+        const currentSolBalance = state.solBalances.get(latestTrade.address) || 0;
+        const currentTokenBalance = state.tokenBalances.get(latestTrade.address) || 0;
+        
+        // Calculate new balances based on trade type
+        let newSolBalance = currentSolBalance;
+        let newTokenBalance = currentTokenBalance;
+        
+        if (latestTrade.type === 'buy') {
+          // For buy trades: decrease SOL, increase tokens
+          newSolBalance = Math.max(0, currentSolBalance - latestTrade.solAmount);
+          newTokenBalance = currentTokenBalance + latestTrade.tokensAmount;
+        } else if (latestTrade.type === 'sell') {
+          // For sell trades: increase SOL, decrease tokens
+          newSolBalance = currentSolBalance + latestTrade.solAmount;
+          newTokenBalance = Math.max(0, currentTokenBalance - latestTrade.tokensAmount);
+        }
+        
+        // Update balances if they changed
+        if (newSolBalance !== currentSolBalance || newTokenBalance !== currentTokenBalance) {
+          dispatch({
+            type: 'UPDATE_BALANCE',
+            payload: {
+              address: latestTrade.address,
+              solBalance: newSolBalance,
+              tokenBalance: newTokenBalance
+            }
+          });
+          
+          console.log(`Updated balances for wallet ${formatAddress(latestTrade.address)}: SOL ${currentSolBalance.toFixed(4)} → ${newSolBalance.toFixed(4)}, Tokens ${currentTokenBalance.toFixed(4)} → ${newTokenBalance.toFixed(4)}`);
+        }
+      }
+    }
+  }, [state.iframeData?.recentTrades]); // Removed state.wallets to prevent triggering on wallet selection changes
 
 
 
@@ -725,6 +795,7 @@ const WalletManager: React.FC = () => {
                 isLoadingChart={state.isLoadingChart}
                 tokenAddress={state.tokenAddress}
                 wallets={state.wallets}
+                onDataUpdate={memoizedCallbacks.setIframeData}
               />
             </div>
           </div>
@@ -748,6 +819,7 @@ const WalletManager: React.FC = () => {
                 setCustomBuyModalOpen={memoizedCallbacks.setCustomBuyModalOpen}
                 onOpenFloating={() => memoizedCallbacks.setFloatingCardOpen(true)}
                 isFloatingCardOpen={state.floatingCard.isOpen}
+                iframeData={state.iframeData}
               />
             </div>
           </div>
@@ -802,6 +874,7 @@ const WalletManager: React.FC = () => {
                 isLoadingChart={state.isLoadingChart}
                 tokenAddress={state.tokenAddress}
                 wallets={state.wallets}
+                onDataUpdate={memoizedCallbacks.setIframeData}
               />
             ),
             ActionsPage: (
@@ -820,6 +893,7 @@ const WalletManager: React.FC = () => {
                 setCustomBuyModalOpen={memoizedCallbacks.setCustomBuyModalOpen}
                 onOpenFloating={() => memoizedCallbacks.setFloatingCardOpen(true)}
                 isFloatingCardOpen={state.floatingCard.isOpen}
+                iframeData={state.iframeData}
               />
             )
           }}
@@ -938,6 +1012,7 @@ const WalletManager: React.FC = () => {
         maxWalletsConfig={maxWalletsConfig}
         currentMarketCap={state.currentMarketCap}
         tokenBalances={state.tokenBalances}
+        iframeData={state.iframeData}
       />
     </div>
   );

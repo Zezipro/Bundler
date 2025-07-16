@@ -6,6 +6,7 @@ import { useToast } from "./Notifications";
 import { executeMoonCreate, WalletForMoonCreate } from './utils/mooncreate';
 
 const STEPS_DEPLOY = ["Token Details", "Select Wallets", "Review"];
+const MIN_WALLETS = 2; // Minimum number of wallets required (developer + 1 buyer)
 const MAX_WALLETS = 15; // Maximum number of wallets that can be selected (increased from 5 to 15 for Moonit)
 
 interface BaseModalProps {
@@ -305,8 +306,8 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
         }
         break;
       case 1:
-        if (selectedWallets.length === 0) {
-          showToast("Please select at least one wallet", "error");
+        if (selectedWallets.length < MIN_WALLETS) {
+          showToast("Please select at least 2 wallets (developer + 1 buyer)", "error");
           return false;
         }
         if (selectedWallets.length > MAX_WALLETS) {
@@ -387,15 +388,31 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
       );
       
       if (result.success && result.mintAddress) {
-        showToast(`Token deployment successful!`, "success");
+        showToast(`Token deployment successful! Mint Address: ${result.mintAddress}`, "success");
         
-        // Store the deployment success data
-        setDeploymentSuccessData({
-          mintAddress: result.mintAddress
+        // Reset form states
+        setSelectedWallets([]);
+        setWalletAmounts({});
+        setTokenData({
+          name: '',
+          symbol: '',
+          description: '',
+          imageUrl: '',
+          totalSupply: '42000000000',
+          links: []
         });
+        setIsConfirmed(false);
+        setCurrentStep(0);
+        setDeploymentSuccessData(null);
         
-        // Move to success step (step 4)
-        setCurrentStep(3);
+        // Close modal
+        onClose();
+        
+        // Set tokenAddress in URL and reload
+        const url = new URL(window.location.href);
+        url.searchParams.set('tokenAddress', result.mintAddress);
+        window.history.pushState({}, '', url.toString());
+        window.location.reload();
         
         // Pass result to onDeploy callback
         onDeploy({
