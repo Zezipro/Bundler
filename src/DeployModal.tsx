@@ -33,7 +33,7 @@ export const DeployModal: React.FC<DeployModalProps> = ({
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm" style={{backgroundColor: 'rgba(5, 10, 14, 0.95)'}}>
-      <div className="relative bg-[#050a0e] border-2 border-[#02b36d40] rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden transform modal-glow">
+      <div className="relative bg-slate-900/20 backdrop-blur-xl border-2 border-blue-500/30 rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden transform modal-glow">
         {/* Header */}
         <div className="relative z-10 p-5 flex justify-between items-center border-b border-[#02b36d40]">
           <div className="flex items-center space-x-3">
@@ -57,7 +57,7 @@ export const DeployModal: React.FC<DeployModalProps> = ({
           {/* Pump Deploy Option */}
           <div 
             onClick={() => setSelectedDeployType('pump')}
-            className="group relative cursor-pointer bg-[#091217] border-2 border-[#02b36d30] rounded-xl p-4 transition-all duration-300 hover:border-[#02b36d] hover:shadow-lg hover:shadow-[#02b36d20]"
+            className="group relative cursor-pointer bg-slate-800/30 backdrop-blur-sm border-2 border-blue-400/20 rounded-xl p-4 transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-400/20"
           >
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-lg bg-[#02b36d20] flex items-center justify-center">
@@ -74,7 +74,7 @@ export const DeployModal: React.FC<DeployModalProps> = ({
           {/* Bonk Deploy Option */}
           <div 
             onClick={() => setSelectedDeployType('bonk')}
-            className="group relative cursor-pointer bg-[#091217] border-2 border-[#02b36d30] rounded-xl p-4 transition-all duration-300 hover:border-[#02b36d] hover:shadow-lg hover:shadow-[#02b36d20]"
+            className="group relative cursor-pointer bg-slate-800/30 backdrop-blur-sm border-2 border-blue-400/20 rounded-xl p-4 transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-400/20"
           >
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-lg bg-[#02b36d20] flex items-center justify-center">
@@ -91,7 +91,7 @@ export const DeployModal: React.FC<DeployModalProps> = ({
           {/* Cook.Meme Deploy Option */}
           <div 
             onClick={() => setSelectedDeployType('cook')}
-            className="group relative cursor-pointer bg-[#091217] border-2 border-[#02b36d30] rounded-xl p-4 transition-all duration-300 hover:border-[#02b36d] hover:shadow-lg hover:shadow-[#02b36d20]"
+            className="group relative cursor-pointer bg-slate-800/30 backdrop-blur-sm border-2 border-blue-400/20 rounded-xl p-4 transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-400/20"
           >
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-lg bg-[#02b36d20] flex items-center justify-center">
@@ -108,7 +108,7 @@ export const DeployModal: React.FC<DeployModalProps> = ({
           {/* moon.it Deploy Option */}
           <div 
             onClick={() => setSelectedDeployType('moon')}
-            className="group relative cursor-pointer bg-[#091217] border-2 border-[#02b36d30] rounded-xl p-4 transition-all duration-300 hover:border-[#02b36d] hover:shadow-lg hover:shadow-[#02b36d20]"
+            className="group relative cursor-pointer bg-slate-800/30 backdrop-blur-sm border-2 border-blue-400/20 rounded-xl p-4 transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-400/20"
           >
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-lg bg-[#02b36d20] flex items-center justify-center">
@@ -125,7 +125,7 @@ export const DeployModal: React.FC<DeployModalProps> = ({
           {/* boop.fun Deploy Option */}
           <div 
             onClick={() => setSelectedDeployType('boop')}
-            className="group relative cursor-pointer bg-[#091217] border-2 border-[#02b36d30] rounded-xl p-4 transition-all duration-300 hover:border-[#02b36d] hover:shadow-lg hover:shadow-[#02b36d20]"
+            className="group relative cursor-pointer bg-slate-800/30 backdrop-blur-sm border-2 border-blue-400/20 rounded-xl p-4 transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-400/20"
           >
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-lg bg-[#02b36d20] flex items-center justify-center">
@@ -140,7 +140,7 @@ export const DeployModal: React.FC<DeployModalProps> = ({
           </div>
           <div 
             onClick={() => showToast("LAUNCHPAD deployment coming soon!", "error")}
-            className="group relative cursor-not-allowed bg-[#091217] border-2 border-[#02b36d30] rounded-xl p-4 opacity-60"
+            className="group relative cursor-not-allowed bg-slate-800/30 backdrop-blur-sm border-2 border-blue-400/20 rounded-xl p-4 opacity-60"
           >
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-lg bg-[#02b36d20] flex items-center justify-center">

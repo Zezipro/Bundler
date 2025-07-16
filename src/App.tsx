@@ -18,7 +18,7 @@ import {
   copyToClipboard,
   ConfigType,
 } from './Utils';
-import Split from 'react-split';
+// Removed Split import - no longer using 3-column layout
 import { useToast } from "./Notifications";
 import {
   fetchSolBalances,
@@ -607,15 +607,15 @@ const WalletManager: React.FC = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-[#050a0e] text-[#b3f0d7] cyberpunk-bg">
+    <div className="h-screen flex flex-col overflow-hidden bg-[#0f1419] text-[#93c5fd] glassmorphism-bg">
       {/* Cyberpunk scanline effect */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-10"></div>
       
 
       
       {/* Top Navigation */}
-      <nav className="relative border-b border-[#02b36d70] px-4 py-2 backdrop-blur-sm bg-[#050a0e99] z-20">
-        <div className="flex items-center gap-3">
+      <nav className="relative border-b border-blue-500/30 px-4 py-1 backdrop-blur-md bg-gradient-to-r from-[#0a1419] to-[#050a0e] z-20 modern-card rounded-none border-l-0 border-r-0 border-t-0">
+        <div className="flex items-center gap-2">
 
         <ServiceSelector />
           
@@ -625,14 +625,14 @@ const WalletManager: React.FC = () => {
               placeholder="TOKEN ADDRESS"
               value={state.tokenAddress}
               onChange={(e) => memoizedCallbacks.setTokenAddress(e.target.value)}
-              className="w-full bg-[#0a1419] border border-[#02b36d40] rounded px-3 py-2 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none cyberpunk-input font-mono tracking-wider"
+              className="w-full bg-gradient-to-r from-[#0a1419] to-[#050a0e] border border-blue-500/30 rounded-md px-3 py-1 text-xs text-slate-100 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400/20 font-mono tracking-wider smooth-transition"
             />
-            <div className="absolute right-3 top-2.5 text-[#02b36d40] text-xs font-mono">SOL</div>
+            <div className="absolute right-3 top-1.5 text-blue-400/40 text-xs font-mono">SOL</div>
           </div>
           
           <WalletTooltip content="Paste from clipboard" position="bottom">
             <button
-              className="p-2 border border-[#02b36d40] hover:border-[#02b36d] bg-[#0a1419] rounded cyberpunk-btn"
+              className="p-1.5 border border-blue-500/30 hover:border-blue-400 bg-gradient-to-br from-[#0a1419] to-[#050a0e] rounded-md smooth-transition hover:shadow-lg hover:shadow-blue-400/20"
               onClick={async () => {
                 try {
                   const text = await navigator.clipboard.readText();
@@ -645,7 +645,7 @@ const WalletManager: React.FC = () => {
                 }
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#02b36d]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400">
                 <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
                 <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
               </svg>
@@ -654,17 +654,17 @@ const WalletManager: React.FC = () => {
           
           <WalletTooltip content="Open Settings" position="bottom">
             <button 
-              className="p-2 border border-[#02b36d40] hover:border-[#02b36d] bg-[#0a1419] rounded cyberpunk-btn"
+              className="p-1.5 border border-blue-500/30 hover:border-blue-400 bg-gradient-to-br from-[#0a1419] to-[#050a0e] rounded-md smooth-transition hover:shadow-lg hover:shadow-blue-400/20"
               onClick={() => memoizedCallbacks.setIsSettingsOpen(true)}
             >
-              <Settings size={20} className="text-[#02b36d]" />
+              <Settings size={16} className="text-blue-400" />
             </button>
           </WalletTooltip>
 
-          <div className="flex items-center ml-4">
+          <div className="flex items-center ml-2">
             <div className="flex flex-col items-start">
-              <div className="text-xs text-[#7ddfbd] font-mono uppercase tracking-wider">WALLETS</div>
-              <div className={`font-bold text-[#02b36d] font-mono ${state.tickEffect ? 'scale-110 transition-transform' : 'transition-transform'}`}>
+              <div className="text-xs text-blue-200 font-mono uppercase tracking-wider">WALLETS</div>
+              <div className={`text-sm font-bold text-blue-400 font-mono ${state.tickEffect ? 'scale-110 transition-transform' : 'transition-transform'}`}>
                 {state.wallets.length}
               </div>
             </div>
@@ -673,81 +673,84 @@ const WalletManager: React.FC = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col md:flex-row h-[calc(100vh-8rem)]">
-        {/* Desktop Layout */}
-        <div className="hidden md:block w-full h-full">
-          <Split
-            className="flex w-full h-full split-custom"
-            sizes={[20, 60, 20]}
-            minSize={[250, 250, 350]}
-            gutterSize={8}
-            gutterAlign="center"
-            direction="horizontal"
-            dragInterval={1}
-            gutter={(index, direction) => {
-              const gutter = document.createElement('div');
-              gutter.className = `gutter gutter-${direction}`;
-              return gutter;
-            }}
-          >
-            {/* Left Column */}
-            <div className="backdrop-blur-sm bg-[#050a0e99] border-r border-[#02b36d40] overflow-y-auto">
+      <div className="flex-1 overflow-hidden">
+        {/* Modern Single Page Layout */}
+        <div className="h-full flex flex-col lg:flex-row gap-6 p-6">
+
+
+          {/* Left Sidebar - Wallets Overview */}
+          <div className="lg:w-80 xl:w-96 flex flex-col gap-6">
+            <div className="h-full modern-card p-6">
+
               {state.connection && (
-                <WalletsPage
-                  wallets={state.wallets}
-                  setWallets={memoizedCallbacks.setWallets}
-                  handleRefresh={handleRefresh}
-                  isRefreshing={state.isRefreshing}
-                  setIsModalOpen={memoizedCallbacks.setIsModalOpen}
-                  tokenAddress={state.tokenAddress}
-                  sortDirection={state.sortDirection}
-                  handleSortWallets={() => handleSortWallets(state.wallets, state.sortDirection, memoizedCallbacks.setSortDirection, state.solBalances, memoizedCallbacks.setWallets)}
-                  connection={state.connection}
-                  solBalances={state.solBalances}
-                  tokenBalances={state.tokenBalances}
-                  quickBuyEnabled={state.quickBuyEnabled}
-                  setQuickBuyEnabled={memoizedCallbacks.setQuickBuyEnabled}
-                  quickBuyAmount={state.quickBuyAmount}
-                  setQuickBuyAmount={memoizedCallbacks.setQuickBuyAmount}
-                  quickBuyMinAmount={state.quickBuyMinAmount}
-                  setQuickBuyMinAmount={memoizedCallbacks.setQuickBuyMinAmount}
-                  quickBuyMaxAmount={state.quickBuyMaxAmount}
-                  setQuickBuyMaxAmount={memoizedCallbacks.setQuickBuyMaxAmount}
-                  useQuickBuyRange={state.useQuickBuyRange}
-                  setUseQuickBuyRange={memoizedCallbacks.setUseQuickBuyRange}
-                />
+                <div className="h-full overflow-y-auto overflow-x-hidden">
+                  <WalletsPage
+                    wallets={state.wallets}
+                    setWallets={memoizedCallbacks.setWallets}
+                    handleRefresh={handleRefresh}
+                    isRefreshing={state.isRefreshing}
+                    setIsModalOpen={memoizedCallbacks.setIsModalOpen}
+                    tokenAddress={state.tokenAddress}
+                    sortDirection={state.sortDirection}
+                    handleSortWallets={() => handleSortWallets(state.wallets, state.sortDirection, memoizedCallbacks.setSortDirection, state.solBalances, memoizedCallbacks.setWallets)}
+                    connection={state.connection}
+                    solBalances={state.solBalances}
+                    tokenBalances={state.tokenBalances}
+                    quickBuyEnabled={state.quickBuyEnabled}
+                    setQuickBuyEnabled={memoizedCallbacks.setQuickBuyEnabled}
+                    quickBuyAmount={state.quickBuyAmount}
+                    setQuickBuyAmount={memoizedCallbacks.setQuickBuyAmount}
+                    quickBuyMinAmount={state.quickBuyMinAmount}
+                    setQuickBuyMinAmount={memoizedCallbacks.setQuickBuyMinAmount}
+                    quickBuyMaxAmount={state.quickBuyMaxAmount}
+                    setQuickBuyMaxAmount={memoizedCallbacks.setQuickBuyMaxAmount}
+                    useQuickBuyRange={state.useQuickBuyRange}
+                    setUseQuickBuyRange={memoizedCallbacks.setUseQuickBuyRange}
+                    currentMarketCap={state.currentMarketCap}
+                    totalSolBalance={memoizedBalances.totalSolBalance}
+                    totalTokenBalance={memoizedBalances.totalTokenBalance}
+                    totalTokenValue={memoizedBalances.totalTokenBalance * (state.currentMarketCap || 0)}
+                    totalPortfolioValue={memoizedBalances.totalSolBalance + (memoizedBalances.totalTokenBalance * (state.currentMarketCap || 0))}
+                  />
+                </div>
               )}
             </div>
+          </div>
 
-            {/* Middle Column */}
-            <div className="backdrop-blur-sm bg-[#050a0e99] border-r border-[#02b36d40] overflow-y-auto">
+          {/* Center Content Area - Chart */}
+          <div className="flex-1 flex flex-col gap-6">
+            {/* Chart Section */}
+            <div className="h-full modern-card p-6">
               <ChartPage
-              isLoadingChart={state.isLoadingChart}
-              tokenAddress={state.tokenAddress}
-              wallets={state.wallets}
-            />
+                isLoadingChart={state.isLoadingChart}
+                tokenAddress={state.tokenAddress}
+                wallets={state.wallets}
+              />
             </div>
+          </div>
 
-            {/* Right Column */}
-            <div className="backdrop-blur-sm bg-[#050a0e99] overflow-y-auto">
+          {/* Right Sidebar - Quick Actions */}
+          <div className="lg:w-80 xl:w-96 flex flex-col gap-6">
+            <div className="modern-card p-6">
+
               <ActionsPage
-              tokenAddress={state.tokenAddress}
-              transactionFee={state.config.transactionFee}
-              handleRefresh={handleRefresh}
-              wallets={state.wallets}
-              solBalances={state.solBalances}
-              tokenBalances={state.tokenBalances}
-              currentMarketCap={state.currentMarketCap}
-              setBurnModalOpen={memoizedCallbacks.setBurnModalOpen}
-              setCalculatePNLModalOpen={memoizedCallbacks.setCalculatePNLModalOpen}
-              setDeployModalOpen={memoizedCallbacks.setDeployModalOpen}
-              setCleanerTokensModalOpen={memoizedCallbacks.setCleanerTokensModalOpen}
-              setCustomBuyModalOpen={memoizedCallbacks.setCustomBuyModalOpen}
-              onOpenFloating={() => memoizedCallbacks.setFloatingCardOpen(true)}
-              isFloatingCardOpen={state.floatingCard.isOpen}
-            />
+                tokenAddress={state.tokenAddress}
+                transactionFee={state.config.transactionFee}
+                handleRefresh={handleRefresh}
+                wallets={state.wallets}
+                solBalances={state.solBalances}
+                tokenBalances={state.tokenBalances}
+                currentMarketCap={state.currentMarketCap}
+                setBurnModalOpen={memoizedCallbacks.setBurnModalOpen}
+                setCalculatePNLModalOpen={memoizedCallbacks.setCalculatePNLModalOpen}
+                setDeployModalOpen={memoizedCallbacks.setDeployModalOpen}
+                setCleanerTokensModalOpen={memoizedCallbacks.setCleanerTokensModalOpen}
+                setCustomBuyModalOpen={memoizedCallbacks.setCustomBuyModalOpen}
+                onOpenFloating={() => memoizedCallbacks.setFloatingCardOpen(true)}
+                isFloatingCardOpen={state.floatingCard.isOpen}
+              />
             </div>
-          </Split>
+          </div>
         </div>
 
         {/* Mobile Layout */}
@@ -779,11 +782,16 @@ const WalletManager: React.FC = () => {
                   setQuickBuyMaxAmount={memoizedCallbacks.setQuickBuyMaxAmount}
                   useQuickBuyRange={state.useQuickBuyRange}
                   setUseQuickBuyRange={memoizedCallbacks.setUseQuickBuyRange}
+                  currentMarketCap={state.currentMarketCap}
+                  totalSolBalance={memoizedBalances.totalSolBalance}
+                  totalTokenBalance={memoizedBalances.totalTokenBalance}
+                  totalTokenValue={memoizedBalances.totalTokenBalance * (state.currentMarketCap || 0)}
+                  totalPortfolioValue={memoizedBalances.totalSolBalance + (memoizedBalances.totalTokenBalance * (state.currentMarketCap || 0))}
                 />
               ) : (
-                <div className="p-4 text-center text-[#7ddfbd]">
+                <div className="p-4 text-center text-blue-200">
                   <div className="loading-anim inline-block">
-                    <div className="h-4 w-4 rounded-full bg-[#02b36d] mx-auto"></div>
+                    <div className="h-4 w-4 rounded-full bg-blue-400 mx-auto"></div>
                   </div>
                   <p className="mt-2 font-mono">CONNECTING TO NETWORK...</p>
                 </div>

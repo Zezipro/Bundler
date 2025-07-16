@@ -37,8 +37,8 @@ const Tooltip = ({ children, content, position = 'top' }) => {
     <div className="relative group">
       {children}
       <div className={`absolute hidden group-hover:block px-3 py-1.5 text-xs font-mono tracking-wide
-                    bg-[#050a0e] text-[#02b36d] rounded-lg backdrop-blur-md
-                    border border-[#02b36d40] shadow-lg shadow-[#00000080]
+                    bg-slate-800/90 text-blue-400 rounded-lg backdrop-blur-md
+                    border border-blue-500/40 shadow-lg shadow-[#00000080]
                     ${positionClasses[position]} z-50 whitespace-nowrap`}>
         <div className="relative z-10">{content}</div>
       </div>
@@ -100,8 +100,8 @@ const PresetButton = ({
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           className="w-full h-8 px-2 text-xs font-mono rounded border text-center
-                   bg-[#050a0e] text-[#e4fbf2] border-[#02b36d]
-                   focus:outline-none focus:ring-1 focus:ring-[#02b36d40]"
+                   bg-slate-800 text-blue-100 border border-blue-500
+                   focus:outline-none focus:ring-1 focus:ring-blue-500/40"
         />
       </div>
     );
@@ -113,8 +113,8 @@ const PresetButton = ({
       className={`relative group px-2 py-1.5 text-xs font-mono rounded border transition-all duration-200
                 min-w-[48px] h-8 flex items-center justify-center
                 ${variant === 'buy' 
-                  ? 'bg-[#050a0e60] border-[#02b36d40] text-[#02b36d] hover:bg-[#02b36d20] hover:border-[#02b36d]' 
-                  : 'bg-[#050a0e60] border-[#ff323240] text-[#ff3232] hover:bg-[#ff323220] hover:border-[#ff3232]'
+                  ? 'bg-slate-800/60 border-blue-500/40 text-blue-400 hover:bg-blue-500/20 hover:border-blue-500' 
+                  : 'bg-slate-800/60 border-red-500/40 text-red-400 hover:bg-red-500/20 hover:border-red-500'
                 }`}
     >
       {isLoading ? (
@@ -176,8 +176,8 @@ const TabButton = ({ label, isActive, onClick, onEdit, isEditMode }) => {
           onKeyDown={handleKeyDown}
           onBlur={handleSave}
           className="w-full px-2 py-1 text-xs font-mono rounded
-                   bg-[#050a0e] text-[#e4fbf2] border border-[#02b36d]
-                   focus:outline-none focus:ring-1 focus:ring-[#02b36d40]"
+                   bg-slate-800 text-blue-100 border border-blue-500
+                   focus:outline-none focus:ring-1 focus:ring-blue-500/40"
         />
       </div>
     );
@@ -188,8 +188,8 @@ const TabButton = ({ label, isActive, onClick, onEdit, isEditMode }) => {
       onClick={isEditMode ? handleEdit : onClick}
       className={`flex-1 px-3 py-1.5 text-xs font-mono rounded transition-all duration-200
                 ${isActive 
-                  ? 'bg-[#02b36d20] border border-[#02b36d] text-[#02b36d]' 
-                  : 'bg-[#050a0e60] border border-[#02b36d20] text-[#7ddfbd60] hover:border-[#02b36d40] hover:text-[#7ddfbd]'
+                  ? 'bg-blue-500/20 border border-blue-500 text-blue-400' 
+                  : 'bg-slate-800/60 border border-blue-500/20 text-blue-400/60 hover:border-blue-500/40 hover:text-blue-400'
                 }
                 ${isEditMode ? 'cursor-text' : 'cursor-pointer'}`}
     >
@@ -480,9 +480,9 @@ const FloatingTradingCard: React.FC<FloatingTradingCardProps> = ({
       <div 
         className="relative overflow-hidden p-4 rounded-lg w-80 max-w-[90vw]"
         style={{
-          background: "rgba(5,10,14,0.98)",
+          background: "rgba(30, 41, 59, 0.6)",
           backdropFilter: "blur(20px)",
-          border: "1px solid rgba(2,179,109,0.3)",
+          border: "1px solid rgba(59, 130, 246, 0.4)",
           boxShadow: "0 4px 20px rgba(0,0,0,0.5)"
         }}
       >
@@ -493,15 +493,15 @@ const FloatingTradingCard: React.FC<FloatingTradingCardProps> = ({
             className="flex items-center gap-1 cursor-grab active:cursor-grabbing"
             title="Drag to move"
           >
-            <Move size={12} className="text-[#02b36d60]" />
+            <Move size={12} className="text-blue-400/60" />
             <div className="relative protocol-dropdown">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsProtocolDropdownOpen(!isProtocolDropdownOpen);
                 }}
-                className="flex items-center gap-1 px-2 py-1 rounded text-xs font-mono text-[#02b36d] font-medium
-                         bg-[#091217] border border-[#02b36d40] hover:bg-[#0a1c23] hover:border-[#02b36d80]
+                className="flex items-center gap-1 px-2 py-1 rounded text-xs font-mono text-blue-400 font-medium
+                         bg-slate-800/60 border border-blue-500/40 hover:bg-slate-700/60 hover:border-blue-500/80
                          transition-all duration-300 focus:outline-none"
               >
                 <span className="flex items-center">
@@ -514,13 +514,13 @@ const FloatingTradingCard: React.FC<FloatingTradingCardProps> = ({
                     dexOptions.find(d => d.value === (manualProtocol || selectedDex))?.label?.replace('⭐ ', '') || 'DEX'
                   )}
                 </span>
-                <ChevronDown size={10} className={`text-[#02b36d] transition-transform duration-300 ${isProtocolDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown size={10} className={`text-blue-400 transition-transform duration-300 ${isProtocolDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {isProtocolDropdownOpen && (
                 <div 
-                  className="absolute z-50 w-48 mt-1 rounded-md bg-[#050a0e]
-                            border border-[#02b36d40] shadow-lg shadow-[#00000080] left-0"
+                  className="absolute z-50 w-48 mt-1 rounded-md bg-slate-800/90
+                            border border-blue-500/40 shadow-lg shadow-[#00000080] left-0"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* DEX options */}
@@ -528,9 +528,9 @@ const FloatingTradingCard: React.FC<FloatingTradingCardProps> = ({
                     {dexOptions.map((dex) => (
                       <button
                         key={dex.value}
-                        className={`w-full px-2 py-1 text-left text-[#b3f0d7] text-xs font-mono flex items-center gap-1
-                                   hover:bg-[#02b36d20] transition-colors duration-200
-                                   ${(manualProtocol || selectedDex) === dex.value ? 'bg-[#02b36d15] border-l-2 border-[#02b36d]' : ''}`}
+                        className={`w-full px-2 py-1 text-left text-blue-200 text-xs font-mono flex items-center gap-1
+                                   hover:bg-blue-500/20 transition-colors duration-200
+                                   ${(manualProtocol || selectedDex) === dex.value ? 'bg-blue-500/15 border-l-2 border-blue-500' : ''}`}
                         onClick={(e) => {
                           e.stopPropagation();
                           setManualProtocol(dex.value);
@@ -559,8 +559,8 @@ const FloatingTradingCard: React.FC<FloatingTradingCardProps> = ({
               onClick={() => setIsEditMode(!isEditMode)}
               className={`p-1.5 rounded transition-all duration-200
                         ${isEditMode 
-                          ? 'bg-[#02b36d20] border border-[#02b36d] text-[#02b36d]' 
-                          : 'hover:bg-[#02b36d20] text-[#02b36d60] hover:text-[#02b36d]'
+                          ? 'bg-blue-500/20 border border-blue-500 text-blue-400' 
+                          : 'hover:bg-blue-500/20 text-blue-400/60 hover:text-blue-400'
                         }`}
             >
               {isEditMode ? <Check size={12} /> : <Edit3 size={12} />}
@@ -568,9 +568,9 @@ const FloatingTradingCard: React.FC<FloatingTradingCardProps> = ({
             
             <button
               onClick={onClose}
-              className="p-1 rounded hover:bg-[#02b36d20] transition-colors"
+              className="p-1 rounded hover:bg-blue-500/20 transition-colors"
             >
-              <X size={14} className="text-[#02b36d60] hover:text-[#02b36d]" />
+              <X size={14} className="text-blue-400/60 hover:text-blue-400" />
             </button>
           </div>
         </div>
@@ -594,8 +594,8 @@ const FloatingTradingCard: React.FC<FloatingTradingCardProps> = ({
           {/* Buy Section */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-mono text-[#02b36d]">BUY</span>
-              <span className="text-xs text-[#7ddfbd60] font-mono">SOL/wallet</span>
+              <span className="text-sm font-mono text-blue-400">BUY</span>
+              <span className="text-xs text-blue-400/60 font-mono">SOL/wallet</span>
             </div>
             
             <div className="grid grid-cols-4 gap-2">
@@ -617,8 +617,8 @@ const FloatingTradingCard: React.FC<FloatingTradingCardProps> = ({
           {/* Sell Section */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-mono text-[#ff3232]">SELL</span>
-              <span className="text-xs text-[#ff323260] font-mono">% tokens</span>
+              <span className="text-sm font-mono text-red-400">SELL</span>
+              <span className="text-xs text-red-400/60 font-mono">% tokens</span>
             </div>
             
             <div className="grid grid-cols-4 gap-2">

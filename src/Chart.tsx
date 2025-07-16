@@ -68,9 +68,9 @@ const IconButton: React.FC<{
   className?: string;
 }> = ({ icon, onClick, title, variant = 'primary', className = '' }) => {
   const variants = {
-    primary: 'bg-[#87D693]/20 hover:bg-[#87D693]/30 text-[#87D693]',
+    primary: 'bg-blue-400/20 hover:bg-blue-400/30 text-blue-400',
     secondary: 'bg-neutral-800/40 hover:bg-neutral-700/50 text-white',
-    solid: 'bg-[#87D693] hover:bg-[#87D693]/90 text-black shadow-lg shadow-[#87D693]/25'
+    solid: 'bg-blue-400 hover:bg-blue-400/90 text-black shadow-lg shadow-blue-400/25'
   };
   
   return (
@@ -241,7 +241,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({
           transition={{ duration: 0.3 }}
         >
           <motion.div 
-            className="w-12 h-12 rounded-full border-2 border-t-transparent border-[#87D693]/30"
+            className="w-12 h-12 rounded-full border-2 border-t-transparent border-blue-400/30"
             variants={loaderVariants}
             animate="animate"
           />
@@ -313,10 +313,10 @@ export const ChartPage: React.FC<ChartPageProps> = ({
       
       <motion.div
         variants={itemVariants}
-        className="mt-6 flex items-center gap-2 px-4 py-3 rounded-lg bg-green-500/10 border border-green-500/20"
+        className="mt-6 flex items-center gap-2 px-4 py-3 rounded-lg bg-blue-500/10 border border-blue-500/20"
       >
-        <AlertCircle size={16} className="text-green-400" />
-        <span className="text-green-300 text-sm">No token selected</span>
+        <AlertCircle size={16} className="text-blue-400" />
+        <span className="text-blue-300 text-sm">No token selected</span>
       </motion.div>
     </motion.div>
   );
@@ -345,7 +345,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({
               animate={{ rotate: 360 }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
             >
-              <BarChart size={24} className="text-[#87D693]" />
+              <BarChart size={24} className="text-blue-400" />
             </motion.div>
           </div>
         ) : !tokenAddress ? (

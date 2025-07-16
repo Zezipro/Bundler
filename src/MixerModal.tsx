@@ -489,7 +489,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
   // Render the modal with cyberpunk styling
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm modal-cyberpunk-container" style={{backgroundColor: 'rgba(5, 10, 14, 0.85)'}}>
-      <div className="relative bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg w-full max-w-6xl overflow-hidden transform modal-cyberpunk-content modal-glow">
+      <div className="relative bg-slate-900/90 backdrop-blur-md border border-blue-500/40 rounded-lg shadow-lg w-full max-w-6xl overflow-hidden transform glassmorphism-card glass-glow">
         {/* Ambient grid background */}
         <div className="absolute inset-0 z-0 opacity-10"
              style={{
@@ -500,7 +500,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
         </div>
 
         {/* Header */}
-        <div className="relative z-10 p-4 flex justify-between items-center border-b border-[#02b36d40]">
+        <div className="relative z-10 p-4 flex justify-between items-center border-b border-blue-500/40">
           <div className="flex items-center">
             <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#02b36d20] mr-3">
               <ArrowsUpFromLine size={16} className="text-[#02b36d]" />
@@ -518,7 +518,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
         </div>
 
         {/* Progress Indicator */}
-        <div className="relative w-full h-1 bg-[#091217] progress-bar-cyberpunk">
+        <div className="relative w-full h-1 bg-slate-700/60 backdrop-blur-sm glassmorphism-shimmer">
           <div 
             className="h-full bg-[#02b36d] transition-all duration-300"
             style={{ width: currentStep === 0 ? '50%' : '100%' }}
@@ -555,13 +555,13 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                         type="text"
                         value={senderSearchTerm}
                         onChange={(e) => setSenderSearchTerm(e.target.value)}
-                        className="w-full pl-9 pr-4 py-2 bg-[#091217] border border-[#02b36d30] rounded-lg text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2 bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-all glassmorphism-input font-mono"
                         placeholder="SEARCH SENDER WALLETS..."
                       />
                     </div>
                     
                     <select 
-                      className="bg-[#091217] border border-[#02b36d30] rounded-lg px-2 text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] modal-input-cyberpunk font-mono"
+                      className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg px-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500 glassmorphism-input font-mono"
                       value={sortOption}
                       onChange={(e) => setSortOption(e.target.value)}
                     >
@@ -570,26 +570,26 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                     </select>
                     
                     <button
-                      className="p-2 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#7ddfbd] hover:text-[#02b36d] hover:border-[#02b36d] transition-all modal-btn-cyberpunk"
+                      className="p-2 bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg text-blue-300 hover:text-blue-400 hover:border-blue-500 transition-all glassmorphism-btn"
                       onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
                     >
                       {sortDirection === 'asc' ? '↑' : '↓'}
                     </button>
                   </div>
 
-                  <div className="max-h-48 overflow-y-auto border border-[#02b36d20] rounded-lg shadow-inner bg-[#091217] transition-all duration-200 hover:border-[#02b36d40] scrollbar-thin">
+                  <div className="max-h-48 overflow-y-auto border border-blue-500/20 rounded-lg shadow-inner bg-slate-700/60 backdrop-blur-sm transition-all duration-200 hover:border-blue-500/40 scrollbar-thin">
                     {filterWallets(getAvailableSenderWallets(), senderSearchTerm).length > 0 ? (
                       filterWallets(getAvailableSenderWallets(), senderSearchTerm).map((wallet) => (
                         <div 
                           key={wallet.id}
-                          className={`flex items-center p-2.5 hover:bg-[#0a1419] cursor-pointer transition-all duration-200 border-b border-[#02b36d20] last:border-b-0
-                                    ${selectedSenderWallet === wallet.address ? 'bg-[#02b36d10] border-[#02b36d30]' : ''}`}
+                          className={`flex items-center p-2.5 hover:bg-slate-600/60 cursor-pointer transition-all duration-200 border-b border-blue-500/20 last:border-b-0
+                ${selectedSenderWallet === wallet.address ? 'bg-blue-500/10 border-blue-500/30' : ''}`}
                           onClick={() => setSelectedSenderWallet(wallet.address)}
                         >
                           <div className={`w-5 h-5 mr-3 rounded flex items-center justify-center transition-all duration-300
                                           ${selectedSenderWallet === wallet.address
                                             ? 'bg-[#02b36d] shadow-md shadow-[#02b36d40]' 
-                                            : 'border border-[#02b36d30] bg-[#091217]'}`}>
+                                            : 'border border-blue-500/30 bg-slate-700/60 backdrop-blur-sm'}`}>
                             {selectedSenderWallet === wallet.address && (
                               <CheckCircle size={14} className="text-[#050a0e] animate-[fadeIn_0.2s_ease]" />
                             )}
@@ -616,7 +616,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                     </label>
                     <button 
                       onClick={handleSelectAllRecipients}
-                      className="text-xs px-2 py-0.5 bg-[#091217] hover:bg-[#0a1419] text-[#7ddfbd] hover:text-[#02b36d] rounded border border-[#02b36d30] hover:border-[#02b36d] transition-all duration-200 font-mono"
+                      className="text-xs px-2 py-0.5 bg-slate-700/60 backdrop-blur-sm hover:bg-slate-600/60 text-blue-300 hover:text-blue-400 rounded border border-blue-500/30 hover:border-blue-500 transition-all duration-200 font-mono"
                     >
                       {selectedRecipientWallets.length === getAvailableRecipientWallets().length ? 'DESELECT ALL' : 'SELECT ALL'}
                     </button>
@@ -630,13 +630,13 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                         type="text"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-9 pr-4 py-2 bg-[#091217] border border-[#02b36d30] rounded-lg text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2 bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-all glassmorphism-input font-mono"
                         placeholder="SEARCH RECIPIENT WALLETS..."
                       />
                     </div>
                     
                     <select 
-                      className="bg-[#091217] border border-[#02b36d30] rounded-lg px-2 text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] modal-input-cyberpunk font-mono"
+                      className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg px-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500 glassmorphism-input font-mono"
                       value={balanceFilter}
                       onChange={(e) => setBalanceFilter(e.target.value)}
                     >
@@ -647,19 +647,19 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                     </select>
                   </div>
 
-                  <div className="max-h-48 overflow-y-auto border border-[#02b36d20] rounded-lg shadow-inner bg-[#091217] transition-all duration-200 hover:border-[#02b36d40] scrollbar-thin">
+                  <div className="max-h-48 overflow-y-auto border border-blue-500/20 rounded-lg shadow-inner bg-slate-700/60 backdrop-blur-sm transition-all duration-200 hover:border-blue-500/40 scrollbar-thin">
                     {filterWallets(getAvailableRecipientWallets(), searchTerm).length > 0 ? (
                       filterWallets(getAvailableRecipientWallets(), searchTerm).map((wallet) => (
                         <div 
                           key={wallet.id}
-                          className={`flex items-center p-2.5 hover:bg-[#0a1419] transition-all duration-200 border-b border-[#02b36d20] last:border-b-0
-                                    ${selectedRecipientWallets.includes(wallet.address) ? 'bg-[#02b36d10] border-[#02b36d30]' : ''}`}
+                          className={`flex items-center p-2.5 hover:bg-slate-600/60 transition-all duration-200 border-b border-blue-500/20 last:border-b-0
+                ${selectedRecipientWallets.includes(wallet.address) ? 'bg-blue-500/10 border-blue-500/30' : ''}`}
                         >
                           <div 
                             className={`w-5 h-5 mr-3 rounded flex items-center justify-center transition-all duration-300 cursor-pointer
                                         ${selectedRecipientWallets.includes(wallet.address) 
                                           ? 'bg-[#02b36d] shadow-md shadow-[#02b36d40]' 
-                                          : 'border border-[#02b36d30] bg-[#091217]'}`}
+                                          : 'border border-blue-500/30 bg-slate-700/60 backdrop-blur-sm'}`}
                             onClick={() => toggleRecipientWalletSelection(wallet.address)}
                           >
                             {selectedRecipientWallets.includes(wallet.address) && (
@@ -688,7 +688,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                                       handleWalletAmountChange(wallet.address, value);
                                     }
                                   }}
-                                  className="w-full pl-6 pr-2 py-1 bg-[#0a1419] border border-[#02b36d30] rounded text-xs text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] modal-input-cyberpunk font-mono"
+                                  className="w-full pl-6 pr-2 py-1 bg-slate-600/60 backdrop-blur-sm border border-blue-500/30 rounded text-xs text-slate-100 focus:outline-none focus:border-blue-500 glassmorphism-input font-mono"
                                   placeholder="0.00"
                                 />
                               </div>
@@ -729,7 +729,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                     <span className="text-xs text-[#7ddfbd] mr-2 font-mono">CUSTOM AMOUNT PER WALLET</span>
                     <div 
                       onClick={() => setUseCustomAmounts(!useCustomAmounts)}
-                      className={`w-10 h-5 rounded-full cursor-pointer transition-all duration-200 flex items-center ${useCustomAmounts ? 'bg-[#02b36d]' : 'bg-[#091217] border border-[#02b36d30]'}`}
+                      className={`w-10 h-5 rounded-full cursor-pointer transition-all duration-200 flex items-center ${useCustomAmounts ? 'bg-blue-500' : 'bg-slate-700/60 backdrop-blur-sm border border-blue-500/30'}`}
                     >
                       <div className={`w-4 h-4 rounded-full bg-[#e4fbf2] transform transition-all duration-200 ${useCustomAmounts ? 'translate-x-5' : 'translate-x-1'}`}></div>
                     </div>
@@ -748,7 +748,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                           <div className="relative" onMouseEnter={() => setShowInfoTip(true)} onMouseLeave={() => setShowInfoTip(false)}>
                             <Info size={14} className="text-[#7ddfbd] cursor-help" />
                             {showInfoTip && (
-                              <div className="absolute left-0 bottom-full mb-2 p-2 bg-[#091217] border border-[#02b36d30] rounded shadow-lg text-xs text-[#e4fbf2] w-48 z-10 font-mono">
+                              <div className="absolute left-0 bottom-full mb-2 p-2 bg-slate-700/90 backdrop-blur-md border border-blue-500/30 rounded shadow-lg text-xs text-slate-100 w-48 z-10 font-mono">
                                 This amount will be mixed to each selected recipient wallet
                               </div>
                             )}
@@ -766,8 +766,8 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                               setCommonAmount(value);
                             }
                           }}
-                          className={`w-full pl-9 pr-4 py-2.5 bg-[#091217] border rounded-lg text-[#e4fbf2] focus:outline-none transition-all duration-200 modal-input-cyberpunk font-mono
-                                    ${hasEnoughBalance ? 'border-[#02b36d30] focus:border-[#02b36d]' : 'border-[#ff4d4f]'}`}
+                          className={`w-full pl-9 pr-4 py-2.5 bg-slate-700/60 backdrop-blur-sm border rounded-lg text-slate-100 focus:outline-none transition-all duration-200 glassmorphism-input font-mono
+${hasEnoughBalance ? 'border-blue-500/30 focus:border-blue-500' : 'border-red-500'}`}
                           placeholder="0.001"
                         />
                       </div>
@@ -775,7 +775,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                     
                     {/* Real-time preview - in the same row */}
                     {selectedSenderWallet && commonAmount && selectedRecipientWallets.length > 0 && (
-                      <div className="w-1/2 bg-[#091217] rounded-lg p-3 border border-[#02b36d30] modal-w-full-md modal-mt-4-md">
+                      <div className="w-1/2 bg-slate-700/60 backdrop-blur-sm rounded-lg p-3 border border-blue-500/30 modal-w-full-md modal-mt-4-md">
                         <div className="flex justify-between items-center">
                           <span className="text-sm text-[#7ddfbd] font-mono">TOTAL TO MIX:</span>
                           <span className={`text-sm font-semibold font-mono ${hasEnoughBalance ? 'text-[#02b36d]' : 'text-[#ff4d4f]'}`}>
@@ -812,7 +812,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                                 setCommonAmount(value);
                               }
                             }}
-                            className="w-full pl-9 pr-4 py-2 bg-[#091217] border border-[#02b36d30] rounded-lg text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                            className="w-full pl-9 pr-4 py-2 bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-all glassmorphism-input font-mono"
                             placeholder="SET COMMON AMOUNT"
                           />
                         </div>
@@ -821,8 +821,8 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                           disabled={!commonAmount}
                           className={`whitespace-nowrap px-3 py-2 text-sm rounded-lg transition-all font-mono border
                                     ${!commonAmount 
-                                      ? 'bg-[#091217] text-[#7ddfbd60] border-[#02b36d20] cursor-not-allowed' 
-                                      : 'bg-[#091217] hover:bg-[#0a1419] text-[#e4fbf2] border-[#02b36d30] hover:border-[#02b36d] modal-btn-cyberpunk'}`}
+                                      ? 'bg-slate-700/60 text-blue-300/60 border-blue-500/20 cursor-not-allowed'
+                : 'bg-slate-700/60 backdrop-blur-sm hover:bg-slate-600/60 text-slate-100 border-blue-500/30 hover:border-blue-500 glassmorphism-btn'}`}
                         >
                           APPLY TO ALL
                         </button>
@@ -831,7 +831,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                     
                     {/* Real-time preview for custom amounts */}
                     {selectedSenderWallet && totalAmount > 0 && (
-                      <div className="w-2/5 bg-[#091217] rounded-lg p-3 border border-[#02b36d30] modal-w-full-md modal-mt-4-md">
+                      <div className="w-2/5 bg-slate-700/60 backdrop-blur-sm rounded-lg p-3 border border-blue-500/30 modal-w-full-md modal-mt-4-md">
                         <div className="flex justify-between items-center">
                           <span className="text-sm text-[#7ddfbd] font-mono">TOTAL TO MIX:</span>
                           <span className={`text-sm font-semibold font-mono ${hasEnoughBalance ? 'text-[#02b36d]' : 'text-[#ff4d4f]'}`}>
@@ -856,7 +856,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
               <div className="flex justify-end gap-3 mt-6">
                 <button
                   onClick={onClose}
-                  className="px-5 py-2.5 text-[#e4fbf2] bg-[#091217] border border-[#02b36d30] hover:bg-[#0a1419] hover:border-[#02b36d] rounded-lg transition-all duration-200 shadow-md font-mono tracking-wider modal-btn-cyberpunk"
+                  className="px-5 py-2.5 text-slate-100 bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 hover:bg-slate-600/60 hover:border-blue-500 rounded-lg transition-all duration-200 shadow-md font-mono tracking-wider glassmorphism-btn"
                 >
                   CANCEL
                 </button>
@@ -892,13 +892,13 @@ export const MixerModal: React.FC<MixerModalProps> = ({
             <div className="flex space-x-4 modal-flex-col-lg animate-[fadeIn_0.3s_ease]">
               {/* Left Side - Summary */}
               <div className="w-1/2 space-y-4 modal-w-full-lg">
-                <div className="bg-[#091217] rounded-lg p-4 border border-[#02b36d30]">
+                <div className="bg-slate-700/60 backdrop-blur-sm rounded-lg p-4 border border-blue-500/30">
                   <h3 className="text-base font-semibold text-[#e4fbf2] mb-3 font-mono tracking-wider">MIXING SUMMARY</h3>
                   
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-[#7ddfbd] font-mono">FROM WALLET:</span>
-                      <div className="flex items-center bg-[#0a1419] px-2 py-1 rounded border border-[#02b36d20]">
+                      <div className="flex items-center bg-slate-600/60 backdrop-blur-sm px-2 py-1 rounded border border-blue-500/20">
                         <span className="text-sm font-mono text-[#e4fbf2] glitch-text">{formatAddress(selectedSenderWallet)}</span>
                       </div>
                     </div>
@@ -927,7 +927,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                       </div>
                     )}
                     
-                    <div className="pt-2 border-t border-[#02b36d20] flex items-center justify-between">
+                    <div className="pt-2 border-t border-blue-500/20 flex items-center justify-between">
                       <span className="text-sm font-medium text-[#7ddfbd] font-mono">TOTAL TO MIX:</span>
                       <span className="text-sm font-semibold text-[#02b36d] font-mono">{totalAmount.toFixed(4)} SOL</span>
                     </div>
@@ -940,7 +940,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                 </div>
                 
                 {/* Confirmation Checkbox */}
-                <div className="flex items-center px-3 py-3 bg-[#091217] rounded-lg border border-[#02b36d30]">
+                <div className="flex items-center px-3 py-3 bg-slate-700/60 backdrop-blur-sm rounded-lg border border-blue-500/30">
                   <div className="relative mx-1">
                     <input
                       type="checkbox"
@@ -949,7 +949,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                       onChange={(e) => setIsConfirmed(e.target.checked)}
                       className="peer sr-only"
                     />
-                    <div className="w-5 h-5 border border-[#02b36d40] rounded peer-checked:bg-[#02b36d] peer-checked:border-0 transition-all"></div>
+                    <div className="w-5 h-5 border border-blue-500/40 rounded peer-checked:bg-blue-500 peer-checked:border-0 transition-all"></div>
                     <CheckCircle size={14} className={`absolute top-0.5 left-0.5 text-[#050a0e] transition-all ${isConfirmed ? 'opacity-100' : 'opacity-0'}`} />
                   </div>
                   <label htmlFor="confirmMixer" className="text-[#e4fbf2] text-sm ml-2 cursor-pointer select-none font-mono">
@@ -960,7 +960,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
               
               {/* Right Side - Recipients List */}
               <div className="w-1/2 modal-w-full-lg modal-mt-4-lg">
-                <div className="bg-[#091217] rounded-lg p-4 border border-[#02b36d30] h-full">
+                <div className="bg-slate-700/60 backdrop-blur-sm rounded-lg p-4 border border-blue-500/30 h-full">
                   <h3 className="text-base font-semibold text-[#e4fbf2] mb-3 font-mono tracking-wider">SELECTED RECIPIENTS</h3>
                   
                   <div className="max-h-64 overflow-y-auto pr-1 scrollbar-thin">
@@ -970,7 +970,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
                         const amount = useCustomAmounts ? getWalletAmount(address) : commonAmount;
                         
                         return wallet ? (
-                          <div key={wallet.id} className="flex items-center justify-between py-1.5 border-b border-[#02b36d20] last:border-b-0">
+                          <div key={wallet.id} className="flex items-center justify-between py-1.5 border-b border-blue-500/20 last:border-b-0">
                             <div className="flex items-center">
                               <span className="text-[#7ddfbd] text-xs mr-2 w-6 font-mono">{index + 1}.</span>
                               <span className="font-mono text-sm text-[#e4fbf2] glitch-text">{formatAddress(wallet.address)}</span>
@@ -998,7 +998,7 @@ export const MixerModal: React.FC<MixerModalProps> = ({
             <div className="flex justify-end gap-3 mt-6">
               <button
                 onClick={() => setCurrentStep(0)}
-                className="px-5 py-2.5 text-[#e4fbf2] bg-[#091217] border border-[#02b36d30] hover:bg-[#0a1419] hover:border-[#02b36d] rounded-lg transition-all duration-200 shadow-md font-mono tracking-wider modal-btn-cyberpunk"
+                className="px-5 py-2.5 text-slate-100 bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 hover:bg-slate-600/60 hover:border-blue-500 rounded-lg transition-all duration-200 shadow-md font-mono tracking-wider glassmorphism-btn"
               >
                 BACK
               </button>
@@ -1024,10 +1024,10 @@ export const MixerModal: React.FC<MixerModalProps> = ({
         </div>
 
         {/* Cyberpunk decorative corner elements */}
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#02b36d] opacity-70"></div>
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-blue-500 opacity-70"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-blue-500 opacity-70"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-blue-500 opacity-70"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-500 opacity-70"></div>
       </div>
     </div>,
     document.body

@@ -465,7 +465,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
               </h3>
             </div>
             
-            <div className="bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg modal-glow">
+            <div className="bg-slate-900/20 backdrop-blur-xl border border-blue-500/30 rounded-lg shadow-lg modal-glow">
               <div className="p-6 space-y-6 relative">
                 {/* Ambient grid background */}
                 <div className="absolute inset-0 z-0 opacity-10"
@@ -485,7 +485,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                       type="text"
                       value={tokenData.name}
                       onChange={(e) => setTokenData(prev => ({ ...prev, name: e.target.value }))}
-                      className="w-full bg-[#091217] border border-[#02b36d30] rounded-lg p-2.5 text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                      className="w-full bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg p-2.5 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                       placeholder="ENTER TOKEN NAME"
                     />
                   </div>
@@ -497,7 +497,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                       type="text"
                       value={tokenData.symbol}
                       onChange={(e) => setTokenData(prev => ({ ...prev, symbol: e.target.value }))}
-                      className="w-full bg-[#091217] border border-[#02b36d30] rounded-lg p-2.5 text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                      className="w-full bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg p-2.5 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                       placeholder="ENTER TOKEN SYMBOL"
                     />
                   </div>
@@ -522,8 +522,8 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                       disabled={isUploading}
                       className={`px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all ${
                         isUploading 
-                          ? 'bg-[#091217] text-[#7ddfbd70] cursor-not-allowed border border-[#02b36d20]' 
-                          : 'bg-[#091217] hover:bg-[#0a1419] border border-[#02b36d40] hover:border-[#02b36d] text-[#e4fbf2] shadow-lg hover:shadow-[#02b36d40] transform hover:-translate-y-0.5 modal-btn-cyberpunk'
+                          ? 'bg-slate-800/30 text-slate-500 cursor-not-allowed border border-blue-400/10'
+              : 'bg-slate-800/30 hover:bg-slate-700/40 border border-blue-400/30 hover:border-blue-400 text-slate-100 shadow-lg hover:shadow-blue-400/30 transform hover:-translate-y-0.5 modal-btn-cyberpunk'
                       }`}
                     >
                       {isUploading ? (
@@ -541,7 +541,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                     
                     {tokenData.imageUrl && (
                       <div className="flex items-center gap-3 flex-grow">
-                        <div className="h-12 w-12 rounded overflow-hidden border border-[#02b36d40] bg-[#091217] flex items-center justify-center">
+                        <div className="h-12 w-12 rounded overflow-hidden border border-blue-400/30 bg-slate-800/30 backdrop-blur-sm flex items-center justify-center">
                           <img 
                             src={tokenData.imageUrl}
                             alt="Logo Preview"
@@ -555,7 +555,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                         <button
                           type="button"
                           onClick={() => setTokenData(prev => ({ ...prev, imageUrl: '' }))}
-                          className="p-1.5 rounded-full hover:bg-[#091217] text-[#7ddfbd] hover:text-[#e4fbf2] transition-all"
+                          className="p-1.5 rounded-full hover:bg-slate-800/30 text-blue-300 hover:text-slate-100 transition-all"
                         >
                           <X size={14} />
                         </button>
@@ -564,7 +564,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                   </div>
                   
                   {isUploading && (
-                    <div className="w-full bg-[#091217] rounded-full h-1.5 mt-2">
+                    <div className="w-full bg-slate-800/30 backdrop-blur-sm rounded-full h-1.5 mt-2">
                       <div 
                         className="bg-[#02b36d] h-1.5 rounded-full transition-all duration-300 progress-bar-cyberpunk"
                         style={{ width: `${uploadProgress}%` }}
@@ -581,7 +581,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                   <textarea
                     value={tokenData.description}
                     onChange={(e) => setTokenData(prev => ({ ...prev, description: e.target.value }))}
-                    className="w-full bg-[#091217] border border-[#02b36d30] rounded-lg p-2.5 text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk min-h-24 font-mono"
+                    className="w-full bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg p-2.5 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk min-h-24 font-mono"
                     placeholder="DESCRIBE YOUR TOKEN"
                     rows={3}
                   />
@@ -600,7 +600,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                         setTokenData(prev => ({ ...prev, totalSupply: e.target.value }))
                       }
                     }}
-                    className="w-full bg-[#091217] border border-[#02b36d30] rounded-lg p-2.5 text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                    className="w-full bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg p-2.5 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                     placeholder="TOTAL SUPPLY (DEFAULT: 42 BILLION)"
                   />
                 </div>
@@ -615,7 +615,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                         type="text"
                         value={getTelegram()}
                         onChange={(e) => updateSocialLinks('telegram', e.target.value)}
-                        className="w-full pl-9 pr-4 py-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                         placeholder="T.ME/YOURGROUP"
                       />
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -634,7 +634,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                         type="text"
                         value={getTwitter()}
                         onChange={(e) => updateSocialLinks('twitter', e.target.value)}
-                        className="w-full pl-9 pr-4 py-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                         placeholder="@YOURHANDLE"
                       />
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -653,7 +653,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                         type="text"
                         value={getWebsite()}
                         onChange={(e) => updateSocialLinks('website', e.target.value)}
-                        className="w-full pl-9 pr-4 py-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                         placeholder="HTTPS://YOURSITE.COM"
                       />
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -711,13 +711,13 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                  className="w-full pl-9 pr-4 py-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                   placeholder="SEARCH WALLETS..."
                 />
               </div>
               
               <select 
-                className="bg-[#091217] border border-[#02b36d30] rounded-lg px-3 py-2.5 text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] modal-input-cyberpunk font-mono"
+                className="bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg px-3 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-400 modal-input-cyberpunk font-mono"
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
               >
@@ -726,14 +726,14 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
               </select>
               
               <button
-                className="p-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#7ddfbd] hover:border-[#02b36d] hover:text-[#02b36d] transition-all modal-btn-cyberpunk flex items-center justify-center"
+                className="p-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-blue-300 hover:border-blue-400 hover:text-blue-400 transition-all modal-btn-cyberpunk flex items-center justify-center"
                 onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
               >
                 {sortDirection === 'asc' ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
               </button>
 
               <select 
-                className="bg-[#091217] border border-[#02b36d30] rounded-lg px-3 py-2.5 text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] modal-input-cyberpunk font-mono"
+                className="bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg px-3 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-400 modal-input-cyberpunk font-mono"
                 value={balanceFilter}
                 onChange={(e) => setBalanceFilter(e.target.value)}
               >
@@ -745,7 +745,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
             </div>
 
             {/* Wallet Selection Limit Info */}
-            <div className="bg-[#091217] border border-[#02b36d40] rounded-lg p-3 mb-3 shadow-lg">
+            <div className="bg-slate-800/30 backdrop-blur-sm border border-blue-400/30 rounded-lg p-3 mb-3 shadow-lg">
               <div className="flex items-center gap-2">
                 <Info size={14} className="text-[#02b36d]" />
                 <span className="text-sm text-[#7ddfbd] font-mono">
@@ -756,7 +756,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
 
             {/* Summary Stats */}
             {selectedWallets.length > 0 && (
-              <div className="bg-[#050a0e] border border-[#02b36d40] rounded-lg p-3 mb-3 shadow-lg modal-glow">
+              <div className="bg-slate-900/20 backdrop-blur-xl border border-blue-500/30 rounded-lg p-3 mb-3 shadow-lg modal-glow">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-[#7ddfbd] font-mono">SELECTED:</span>
@@ -772,7 +772,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
               </div>
             )}
 
-            <div className="bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg modal-glow relative">
+            <div className="bg-slate-900/20 backdrop-blur-xl border border-blue-500/30 rounded-lg shadow-lg modal-glow relative">
               {/* Ambient grid background */}
               <div className="absolute inset-0 z-0 opacity-10"
                    style={{
@@ -797,7 +797,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                         return (
                           <div
                             key={wallet?.id}
-                            className="p-3 rounded-lg border border-[#02b36d] bg-[#02b36d10] mb-2 shadow-lg modal-glow"
+                            className="p-3 rounded-lg border border-blue-400 bg-blue-400/10 mb-2 shadow-lg modal-glow"
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-4">
@@ -812,7 +812,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                                       }
                                     }}
                                     disabled={index === 0}
-                                    className={`p-1 rounded hover:bg-[#091217] transition-all ${index === 0 ? 'opacity-50 cursor-not-allowed' : 'modal-btn-cyberpunk'}`}
+                                    className={`p-1 rounded hover:bg-slate-800/30 transition-all ${index === 0 ? 'opacity-50 cursor-not-allowed' : 'modal-btn-cyberpunk'}`}
                                   >
                                     <ArrowUp size={16} className="text-[#e4fbf2]" />
                                   </button>
@@ -826,7 +826,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                                       }
                                     }}
                                     disabled={index === selectedWallets.length - 1}
-                                    className={`p-1 rounded hover:bg-[#091217] transition-all ${index === selectedWallets.length - 1 ? 'opacity-50 cursor-not-allowed' : 'modal-btn-cyberpunk'}`}
+                                    className={`p-1 rounded hover:bg-slate-800/30 transition-all ${index === selectedWallets.length - 1 ? 'opacity-50 cursor-not-allowed' : 'modal-btn-cyberpunk'}`}
                                   >
                                     <ArrowDown size={16} className="text-[#e4fbf2]" />
                                   </button>
@@ -852,13 +852,13 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                                     value={walletAmounts[privateKey] || ''}
                                     onChange={(e) => handleAmountChange(privateKey, e.target.value)}
                                     placeholder="AMOUNT"
-                                    className="w-32 pl-9 pr-2 py-2 bg-[#091217] border border-[#02b36d30] rounded-lg text-sm text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                                    className="w-32 pl-9 pr-2 py-2 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                                   />
                                 </div>
                                 <button
                                   type="button"
                                   onClick={() => handleWalletSelection(privateKey)}
-                                  className="p-1 rounded hover:bg-[#091217] transition-all modal-btn-cyberpunk"
+                                  className="p-1 rounded hover:bg-slate-800/30 transition-all modal-btn-cyberpunk"
                                 >
                                   <X size={18} className="text-[#7ddfbd] hover:text-[#e4fbf2]" />
                                 </button>
@@ -882,11 +882,11 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                         return (
                           <div
                             key={wallet.id}
-                            className="flex items-center justify-between p-3 rounded-lg border border-[#02b36d40] hover:border-[#02b36d] hover:bg-[#091217] transition-all duration-200 mb-2 cursor-pointer"
+                            className="flex items-center justify-between p-3 rounded-lg border border-blue-400/30 hover:border-blue-400 hover:bg-slate-800/30 transition-all duration-200 mb-2 cursor-pointer"
                             onClick={() => handleWalletSelection(wallet.privateKey)}
                           >
                             <div className="flex items-center gap-4">
-                              <div className="w-5 h-5 rounded-full border border-[#02b36d40] flex items-center justify-center cursor-pointer hover:border-[#02b36d] transition-all">
+                              <div className="w-5 h-5 rounded-full border border-blue-400/30 flex items-center justify-center cursor-pointer hover:border-blue-400 transition-all">
                                 <PlusCircle size={14} className="text-[#7ddfbd]" />
                               </div>
                               <div className="space-y-1">
@@ -941,7 +941,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
   
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Left column - Token Details */}
-              <div className="bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg modal-glow relative">
+              <div className="bg-slate-900/20 backdrop-blur-xl border border-blue-500/30 rounded-lg shadow-lg modal-glow relative">
                 {/* Ambient grid background */}
                 <div className="absolute inset-0 z-0 opacity-10"
                      style={{
@@ -979,7 +979,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                     {tokenData.imageUrl && (
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-[#7ddfbd] font-mono">LOGO:</span>
-                        <div className="bg-[#091217] border border-[#02b36d40] rounded-lg p-1 w-12 h-12 flex items-center justify-center">
+                        <div className="bg-slate-800/30 backdrop-blur-sm border border-blue-400/30 rounded-lg p-1 w-12 h-12 flex items-center justify-center">
                           <img 
                             src={tokenData.imageUrl}
                             alt="Token Logo"
@@ -1033,14 +1033,14 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                 </div>
                 
                 {/* Cyberpunk decorative corner elements */}
-                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#02b36d] opacity-70"></div>
-                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#02b36d] opacity-70"></div>
-                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#02b36d] opacity-70"></div>
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#02b36d] opacity-70"></div>
+                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-blue-400 opacity-70"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-blue-400 opacity-70"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-blue-400 opacity-70"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-400 opacity-70"></div>
               </div>
               
               {/* Right column - Selected Wallets */}
-              <div className="bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg modal-glow relative">
+              <div className="bg-slate-900/20 backdrop-blur-xl border border-blue-500/30 rounded-lg shadow-lg modal-glow relative">
                 {/* Ambient grid background */}
                 <div className="absolute inset-0 z-0 opacity-10"
                      style={{
@@ -1060,7 +1060,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                       const solBalance = wallet ? solBalances.get(wallet.address) || 0 : 0;
                       
                       return (
-                        <div key={index} className="flex justify-between items-center p-3 bg-[#091217] rounded-lg mb-2 border border-[#02b36d30] hover:border-[#02b36d] transition-all">
+                        <div key={index} className="flex justify-between items-center p-3 bg-slate-800/30 backdrop-blur-sm rounded-lg mb-2 border border-blue-400/20 hover:border-blue-400 transition-all">
                           <div className="flex items-center gap-2">
                             <span className="text-[#02b36d] text-xs font-medium w-6 font-mono">{index === 0 ? 'CRET' : `#${index + 1}`}</span>
                             <span className="font-mono text-sm text-[#e4fbf2] glitch-text">
@@ -1085,7 +1085,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
               </div>
             </div>
   
-            <div className="bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg modal-glow">
+            <div className="bg-slate-900/20 backdrop-blur-xl border border-blue-500/30 rounded-lg shadow-lg modal-glow">
               <div className="p-4 relative">
                 {/* Ambient grid background */}
                 <div className="absolute inset-0 z-0 opacity-10"
@@ -1101,7 +1101,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                     onClick={() => setIsConfirmed(!isConfirmed)}
                     className="relative w-5 h-5 cursor-pointer"
                   >
-                    <div className={`w-5 h-5 border rounded transition-all ${isConfirmed ? 'bg-[#02b36d] border-[#02b36d]' : 'border-[#02b36d40]'}`}></div>
+                    <div className={`w-5 h-5 border rounded transition-all ${isConfirmed ? 'bg-blue-400 border-blue-400' : 'border-blue-400/30'}`}></div>
                     {isConfirmed && (
                       <CheckCircle size={14} className="absolute top-0.5 left-0.5 text-[#050a0e]" />
                     )}
@@ -1368,7 +1368,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm modal-cyberpunk-container" style={{backgroundColor: 'rgba(5, 10, 14, 0.85)'}}>
-      <div className="relative bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg w-full max-w-3xl overflow-hidden transform modal-cyberpunk-content modal-glow">
+      <div className="relative bg-slate-900/20 backdrop-blur-xl border border-blue-500/30 rounded-lg shadow-lg w-full max-w-3xl overflow-hidden transform modal-cyberpunk-content modal-glow">
         {/* Ambient grid background */}
         <div className="absolute inset-0 z-0 opacity-10"
              style={{
@@ -1398,7 +1398,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
 
         {/* Progress Indicator - Only show for steps 0-2 */}
         {currentStep < 3 && (
-          <div className="relative w-full h-1 bg-[#091217] progress-bar-cyberpunk">
+          <div className="relative w-full h-1 bg-slate-800/30 backdrop-blur-sm progress-bar-cyberpunk">
             <div 
               className="h-full bg-[#02b36d] transition-all duration-300"
               style={{ width: `${(currentStep + 1) / STEPS_DEPLOY.length * 100}%` }}
@@ -1419,7 +1419,7 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
                   <button
                     type="button"
                     onClick={handleNewDeployment}
-                    className="px-5 py-2.5 text-[#e4fbf2] bg-[#091217] border border-[#02b36d30] hover:bg-[#0a1419] hover:border-[#02b36d] rounded-lg transition-all duration-200 shadow-md font-mono tracking-wider modal-btn-cyberpunk"
+                    className="px-5 py-2.5 text-slate-100 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 hover:bg-slate-700/40 hover:border-blue-400 rounded-lg transition-all duration-200 shadow-md font-mono tracking-wider modal-btn-cyberpunk"
                   >
                     NEW DEPLOYMENT
                   </button>
@@ -1473,10 +1473,10 @@ export const DeployMoonModal: React.FC<DeployMoonModalProps> = ({
         </div>
         
         {/* Cyberpunk decorative corner elements */}
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#02b36d] opacity-70"></div>
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-blue-400 opacity-70"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-blue-400 opacity-70"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-blue-400 opacity-70"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-400 opacity-70"></div>
       </div>
     </div>,
     document.body

@@ -241,32 +241,32 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-[#091217] border border-[#02b36d40] cyberpunk-border rounded-lg w-[95vw] max-w-7xl h-[90vh] p-6 overflow-hidden flex flex-col">
+      <div className="bg-slate-800/60 backdrop-blur-md border border-blue-500/40 glassmorphism-border rounded-lg w-[95vw] max-w-7xl h-[90vh] max-h-[90vh] p-6 overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex justify-between items-center mb-4 pb-4 border-b border-[#02b36d40]">
+        <div className="flex justify-between items-center mb-4 pb-4 border-b border-blue-500/40">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <Wallet className="text-[#02b36d]" size={24} />
-              <h2 className="text-xl font-bold text-[#e4fbf2] font-mono tracking-wider">WALLET MANAGER</h2>
+              <Wallet className="text-blue-400" size={24} />
+              <h2 className="text-xl font-bold text-slate-100 font-mono tracking-wider">WALLET MANAGER</h2>
             </div>
             
             {/* Quick Stats */}
             <div className="flex gap-6 text-sm font-mono">
               <div className="text-center">
-                <div className="text-[#02b36d] font-bold">{filteredAndSortedWallets.length}</div>
-                <div className="text-[#7ddfbd]">SHOWN</div>
+                <div className="text-blue-400 font-bold">{filteredAndSortedWallets.length}</div>
+                <div className="text-blue-200">SHOWN</div>
               </div>
               <div className="text-center">
-                <div className="text-[#02b36d] font-bold">{totalSOL.toFixed(4)}</div>
-                <div className="text-[#7ddfbd]">TOTAL SOL</div>
+                <div className="text-blue-400 font-bold">{totalSOL.toFixed(4)}</div>
+                <div className="text-blue-200">TOTAL SOL</div>
               </div>
               <div className="text-center">
-                <div className="text-[#02b36d] font-bold">{totalTokens.toLocaleString()}</div>
-                <div className="text-[#7ddfbd]">TOTAL TOKENS</div>
+                <div className="text-blue-400 font-bold">{totalTokens.toLocaleString()}</div>
+                <div className="text-blue-200">TOTAL TOKENS</div>
               </div>
               <div className="text-center">
-                <div className="text-[#02b36d] font-bold">{activeWallets}</div>
-                <div className="text-[#7ddfbd]">ACTIVE</div>
+                <div className="text-blue-400 font-bold">{activeWallets}</div>
+                <div className="text-blue-200">ACTIVE</div>
               </div>
             </div>
           </div>
@@ -275,9 +275,9 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
             <WalletTooltip content="Open System Settings" position="bottom">
               <button 
                 onClick={onOpenSettings}
-                className="p-2 hover:bg-[#02b36d20] border border-[#02b36d40] hover:border-[#02b36d] rounded transition-all duration-300"
+                className="p-2 hover:bg-blue-500/20 border border-blue-500/40 hover:border-blue-500 rounded transition-all duration-300"
               >
-                <Settings size={20} className="text-[#02b36d]" />
+                <Settings size={20} className="text-blue-400" />
               </button>
             </WalletTooltip>
             
@@ -294,13 +294,13 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
         <div className="flex flex-wrap gap-4 mb-4 items-center">
           {/* Search */}
           <div className="relative flex-1 min-w-[300px]">
-            <Search size={18} className="absolute left-3 top-3 text-[#02b36d40]" />
+            <Search size={18} className="absolute left-3 top-3 text-blue-400/40" />
             <input
               type="text"
               placeholder="Search by address..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#0a1419] border border-[#02b36d40] rounded pl-10 pr-4 py-2 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none font-mono"
+              className="w-full bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 rounded pl-10 pr-4 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none font-mono"
             />
           </div>
 
@@ -308,7 +308,7 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value as any)}
-            className="bg-[#0a1419] border border-[#02b36d40] rounded px-3 py-2 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none font-mono"
+            className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 rounded px-3 py-2 text-sm text-slate-100 focus:border-blue-500 focus:outline-none font-mono"
           >
             <option value="all">All Wallets</option>
             <option value="withSOL">With SOL</option>
@@ -322,9 +322,9 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
               <WalletTooltip content="Download Selected" position="bottom">
                 <button
                   onClick={downloadSelectedWallets}
-                  className="p-2 bg-[#02b36d20] border border-[#02b36d40] hover:border-[#02b36d] rounded transition-all duration-300"
+                  className="p-2 bg-blue-500/20 border border-blue-500/40 hover:border-blue-500 rounded transition-all duration-300"
                 >
-                  <Download size={16} className="text-[#02b36d]" />
+                  <Download size={16} className="text-blue-400" />
                 </button>
               </WalletTooltip>
               
@@ -337,7 +337,7 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
                 </button>
               </WalletTooltip>
               
-              <span className="px-3 py-2 bg-[#02b36d20] rounded text-sm font-mono text-[#02b36d]">
+              <span className="px-3 py-2 bg-blue-400/20 rounded text-sm font-mono text-blue-400">
                 {selectedWallets.size} selected
               </span>
             </div>
@@ -350,26 +350,26 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
 
         {/* Table Container */}
         <div className="flex-1 overflow-hidden">
-          <div className="h-full overflow-y-auto border border-[#02b36d40] rounded-lg">
-            <table className="w-full text-sm font-mono">
+          <div className="h-[calc(90vh-320px)] overflow-auto border border-blue-500/40 rounded-lg">
+            <table className="w-full text-sm font-mono min-w-max">
               {/* Header */}
-              <thead className="sticky top-0 bg-[#0a1419] border-b border-[#02b36d40]">
+              <thead className="sticky top-0 bg-slate-700/80 backdrop-blur-md border-b border-blue-500/40">
                 <tr>
                   <th className="p-3 text-left">
                     <button
                       onClick={selectedWallets.size === filteredAndSortedWallets.length ? clearSelection : selectAllVisible}
-                      className="text-[#02b36d] hover:text-[#e4fbf2] transition-colors"
+                      className="text-blue-400 hover:text-slate-100 transition-colors"
                     >
                       {selectedWallets.size === filteredAndSortedWallets.length && filteredAndSortedWallets.length > 0 ? 
                         <CheckSquare size={16} /> : <Square size={16} />
                       }
                     </button>
                   </th>
-                  <th className="p-3 text-left text-[#7ddfbd]">LABEL</th>
+                  <th className="p-3 text-left text-blue-200">LABEL</th>
                   <th className="p-3 text-left">
                     <button
                       onClick={() => handleSort('address')}
-                      className="flex items-center gap-2 text-[#7ddfbd] hover:text-[#e4fbf2] transition-colors"
+                      className="flex items-center gap-2 text-blue-200 hover:text-slate-100 transition-colors"
                     >
                       ADDRESS
                       <SortIcon field="address" />
@@ -378,7 +378,7 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
                   <th className="p-3 text-left">
                     <button
                       onClick={() => handleSort('solBalance')}
-                      className="flex items-center gap-2 text-[#7ddfbd] hover:text-[#e4fbf2] transition-colors"
+                      className="flex items-center gap-2 text-blue-200 hover:text-slate-100 transition-colors"
                     >
                       SOL BALANCE
                       <SortIcon field="solBalance" />
@@ -388,15 +388,15 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
                     <th className="p-3 text-left">
                       <button
                         onClick={() => handleSort('tokenBalance')}
-                        className="flex items-center gap-2 text-[#7ddfbd] hover:text-[#e4fbf2] transition-colors"
+                        className="flex items-center gap-2 text-blue-200 hover:text-slate-100 transition-colors"
                       >
                         TOKEN BALANCE
                         <SortIcon field="tokenBalance" />
                       </button>
                     </th>
                   )}
-                  <th className="p-3 text-left text-[#7ddfbd]">PRIVATE KEY</th>
-                  <th className="p-3 text-left text-[#7ddfbd]">ACTIONS</th>
+                  <th className="p-3 text-left text-blue-200">PRIVATE KEY</th>
+                  <th className="p-3 text-left text-blue-200">ACTIONS</th>
                 </tr>
               </thead>
 
@@ -410,19 +410,19 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
                   return (
                     <tr 
                       key={wallet.id}
-                      className={`border-b border-[#02b36d20] hover:bg-[#02b36d10] transition-colors ${
-                        isSelected ? 'bg-[#02b36d20]' : ''
+                      className={`border-b border-blue-500/20 hover:bg-blue-500/10 transition-colors ${
+                        isSelected ? 'bg-blue-400/20' : ''
                       }`}
                     >
                       <td className="p-3">
                         <button
                           onClick={() => toggleWalletSelection(wallet.id)}
-                          className="text-[#02b36d] hover:text-[#e4fbf2] transition-colors"
+                          className="text-blue-400 hover:text-slate-100 transition-colors"
                         >
                           {isSelected ? <CheckSquare size={16} /> : <Square size={16} />}
                         </button>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 whitespace-nowrap">
                         {editingLabel === wallet.id ? (
                           <div className="flex items-center gap-2">
                             <input
@@ -430,15 +430,15 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
                               value={editLabelValue}
                               onChange={(e) => setEditLabelValue(e.target.value)}
                               onKeyDown={(e) => handleLabelKeyPress(e, wallet.id)}
-                              className="bg-[#0a1419] border border-[#02b36d40] rounded px-2 py-1 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none font-mono flex-1"
+                              className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 rounded px-2 py-1 text-sm text-slate-100 focus:border-blue-500 focus:outline-none font-mono flex-1 min-w-[120px]"
                               placeholder="Enter label..."
                               autoFocus
                             />
                             <button
                               onClick={() => saveLabel(wallet.id)}
-                              className="p-1 hover:bg-[#02b36d20] rounded transition-all duration-300"
+                              className="p-1 hover:bg-blue-400/20 rounded transition-all duration-300"
                             >
-                              <Check size={14} className="text-[#02b36d]" />
+                              <Check size={14} className="text-blue-400" />
                             </button>
                             <button
                               onClick={cancelEditingLabel}
@@ -449,59 +449,59 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
                           </div>
                         ) : (
                           <div className="flex items-center gap-2">
-                            <span className="text-[#e4fbf2] font-mono text-sm">
+                            <span className="text-slate-100 font-mono text-sm">
                               {wallet.label || 'No label'}
                             </span>
                             <button
                               onClick={() => startEditingLabel(wallet)}
-                              className="p-1 hover:bg-[#02b36d20] rounded transition-all duration-300 opacity-60 hover:opacity-100"
+                              className="p-1 hover:bg-blue-400/20 rounded transition-all duration-300 opacity-60 hover:opacity-100"
                             >
-                              <Edit3 size={12} className="text-[#02b36d]" />
+                              <Edit3 size={12} className="text-blue-400" />
                             </button>
                           </div>
                         )}
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 whitespace-nowrap">
                         <WalletTooltip content="Click to copy address" position="top">
                           <button
                             onClick={() => copyToClipboard(wallet.address, showToast)}
-                            className="text-[#e4fbf2] hover:text-[#02b36d] transition-colors font-mono"
+                            className="text-slate-100 hover:text-blue-400 transition-colors font-mono"
                           >
                             {formatAddress(wallet.address)}
                           </button>
                         </WalletTooltip>
                       </td>
-                      <td className="p-3">
-                        <span className={`${solBalance > 0 ? 'text-[#02b36d]' : 'text-[#7ddfbd]'} font-bold`}>
+                      <td className="p-3 whitespace-nowrap">
+                        <span className={`${solBalance > 0 ? 'text-blue-400' : 'text-blue-200'} font-bold`}>
                           {solBalance.toFixed(4)}
                         </span>
                       </td>
                       {tokenAddress && (
-                        <td className="p-3">
-                          <span className={`${tokenBalance > 0 ? 'text-[#02b36d]' : 'text-[#7ddfbd]'} font-bold`}>
+                        <td className="p-3 whitespace-nowrap">
+                          <span className={`${tokenBalance > 0 ? 'text-blue-400' : 'text-blue-200'} font-bold`}>
                             {tokenBalance.toLocaleString()}
                           </span>
                         </td>
                       )}
-                      <td className="p-3">
+                      <td className="p-3 whitespace-nowrap">
                         <WalletTooltip content="Click to copy private key" position="top">
                           <button
                             onClick={() => copyToClipboard(wallet.privateKey, showToast)}
-                            className="text-[#7ddfbd] hover:text-[#02b36d] transition-colors font-mono text-xs"
+                            className="text-blue-200 hover:text-blue-400 transition-colors font-mono text-xs"
                           >
                             {wallet.privateKey.substring(0, 16)}...
                           </button>
                         </WalletTooltip>
                       </td>
-                      <td className="p-3">
+                      <td className="p-3 whitespace-nowrap">
                         <div className="flex gap-1">
 
                           <WalletTooltip content="Download Private Key" position="top">
                             <button
                               onClick={() => downloadPrivateKey(wallet)}
-                              className="p-1 hover:bg-[#02b36d20] rounded transition-all duration-300"
+                              className="p-1 hover:bg-blue-400/20 rounded transition-all duration-300"
                             >
-                              <Download size={14} className="text-[#02b36d]" />
+                              <Download size={14} className="text-blue-400" />
                             </button>
                           </WalletTooltip>
                           
@@ -528,7 +528,7 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
 
             {/* Empty State */}
             {filteredAndSortedWallets.length === 0 && (
-              <div className="p-8 text-center text-[#7ddfbd]">
+              <div className="p-8 text-center text-blue-200">
                 <Wallet size={48} className="mx-auto mb-4 opacity-50" />
                 <div className="font-mono">
                   {searchTerm || filterType !== 'all' 
@@ -542,11 +542,11 @@ const EnhancedWalletOverview: React.FC<EnhancedWalletOverviewProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="flex justify-between items-center mt-4 pt-4 border-t border-[#02b36d40]">
+        <div className="flex justify-between items-center mt-4 pt-4 border-t border-blue-500/40">
           <div className="flex gap-2">
             <button
               onClick={() => handleCleanupWallets(wallets, solBalances, tokenBalances, setWallets, showToast)}
-              className="px-4 py-2 bg-[#091217] border border-[#ff224440] hover:border-[#ff2244] rounded font-mono text-sm transition-all duration-300 text-[#ff2244]"
+              className="px-4 py-2 bg-slate-700/60 backdrop-blur-sm border border-red-500/40 hover:border-red-500 rounded font-mono text-sm transition-all duration-300 text-red-400"
             >
               CLEANUP EMPTY
             </button>

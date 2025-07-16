@@ -41,160 +41,184 @@ export const WalletTooltip: React.FC<{
 // Define the application styles that will be injected
 export const initStyles = () => {
   return `
-  /* Background grid animation */
-  @keyframes grid-pulse {
-    0% { opacity: 0.1; }
-    50% { opacity: 0.15; }
-    100% { opacity: 0.1; }
+  /* Glassmorphism background */
+  @keyframes subtle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
   }
 
-  .cyberpunk-bg {
-    background-color: #050a0e;
-    background-image: 
-      linear-gradient(rgba(2, 179, 109, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(2, 179, 109, 0.05) 1px, transparent 1px);
-    background-size: 20px 20px;
-    background-position: center center;
+  .glassmorphism-bg {
+    background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
     position: relative;
     overflow: hidden;
   }
 
-  .cyberpunk-bg::before {
+  .glassmorphism-bg::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-      linear-gradient(rgba(2, 179, 109, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(2, 179, 109, 0.05) 1px, transparent 1px);
-    background-size: 20px 20px;
-    background-position: center center;
-    animation: grid-pulse 4s infinite;
+    background: radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
     z-index: 0;
   }
 
-  /* Glowing border effect */
-  @keyframes border-glow {
-    0% { box-shadow: 0 0 5px rgba(2, 179, 109, 0.5), inset 0 0 5px rgba(2, 179, 109, 0.2); }
-    50% { box-shadow: 0 0 10px rgba(2, 179, 109, 0.8), inset 0 0 10px rgba(2, 179, 109, 0.3); }
-    100% { box-shadow: 0 0 5px rgba(2, 179, 109, 0.5), inset 0 0 5px rgba(2, 179, 109, 0.2); }
+  /* Glassmorphism border effect */
+  @keyframes glass-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 
-  .cyberpunk-border {
-    border: 1px solid rgba(2, 179, 109, 0.5);
-    border-radius: 4px;
-    animation: border-glow 4s infinite;
+  .glassmorphism-border {
+    background: rgba(30, 58, 138, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(30, 58, 138, 0.1);
+    transition: all 0.3s ease;
   }
 
-  /* Button hover animations */
-  @keyframes btn-glow {
-    0% { box-shadow: 0 0 5px #02b36d; }
-    50% { box-shadow: 0 0 15px #02b36d; }
-    100% { box-shadow: 0 0 5px #02b36d; }
+  .glassmorphism-border:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 12px 40px rgba(30, 58, 138, 0.2);
   }
 
-  .cyberpunk-btn {
+  /* Glassmorphism button animations */
+  @keyframes glass-pulse {
+    0% { box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2); }
+    50% { box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4); }
+    100% { box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2); }
+  }
+
+  .glassmorphism-btn {
+    background: rgba(30, 58, 138, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
   }
 
-  .cyberpunk-btn:hover {
-    animation: btn-glow 2s infinite;
+  .glassmorphism-btn:hover {
+    background: rgba(30, 58, 138, 0.25);
+    border-color: rgba(59, 130, 246, 0.5);
+    transform: translateY(-2px);
+    animation: glass-pulse 2s infinite;
   }
 
-  .cyberpunk-btn::after {
+  .glassmorphism-btn::before {
     content: "";
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
-      to bottom right,
-      rgba(2, 179, 109, 0) 0%,
-      rgba(2, 179, 109, 0.3) 50%,
-      rgba(2, 179, 109, 0) 100%
+      90deg,
+      transparent,
+      rgba(59, 130, 246, 0.2),
+      transparent
     );
-    transform: rotate(45deg);
-    transition: all 0.5s ease;
-    opacity: 0;
+    transition: left 0.5s ease;
   }
 
-  .cyberpunk-btn:hover::after {
-    opacity: 1;
-    transform: rotate(45deg) translate(50%, 50%);
+  .glassmorphism-btn:hover::before {
+    left: 100%;
   }
 
-  /* Glitch effect for text */
-  @keyframes glitch {
-    2%, 8% { transform: translate(-2px, 0) skew(0.3deg); }
-    4%, 6% { transform: translate(2px, 0) skew(-0.3deg); }
-    62%, 68% { transform: translate(0, 0) skew(0.33deg); }
-    64%, 66% { transform: translate(0, 0) skew(-0.33deg); }
+  /* Glassmorphism text effect */
+  @keyframes glass-glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(59, 130, 246, 0.3); }
+    50% { text-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
   }
 
-  .cyberpunk-glitch {
+  .glassmorphism-text {
     position: relative;
+    color: rgba(147, 197, 253, 0.9);
   }
 
-  .cyberpunk-glitch:hover {
-    animation: glitch 2s infinite;
+  .glassmorphism-text:hover {
+    animation: glass-glow 2s infinite;
   }
 
   /* Input focus effect */
-  .cyberpunk-input:focus {
-    box-shadow: 0 0 0 1px rgba(2, 179, 109, 0.7), 0 0 15px rgba(2, 179, 109, 0.5);
+  .glassmorphism-input {
+    background: rgba(30, 58, 138, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+  }
+
+  .glassmorphism-input:focus {
+    background: rgba(30, 58, 138, 0.15);
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 8px 25px rgba(30, 58, 138, 0.2);
+    outline: none;
   }
 
   /* Card hover effect */
-  .cyberpunk-card {
+  .glassmorphism-card {
+    background: rgba(30, 58, 138, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
     transition: all 0.3s ease;
+    animation: subtle-float 6s ease-in-out infinite;
   }
 
-  .cyberpunk-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(2, 179, 109, 0.3);
+  .glassmorphism-card:hover {
+    background: rgba(30, 58, 138, 0.15);
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.2);
   }
 
-  /* Scan line effect */
-  @keyframes scanline {
+  /* Glassmorphism shimmer effect */
+  @keyframes glass-shimmer {
     0% { 
-      transform: translateY(-100%);
-      opacity: 0.7;
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.3;
     }
     100% { 
-      transform: translateY(100%);
+      transform: translateX(100%);
       opacity: 0;
     }
   }
 
-  .cyberpunk-scanline {
+  .glassmorphism-shimmer {
     position: relative;
     overflow: hidden;
   }
 
-  .cyberpunk-scanline::before {
+  .glassmorphism-shimmer::before {
     content: "";
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 10px;
-    background: linear-gradient(to bottom, 
+    height: 100%;
+    background: linear-gradient(90deg, 
       transparent 0%,
-      rgba(2, 179, 109, 0.2) 50%,
+      rgba(59, 130, 246, 0.1) 50%,
       transparent 100%);
-    z-index: 10;
-    animation: scanline 8s linear infinite;
+    z-index: 1;
+    animation: glass-shimmer 3s ease-in-out infinite;
   }
 
   /* Split gutter styling */
   .split-custom .gutter {
-    background-color: transparent;
+    background: rgba(30, 58, 138, 0.05);
     position: relative;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
   }
 
   .split-custom .gutter-horizontal {
@@ -202,118 +226,133 @@ export const initStyles = () => {
   }
 
   .split-custom .gutter-horizontal:hover {
-    background-color: rgba(2, 179, 109, 0.3);
+    background: rgba(30, 58, 138, 0.15);
   }
 
   .split-custom .gutter-horizontal::before,
   .split-custom .gutter-horizontal::after {
     content: "";
     position: absolute;
-    width: 1px;
-    height: 15px;
-    background-color: rgba(2, 179, 109, 0.7);
+    width: 2px;
+    height: 12px;
+    background: rgba(59, 130, 246, 0.4);
     left: 50%;
     transform: translateX(-50%);
     transition: all 0.3s ease;
+    border-radius: 1px;
   }
 
   .split-custom .gutter-horizontal::before {
-    top: calc(50% - 10px);
+    top: calc(50% - 8px);
   }
 
   .split-custom .gutter-horizontal::after {
-    top: calc(50% + 10px);
+    top: calc(50% + 8px);
   }
 
   .split-custom .gutter-horizontal:hover::before,
   .split-custom .gutter-horizontal:hover::after {
-    background-color: #02b36d;
-    box-shadow: 0 0 10px rgba(2, 179, 109, 0.7);
+    background: rgba(59, 130, 246, 0.8);
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
   }
 
-  /* Neo-futuristic table styling */
-  .cyberpunk-table {
+  /* Glassmorphism table styling */
+  .glassmorphism-table {
     border-collapse: separate;
     border-spacing: 0;
+    background: rgba(30, 58, 138, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
   }
 
-  .cyberpunk-table thead th {
-    background-color: rgba(2, 179, 109, 0.1);
-    border-bottom: 2px solid rgba(2, 179, 109, 0.5);
+  .glassmorphism-table thead th {
+    background: rgba(30, 58, 138, 0.15);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(15px);
   }
 
-  .cyberpunk-table tbody tr {
-    transition: all 0.2s ease;
+  .glassmorphism-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
   }
 
-  .cyberpunk-table tbody tr:hover {
-    background-color: rgba(2, 179, 109, 0.05);
+  .glassmorphism-table tbody tr:hover {
+    background: rgba(30, 58, 138, 0.1);
+    backdrop-filter: blur(15px);
   }
 
-  /* Neon text effect */
-  .neon-text {
-    color: #02b36d;
-    text-shadow: 0 0 5px rgba(2, 179, 109, 0.7);
+  /* Glassmorphism text effect */
+  .glass-text {
+    color: rgba(147, 197, 253, 0.9);
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
   }
 
-  /* Notification animation */
-  @keyframes notification-slide {
-    0% { transform: translateX(50px); opacity: 0; }
-    10% { transform: translateX(0); opacity: 1; }
-    90% { transform: translateX(0); opacity: 1; }
-    100% { transform: translateX(50px); opacity: 0; }
+  /* Glassmorphism notification animation */
+  @keyframes glass-notification-slide {
+    0% { transform: translateX(50px) scale(0.9); opacity: 0; }
+    10% { transform: translateX(0) scale(1); opacity: 1; }
+    90% { transform: translateX(0) scale(1); opacity: 1; }
+    100% { transform: translateX(50px) scale(0.9); opacity: 0; }
   }
 
-  .notification-anim {
-    animation: notification-slide 4s forwards;
+  .glass-notification-anim {
+    animation: glass-notification-slide 4s forwards;
+    background: rgba(30, 58, 138, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(15px);
   }
 
-  /* Loading animation */
-  @keyframes loading-pulse {
-    0% { transform: scale(0.85); opacity: 0.7; }
-    50% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(0.85); opacity: 0.7; }
+  /* Glassmorphism loading animation */
+  @keyframes glass-loading-pulse {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.6; }
   }
 
-  .loading-anim {
-    animation: loading-pulse 1.5s infinite;
+  .glass-loading-anim {
+    animation: glass-loading-pulse 2s infinite;
+    background: rgba(30, 58, 138, 0.1);
+    backdrop-filter: blur(10px);
   }
 
   /* Button click effect */
-  .cyberpunk-btn:active {
-    transform: scale(0.95);
-    box-shadow: 0 0 15px rgba(2, 179, 109, 0.7);
+  .glassmorphism-btn:active {
+    transform: scale(0.95) translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
   }
 
   /* Menu active state */
-  .menu-item-active {
-    border-left: 3px solid #02b36d;
-    background-color: rgba(2, 179, 109, 0.1);
+  .glass-menu-item-active {
+    border-left: 3px solid rgba(59, 130, 246, 0.8);
+    background: rgba(30, 58, 138, 0.15);
+    backdrop-filter: blur(10px);
   }
 
-  /* Angle brackets for headings */
-  .heading-brackets {
+  /* Glassmorphism accent elements */
+  .glass-accent {
     position: relative;
     display: inline-block;
   }
 
-  .heading-brackets::before,
-  .heading-brackets::after {
+  .glass-accent::before,
+  .glass-accent::after {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: #02b36d;
+    color: rgba(59, 130, 246, 0.7);
     font-weight: bold;
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
   }
 
-  .heading-brackets::before {
-    content: ">";
-    left: -15px;
+  .glass-accent::before {
+    content: "◆";
+    left: -20px;
   }
 
-  .heading-brackets::after {
-    content: "<";
-    right: -15px;
+  .glass-accent::after {
+    content: "◆";
+    right: -20px;
   }
 
   /* Fade-in animation */

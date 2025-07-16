@@ -58,9 +58,9 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
     const cyberpunkStyle = document.createElement('style');
     cyberpunkStyle.textContent = `
       @keyframes mobile-nav-pulse {
-        0% { box-shadow: 0 0 5px rgba(2, 179, 109, 0.5), 0 0 10px rgba(2, 179, 109, 0.2); }
-        50% { box-shadow: 0 0 10px rgba(2, 179, 109, 0.8), 0 0 15px rgba(2, 179, 109, 0.4); }
-        100% { box-shadow: 0 0 5px rgba(2, 179, 109, 0.5), 0 0 10px rgba(2, 179, 109, 0.2); }
+        0% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.2); }
+        50% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 15px rgba(59, 130, 246, 0.4); }
+        100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.2); }
       }
       
       @keyframes mobile-nav-scan {
@@ -69,9 +69,9 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
       }
       
       @keyframes mobile-nav-glow {
-        0% { text-shadow: 0 0 4px rgba(2, 179, 109, 0.7); }
-        50% { text-shadow: 0 0 8px rgba(2, 179, 109, 0.9), 0 0 12px rgba(2, 179, 109, 0.5); }
-        100% { text-shadow: 0 0 4px rgba(2, 179, 109, 0.7); }
+        0% { text-shadow: 0 0 4px rgba(59, 130, 246, 0.7); }
+        50% { text-shadow: 0 0 8px rgba(59, 130, 246, 0.9), 0 0 12px rgba(59, 130, 246, 0.5); }
+        100% { text-shadow: 0 0 4px rgba(59, 130, 246, 0.7); }
       }
       
       @keyframes mobile-nav-active {
@@ -85,7 +85,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
         background: linear-gradient(45deg, #050a0e, #091217, #0a1419);
         background-size: 200% 200%;
         animation: mobile-nav-active 8s ease infinite;
-        border: 1px solid rgba(2, 179, 109, 0.3);
+        border: 1px solid rgba(59, 130, 246, 0.3);
       }
       
       .mobile-nav-active::before {
@@ -94,7 +94,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
         inset: 0;
         border-radius: 0.5rem;
         padding: 1px;
-        background: linear-gradient(45deg, rgba(2, 179, 109, 0.6), rgba(125, 223, 189, 0.3), rgba(2, 179, 109, 0.6));
+        background: linear-gradient(45deg, rgba(59, 130, 246, 0.6), rgba(147, 197, 253, 0.3), rgba(59, 130, 246, 0.6));
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
@@ -110,9 +110,9 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
         width: 100%;
         height: 4px;
         background: linear-gradient(to bottom, 
-          transparent 0%,
-          rgba(2, 179, 109, 0.2) 50%,
-          transparent 100%);
+            transparent 0%,
+            rgba(59, 130, 246, 0.2) 50%,
+            transparent 100%);
         z-index: 10;
         animation: mobile-nav-scan 8s linear infinite;
         pointer-events: none;
@@ -131,8 +131,8 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
       }
       
       .mobile-nav-grid {
-        background-image: linear-gradient(rgba(2, 179, 109, 0.1) 1px, transparent 1px), 
-                         linear-gradient(90deg, rgba(2, 179, 109, 0.1) 1px, transparent 1px);
+        background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
+                         linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
         background-size: 20px 20px;
         background-position: center center;
         opacity: 0.1;
@@ -160,7 +160,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
   ];
 
   return (
-    <div className="md:hidden flex flex-col h-[100dvh] max-h-[100dvh] select-none bg-[#050a0e]" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <div className="md:hidden flex flex-col h-[100dvh] max-h-[100dvh] select-none bg-slate-900/90 backdrop-blur-md" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
       {/* Main content area */}
       <div className="flex-1 overflow-hidden relative">
         {/* Grid background */}
@@ -184,12 +184,12 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
       </div>
 
       {/* Navigation bar */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-[#050a0e] border-t border-[#02b36d40] z-50 mobile-nav-scan" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      <nav className="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-md border-t border-blue-500/40 z-50 glass-shimmer" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         {/* Ambient glow from below */}
         <div 
           className="absolute bottom-0 left-0 right-0 h-1 opacity-60"
           style={{
-            background: 'linear-gradient(to top, rgba(2, 179, 109, 0.5), transparent 100%)',
+            background: 'linear-gradient(to top, rgba(59, 130, 246, 0.5), transparent 100%)',
           }}
         ></div>
         
@@ -202,22 +202,22 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
               className={`
                 flex flex-col items-center justify-center py-1 px-3
                 rounded-lg transition-all duration-300 mobile-nav-button
-                ${currentPage === id ? 'mobile-nav-active' : 'hover:bg-[#091217] active:bg-[#0a1419]'}
+                ${currentPage === id ? 'glassmorphism-btn' : 'hover:bg-slate-800/60 active:bg-slate-700/60'}
               `}
             >
               <Icon 
                 size={20} 
                 className={`transition-colors duration-300 ${
                   currentPage === id 
-                    ? 'text-[#02b36d] mobile-nav-icon-active' 
-                    : 'text-[#7ddfbd80]'
+                    ? 'text-blue-400 mobile-nav-icon-active' 
+                    : 'text-blue-200/50'
                 }`} 
               />
               <span 
                 className={`text-xs mt-1 transition-colors duration-300 font-mono tracking-wider ${
                   currentPage === id 
-                    ? 'text-[#02b36d] mobile-nav-label-active' 
-                    : 'text-[#7ddfbd80]'
+                    ? 'text-blue-400 mobile-nav-label-active' 
+                    : 'text-blue-200/50'
                 }`}
               >
                 {label}
@@ -225,15 +225,15 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({
               
               {/* Indicator dot for active tab */}
               {currentPage === id && (
-                <div className="absolute -top-1 w-1 h-1 rounded-full bg-[#02b36d]"></div>
+                <div className="absolute -top-1 w-1 h-1 rounded-full bg-blue-400"></div>
               )}
             </button>
           ))}
         </div>
         
         {/* Decorative corner elements */}
-        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#02b36d] opacity-70"></div>
-        <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#02b36d] opacity-70"></div>
+        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-blue-500 opacity-70"></div>
+                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-blue-500 opacity-70"></div>
       </nav>
     </div>
   );

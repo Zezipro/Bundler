@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Modern animations */
 @keyframes slideInRight {
     from {
     transform: translateX(100%);
@@ -10,6 +12,53 @@
     transform: translateX(0);
     opacity: 1;
     }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes glass-glow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(59, 130, 246, 0.4), 0 0 35px rgba(30, 58, 138, 0.3);
+    }
+}
+
+/* Glassmorphism card styling */
+.glass-card {
+    background: rgba(30, 58, 138, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(15px);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.glass-card:hover {
+    background: rgba(30, 58, 138, 0.15);
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(30, 58, 138, 0.2);
+}
+
+/* Glassmorphism glowing elements */
+.glass-glow-effect {
+    animation: glass-glow 3s ease-in-out infinite alternate;
+}
+
+/* Smooth transitions */
+.smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 :root {
   --sat: env(safe-area-inset-top);
@@ -41,19 +90,19 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(11, 82, 46, 0.5); /* yellow-500 with opacity */
+  background-color: rgba(59, 130, 246, 0.4); /* blue-500 with opacity */
   border-radius: 8px;
   transition: background-color 0.2s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(11, 82, 46, 0.5)
+  background-color: rgba(59, 130, 246, 0.6)
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(11, 82, 46, 0.5) transparent;
+  scrollbar-color: rgba(59, 130, 246, 0.4) transparent;
 }
 
 /* For Edge legacy */
@@ -74,12 +123,12 @@
   }
   
   *::-ms-scrollbar-thumb {
-    background-color: rgba(11, 82, 46, 0.5);
+    background-color: rgba(59, 130, 246, 0.4);
     border-radius: 8px;
   }
   
   *::-ms-scrollbar-thumb:hover {
-    background-color: rgba(11, 82, 46, 0.5);
+    background-color: rgba(59, 130, 246, 0.6);
   }
 }
 iframe::-webkit-scrollbar {

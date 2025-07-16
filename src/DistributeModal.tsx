@@ -488,8 +488,8 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
 
   // Render the modal with cyberpunk styling
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm modal-cyberpunk-container" style={{backgroundColor: 'rgba(5, 10, 14, 0.85)'}}>
-      <div className="relative bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg w-full max-w-6xl overflow-hidden transform modal-cyberpunk-content modal-glow">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm modal-cyberpunk-container" style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+      <div className="relative bg-slate-900/80 backdrop-blur-md border border-blue-400/30 rounded-lg shadow-lg w-full max-w-6xl overflow-hidden transform modal-cyberpunk-content modal-glow">
         {/* Ambient grid background */}
         <div className="absolute inset-0 z-0 opacity-10"
              style={{
@@ -500,27 +500,27 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
         </div>
 
         {/* Header */}
-        <div className="relative z-10 p-4 flex justify-between items-center border-b border-[#02b36d40]">
+        <div className="relative z-10 p-4 flex justify-between items-center border-b border-blue-400/30">
           <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#02b36d20] mr-3">
-              <ArrowsUpFromLine size={16} className="text-[#02b36d]" />
+            <div className="w-8 h-8 rounded-full flex items-center justify-center bg-blue-400/20 mr-3">
+              <ArrowsUpFromLine size={16} className="text-blue-400" />
             </div>
-            <h2 className="text-lg font-semibold text-[#e4fbf2] font-mono">
-              <span className="text-[#02b36d]">/</span> DISTRIBUTE SOL <span className="text-[#02b36d]">/</span>
+            <h2 className="text-lg font-semibold text-slate-100 font-mono">
+              <span className="text-blue-400">/</span> DISTRIBUTE SOL <span className="text-blue-400">/</span>
             </h2>
           </div>
           <button 
             onClick={onClose}
-            className="text-[#7ddfbd] hover:text-[#02b36d] transition-colors p-1 hover:bg-[#02b36d20] rounded"
+            className="text-slate-300 hover:text-blue-400 transition-colors p-1 hover:bg-blue-400/20 rounded"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Progress Indicator */}
-        <div className="relative w-full h-1 bg-[#091217] progress-bar-cyberpunk">
+        <div className="relative w-full h-1 bg-slate-800 progress-bar-cyberpunk">
           <div 
-            className="h-full bg-[#02b36d] transition-all duration-300"
+            className="h-full bg-blue-400 transition-all duration-300"
             style={{ width: currentStep === 0 ? '50%' : '100%' }}
           ></div>
         </div>
@@ -534,13 +534,13 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
                 {/* Left Side - Sender Wallet Selector */}
                 <div className="w-1/2 modal-w-full-lg">
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-sm font-medium text-[#7ddfbd] font-mono uppercase tracking-wider">
-                      <span className="text-[#02b36d]">&#62;</span> From Wallet <span className="text-[#02b36d]">&#60;</span>
-                    </label>
+                    <label className="text-sm font-medium text-slate-300 font-mono uppercase tracking-wider">
+                  <span className="text-blue-400">&#62;</span> From Wallet <span className="text-blue-400">&#60;</span>
+                </label>
                     {selectedSenderWallet && (
                       <div className="flex items-center gap-1 text-xs">
-                        <DollarSign size={10} className="text-[#7ddfbd]" />
-                        <span className="text-[#02b36d] font-medium font-mono">
+                        <DollarSign size={10} className="text-slate-300" />
+                  <span className="text-blue-400 font-medium font-mono">
                           {formatSolBalance(senderBalance)} SOL
                         </span>
                       </div>
@@ -550,18 +550,18 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
                   {/* Sender Search and Filters */}
                   <div className="mb-2 flex space-x-2">
                     <div className="relative flex-grow">
-                      <Search size={14} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#7ddfbd]" />
+                      <Search size={14} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-300" />
                       <input
                         type="text"
                         value={senderSearchTerm}
                         onChange={(e) => setSenderSearchTerm(e.target.value)}
-                        className="w-full pl-9 pr-4 py-2 bg-[#091217] border border-[#02b36d30] rounded-lg text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                         placeholder="SEARCH SENDER WALLETS..."
                       />
                     </div>
                     
                     <select 
-                      className="bg-[#091217] border border-[#02b36d30] rounded-lg px-2 text-sm text-[#e4fbf2] focus:outline-none focus:border-[#02b36d] modal-input-cyberpunk font-mono"
+                      className="bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg px-2 text-sm text-slate-100 focus:outline-none focus:border-blue-400 modal-input-cyberpunk font-mono"
                       value={sortOption}
                       onChange={(e) => setSortOption(e.target.value)}
                     >
@@ -570,14 +570,14 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
                     </select>
                     
                     <button
-                      className="p-2 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#7ddfbd] hover:text-[#02b36d] hover:border-[#02b36d] transition-all modal-btn-cyberpunk"
+                      className="p-2 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-slate-300 hover:text-blue-400 hover:border-blue-400 transition-all modal-btn-cyberpunk"
                       onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
                     >
                       {sortDirection === 'asc' ? '↑' : '↓'}
                     </button>
                   </div>
 
-                  <div className="max-h-48 overflow-y-auto border border-[#02b36d20] rounded-lg shadow-inner bg-[#091217] transition-all duration-200 hover:border-[#02b36d40] scrollbar-thin">
+                  <div className="max-h-48 overflow-y-auto border border-blue-400/10 rounded-lg shadow-inner bg-slate-800/30 backdrop-blur-sm transition-all duration-200 hover:border-blue-400/30 scrollbar-thin">
                     {filterWallets(getAvailableSenderWallets(), senderSearchTerm).length > 0 ? (
                       filterWallets(getAvailableSenderWallets(), senderSearchTerm).map((wallet) => (
                         <div 
@@ -589,19 +589,19 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
                           <div className={`w-5 h-5 mr-3 rounded flex items-center justify-center transition-all duration-300
                                           ${selectedSenderWallet === wallet.address
                                             ? 'bg-[#02b36d] shadow-md shadow-[#02b36d40]' 
-                                            : 'border border-[#02b36d30] bg-[#091217]'}`}>
+                                            : 'border border-blue-400/20 bg-slate-800/30'}`}>
                             {selectedSenderWallet === wallet.address && (
                               <CheckCircle size={14} className="text-[#050a0e] animate-[fadeIn_0.2s_ease]" />
                             )}
                           </div>
                           <div className="flex-1 flex justify-between items-center">
-                            <span className="font-mono text-sm text-[#e4fbf2] glitch-text">{formatAddress(wallet.address)}</span>
-                            <span className="text-xs text-[#7ddfbd] font-mono">{formatSolBalance(getWalletBalance(wallet.address) || 0)} SOL</span>
+                            <span className="font-mono text-sm text-slate-100 glitch-text">{formatAddress(wallet.address)}</span>
+                            <span className="text-xs text-slate-300 font-mono">{formatSolBalance(getWalletBalance(wallet.address) || 0)} SOL</span>
                           </div>
                         </div>
                       ))
                     ) : (
-                      <div className="p-3 text-sm text-[#7ddfbd] text-center font-mono">
+                      <div className="p-3 text-sm text-slate-300 text-center font-mono">
                         {senderSearchTerm ? "NO WALLETS FOUND" : "NO WALLETS AVAILABLE"}
                       </div>
                     )}
@@ -611,12 +611,12 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
                 {/* Right Side - Recipient Wallets */}
                 <div className="w-1/2 modal-w-full-lg modal-mt-4-lg">
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-sm font-medium text-[#7ddfbd] font-mono uppercase tracking-wider">
-                      <span className="text-[#02b36d]">&#62;</span> To Wallets <span className="text-[#02b36d]">&#60;</span>
-                    </label>
+                    <label className="text-sm font-medium text-slate-300 font-mono uppercase tracking-wider">
+                  <span className="text-blue-400">&#62;</span> To Wallets <span className="text-blue-400">&#60;</span>
+                </label>
                     <button 
                       onClick={handleSelectAllRecipients}
-                      className="text-xs px-2 py-0.5 bg-[#091217] hover:bg-[#0a1419] text-[#7ddfbd] hover:text-[#02b36d] rounded border border-[#02b36d30] hover:border-[#02b36d] transition-all duration-200 font-mono"
+                      className="text-xs px-2 py-0.5 bg-slate-800/30 backdrop-blur-sm hover:bg-slate-700/40 text-slate-300 hover:text-blue-400 rounded border border-blue-400/20 hover:border-blue-400 transition-all duration-200 font-mono"
                     >
                       {selectedRecipientWallets.length === getAvailableRecipientWallets().length ? 'DESELECT ALL' : 'SELECT ALL'}
                     </button>
@@ -892,49 +892,49 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
             <div className="flex space-x-4 modal-flex-col-lg animate-[fadeIn_0.3s_ease]">
               {/* Left Side - Summary */}
               <div className="w-1/2 space-y-4 modal-w-full-lg">
-                <div className="bg-[#091217] rounded-lg p-4 border border-[#02b36d30]">
-                  <h3 className="text-base font-semibold text-[#e4fbf2] mb-3 font-mono tracking-wider">DISTRIBUTION SUMMARY</h3>
+                <div className="bg-slate-800/30 backdrop-blur-sm rounded-lg p-4 border border-blue-400/20">
+                  <h3 className="text-base font-semibold text-slate-100 mb-3 font-mono tracking-wider">DISTRIBUTION SUMMARY</h3>
                   
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-[#7ddfbd] font-mono">FROM WALLET:</span>
+                      <span className="text-sm text-slate-300 font-mono">FROM WALLET:</span>
                       <div className="flex items-center bg-[#0a1419] px-2 py-1 rounded border border-[#02b36d20]">
-                        <span className="text-sm font-mono text-[#e4fbf2] glitch-text">{formatAddress(selectedSenderWallet)}</span>
+                        <span className="text-sm font-mono text-slate-100 glitch-text">{formatAddress(selectedSenderWallet)}</span>
                       </div>
                     </div>
                     
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-[#7ddfbd] font-mono">WALLET BALANCE:</span>
-                      <span className="text-sm text-[#e4fbf2] font-mono">{formatSolBalance(senderBalance)} SOL</span>
+                      <span className="text-sm text-slate-300 font-mono">WALLET BALANCE:</span>
+                      <span className="text-sm text-slate-100 font-mono">{formatSolBalance(senderBalance)} SOL</span>
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-[#7ddfbd] font-mono">RECIPIENTS:</span>
-                      <span className="text-sm text-[#e4fbf2] font-mono">{selectedRecipientWallets.length} WALLETS</span>
+                      <span className="text-sm text-slate-300 font-mono">RECIPIENTS:</span>
+                      <span className="text-sm text-slate-100 font-mono">{selectedRecipientWallets.length} WALLETS</span>
                     </div>
                     
                     {!useCustomAmounts && (
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-[#7ddfbd] font-mono">AMOUNT PER WALLET:</span>
-                        <span className="text-sm text-[#02b36d] font-medium font-mono">{commonAmount} SOL</span>
+                        <span className="text-sm text-slate-300 font-mono">AMOUNT PER WALLET:</span>
+                        <span className="text-sm text-blue-400 font-medium font-mono">{commonAmount} SOL</span>
                       </div>
                     )}
                     
                     {useCustomAmounts && (
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-[#7ddfbd] font-mono">CUSTOM AMOUNTS:</span>
-                        <span className="text-sm text-[#02b36d] font-medium font-mono">YES</span>
+                        <span className="text-sm text-slate-300 font-mono">CUSTOM AMOUNTS:</span>
+                        <span className="text-sm text-blue-400 font-medium font-mono">YES</span>
                       </div>
                     )}
                     
-                    <div className="pt-2 border-t border-[#02b36d20] flex items-center justify-between">
-                      <span className="text-sm font-medium text-[#7ddfbd] font-mono">TOTAL TO SEND:</span>
-                      <span className="text-sm font-semibold text-[#02b36d] font-mono">{totalAmount.toFixed(4)} SOL</span>
+                    <div className="pt-2 border-t border-blue-400/20 flex items-center justify-between">
+                      <span className="text-sm font-medium text-slate-300 font-mono">TOTAL TO SEND:</span>
+                      <span className="text-sm font-semibold text-blue-400 font-mono">{totalAmount.toFixed(4)} SOL</span>
                     </div>
                     
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-[#7ddfbd] font-mono">REMAINING BALANCE:</span>
-                      <span className="text-sm text-[#e4fbf2] font-mono">{(senderBalance - totalAmount).toFixed(4)} SOL</span>
+                      <span className="text-sm text-slate-300 font-mono">REMAINING BALANCE:</span>
+                      <span className="text-sm text-slate-100 font-mono">{(senderBalance - totalAmount).toFixed(4)} SOL</span>
                     </div>
                   </div>
                 </div>
@@ -960,8 +960,8 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
               
               {/* Right Side - Recipients List */}
               <div className="w-1/2 modal-w-full-lg modal-mt-4-lg">
-                <div className="bg-[#091217] rounded-lg p-4 border border-[#02b36d30] h-full">
-                  <h3 className="text-base font-semibold text-[#e4fbf2] mb-3 font-mono tracking-wider">SELECTED RECIPIENTS</h3>
+                <div className="bg-slate-800/30 backdrop-blur-sm rounded-lg p-4 border border-blue-400/20 h-full">
+                  <h3 className="text-base font-semibold text-slate-100 mb-3 font-mono tracking-wider">SELECTED RECIPIENTS</h3>
                   
                   <div className="max-h-64 overflow-y-auto pr-1 scrollbar-thin">
                     {selectedRecipientWallets.length > 0 ? (
@@ -976,8 +976,8 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
                               <span className="font-mono text-sm text-[#e4fbf2] glitch-text">{formatAddress(wallet.address)}</span>
                             </div>
                             <div className="flex items-center">
-                              <span className="text-xs text-[#7ddfbd] mr-2 font-mono">CURRENT: {formatSolBalance(getWalletBalance(wallet.address) || 0)} SOL</span>
-                              <span className="text-xs text-[#02b36d] font-mono">+{amount} SOL</span>
+                              <span className="text-xs text-slate-300 mr-2 font-mono">CURRENT: {formatSolBalance(getWalletBalance(wallet.address) || 0)} SOL</span>
+                              <span className="text-xs text-blue-400 font-mono">+{amount} SOL</span>
                             </div>
                           </div>
                         ) : null;
@@ -998,21 +998,21 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
             <div className="flex justify-end gap-3 mt-6">
               <button
                 onClick={() => setCurrentStep(0)}
-                className="px-5 py-2.5 text-[#e4fbf2] bg-[#091217] border border-[#02b36d30] hover:bg-[#0a1419] hover:border-[#02b36d] rounded-lg transition-all duration-200 shadow-md font-mono tracking-wider modal-btn-cyberpunk"
+                className="px-5 py-2.5 text-slate-100 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 hover:bg-slate-700/40 hover:border-blue-400 rounded-lg transition-all duration-200 shadow-md font-mono tracking-wider modal-btn-cyberpunk"
               >
                 BACK
               </button>
               <button
                 onClick={handleDistribute}
                 disabled={!isConfirmed || isSubmitting}
-                className={`px-5 py-2.5 text-[#050a0e] rounded-lg shadow-lg flex items-center transition-all duration-300 font-mono tracking-wider 
+                className={`px-5 py-2.5 text-slate-900 rounded-lg shadow-lg flex items-center transition-all duration-300 font-mono tracking-wider 
                           ${!isConfirmed || isSubmitting
-                            ? 'bg-[#02b36d50] cursor-not-allowed opacity-50' 
-                            : 'bg-[#02b36d] hover:bg-[#01a35f] transform hover:-translate-y-0.5 modal-btn-cyberpunk'}`}
+                            ? 'bg-blue-400/50 cursor-not-allowed opacity-50' 
+                            : 'bg-blue-400 hover:bg-blue-500 transform hover:-translate-y-0.5 modal-btn-cyberpunk'}`}
               >
                 {isSubmitting ? (
                   <>
-                    <div className="h-4 w-4 rounded-full border-2 border-[#050a0e80] border-t-transparent animate-spin mr-2"></div>
+                    <div className="h-4 w-4 rounded-full border-2 border-slate-900/50 border-t-transparent animate-spin mr-2"></div>
                     PROCESSING...
                   </>
                 ) : (
@@ -1024,10 +1024,10 @@ export const DistributeModal: React.FC<DistributeModalProps> = ({
         </div>
 
         {/* Cyberpunk decorative corner elements */}
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#02b36d] opacity-70"></div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#02b36d] opacity-70"></div>
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-blue-400 opacity-70"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-blue-400 opacity-70"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-blue-400 opacity-70"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-blue-400 opacity-70"></div>
       </div>
     </div>,
     document.body

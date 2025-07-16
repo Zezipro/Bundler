@@ -106,7 +106,7 @@ const IntroductionModal: React.FC<IntroductionModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50 cyberpunk-scanline">
       <div 
-        className="relative bg-[#091217] border border-[#02b36d40] cyberpunk-border rounded-lg w-[32rem] max-w-[95%] p-6 mx-4 min-h-[26rem] overflow-hidden"
+        className="relative bg-slate-800/60 backdrop-blur-md border border-blue-500/40 glassmorphism-border rounded-lg w-[32rem] max-w-[95%] p-6 mx-4 min-h-[26rem] overflow-hidden"
         style={{
           animation: 'fadeInScale 0.3s ease-out forwards',
           transform: 'scale(0.95)',
@@ -130,7 +130,7 @@ const IntroductionModal: React.FC<IntroductionModalProps> = ({
         </div>
 
         {/* Step indicator */}
-        <div className="absolute top-4 left-4 bg-[#02b36d20] px-3 py-1 rounded-full border border-[#02b36d40]">
+        <div className="absolute top-4 left-4 bg-blue-500/20 px-3 py-1 rounded-full border border-blue-500/40">
           <span className="text-sm font-mono text-[#02b36d]">
             {currentStep + 1}/{steps.length}
           </span>
@@ -139,7 +139,7 @@ const IntroductionModal: React.FC<IntroductionModalProps> = ({
         {/* Main content */}
         <div className="mt-12 flex flex-col items-center">
           {/* Icon with glowing effect */}
-          <div className="w-20 h-20 flex items-center justify-center bg-[#02b36d10] rounded-full border border-[#02b36d40] mb-6 cyberpunk-border">
+          <div className="w-20 h-20 flex items-center justify-center bg-blue-500/10 rounded-full border border-blue-500/40 mb-6 glassmorphism-border">
             {steps[currentStep].icon}
           </div>
 
@@ -165,7 +165,7 @@ const IntroductionModal: React.FC<IntroductionModalProps> = ({
           <div className="flex justify-between w-full mt-4">
             <button
               onClick={handlePrevStep}
-              className={`p-2 border border-[#02b36d40] hover:border-[#02b36d] rounded transition-all duration-300 ${
+              className={`p-2 border border-blue-500/40 hover:border-blue-500 rounded transition-all duration-300 ${
                 currentStep === 0 ? 'opacity-50 cursor-not-allowed' : 'cyberpunk-btn'
               }`}
               disabled={currentStep === 0}

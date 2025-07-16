@@ -266,9 +266,9 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-[#091217] border border-[#02b36d40] cyberpunk-border rounded-lg w-[90vw] max-w-4xl h-[85vh] p-6 mx-4 overflow-hidden flex flex-col">
+      <div className="bg-slate-800/60 backdrop-blur-md border border-blue-500/40 glassmorphism-border rounded-lg w-[90vw] max-w-4xl h-[85vh] p-6 mx-4 overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 pb-4 border-b border-[#02b36d40]">
+        <div className="flex justify-between items-center mb-6 pb-4 border-b border-blue-500/40">
           <div className="flex items-center gap-3">
             <Settings className="text-[#02b36d]" size={24} />
             <h2 className="text-xl font-bold text-[#e4fbf2] font-mono tracking-wider">SYSTEM SETTINGS</h2>
@@ -307,7 +307,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
         <div className="flex-1 overflow-y-auto">
           {activeTab === 'network' && (
             <div className="space-y-6">
-              <div className="bg-[#0a1419] border border-[#02b36d30] rounded-lg p-6">
+              <div className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg p-6">
                 <h3 className="text-lg font-bold text-[#e4fbf2] font-mono mb-4 flex items-center gap-2">
                   <Globe size={20} className="text-[#02b36d]" />
                   NETWORK CONFIGURATION
@@ -322,7 +322,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
                       type="text"
                       value={config.rpcEndpoint}
                       onChange={(e) => onConfigChange('rpcEndpoint', e.target.value)}
-                      className="w-full bg-[#091217] border border-[#02b36d40] rounded p-3 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none cyberpunk-input font-mono"
+                      className="w-full bg-slate-600/60 backdrop-blur-sm border border-blue-500/40 rounded p-3 text-sm text-slate-100 focus:border-blue-500 focus:outline-none glassmorphism-input font-mono"
                       placeholder="Enter RPC endpoint URL"
                     />
                   </div>
@@ -335,7 +335,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
                       type="text"
                       value={config.transactionFee}
                       onChange={(e) => onConfigChange('transactionFee', e.target.value)}
-                      className="w-full bg-[#091217] border border-[#02b36d40] rounded p-3 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none cyberpunk-input font-mono"
+                      className="w-full bg-slate-600/60 backdrop-blur-sm border border-blue-500/40 rounded p-3 text-sm text-slate-100 focus:border-blue-500 focus:outline-none glassmorphism-input font-mono"
                       placeholder="0.000005"
                     />
                   </div>
@@ -347,7 +347,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
           {activeTab === 'wallets' && (
             <div className="space-y-6">
               {/* Create Wallets Section */}
-              <div className="bg-[#0a1419] border border-[#02b36d30] rounded-lg p-6">
+              <div className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg p-6">
                 <h3 className="text-lg font-bold text-[#e4fbf2] font-mono mb-4 flex items-center gap-2">
                   <Plus size={20} className="text-[#02b36d]" />
                   CREATE WALLETS
@@ -364,7 +364,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
                       max="100"
                       value={walletQuantity}
                       onChange={(e) => setWalletQuantity(e.target.value)}
-                      className="w-full bg-[#091217] border border-[#02b36d40] rounded p-3 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none cyberpunk-input font-mono"
+                      className="w-full bg-slate-600/60 backdrop-blur-sm border border-blue-500/40 rounded p-3 text-sm text-slate-100 focus:border-blue-500 focus:outline-none glassmorphism-input font-mono"
                       placeholder="1"
                     />
                   </div>
@@ -383,7 +383,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
               </div>
 
               {/* Wallet Management Actions */}
-              <div className="bg-[#0a1419] border border-[#02b36d30] rounded-lg p-6">
+              <div className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg p-6">
                 <h3 className="text-lg font-bold text-[#e4fbf2] font-mono mb-4 flex items-center gap-2">
                   <Settings size={20} className="text-[#02b36d]" />
                   WALLET MANAGEMENT
@@ -407,9 +407,9 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
                           setImportKey(e.target.value);
                           setImportError(null);
                         }}
-                        className={`w-full bg-[#091217] border ${
-                          importError ? 'border-[#ff2244]' : 'border-[#02b36d40]'
-                        } rounded p-3 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none cyberpunk-input font-mono`}
+                        className={`w-full bg-slate-600/60 backdrop-blur-sm border ${
+            importError ? 'border-red-500' : 'border-blue-500/40'
+          } rounded p-3 text-sm text-slate-100 focus:border-blue-500 focus:outline-none glassmorphism-input font-mono`}
                       />
                       {importError && (
                         <div className="text-[#ff2244] text-sm font-mono flex items-center">
@@ -445,8 +445,8 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
                         className={`w-full p-3 ${
                           isProcessingFile 
                             ? 'bg-[#02b36d20] cursor-not-allowed' 
-                            : 'bg-[#091217] hover:bg-[#02b36d20] cyberpunk-btn'
-                        } border border-[#02b36d40] rounded font-mono text-sm transition-all duration-300 flex items-center justify-center gap-2`}
+                            : 'bg-slate-700/60 backdrop-blur-sm hover:bg-blue-500/20 glassmorphism-btn'
+              } border border-blue-500/40 rounded font-mono text-sm transition-all duration-300 flex items-center justify-center gap-2`}
                       >
                         <FileUp size={16} />
                         {isProcessingFile ? 'PROCESSING FILE...' : 'IMPORT FROM FILE (.txt/.key)'}
@@ -455,12 +455,12 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
                   </div>
 
                   {/* Management Actions */}
-                  <div className="border-t border-[#02b36d20] pt-4">
+                  <div className="border-t border-blue-500/20 pt-4">
                     <h4 className="text-md font-bold text-[#e4fbf2] font-mono mb-4">ACTIONS</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <button
                         onClick={() => downloadAllWallets(wallets)}
-                        className="p-3 bg-[#091217] border border-[#02b36d40] hover:border-[#02b36d] rounded font-mono text-sm transition-all duration-300 flex items-center justify-center gap-2"
+                        className="p-3 bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 hover:border-blue-500 rounded font-mono text-sm transition-all duration-300 flex items-center justify-center gap-2 glassmorphism-btn"
                       >
                         <Download size={16} />
                         EXPORT ALL WALLETS
@@ -468,7 +468,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
                       
                       <button
                         onClick={() => handleCleanupWallets(wallets, solBalances, tokenBalances, setWallets, showToast)}
-                        className="p-3 bg-[#091217] border border-[#ff224440] hover:border-[#ff2244] rounded font-mono text-sm transition-all duration-300 flex items-center justify-center gap-2 text-[#ff2244]"
+                        className="p-3 bg-slate-700/60 backdrop-blur-sm border border-red-500/40 hover:border-red-500 rounded font-mono text-sm transition-all duration-300 flex items-center justify-center gap-2 text-red-400 glassmorphism-btn"
                       >
                         <Trash2 size={16} />
                         REMOVE EMPTY WALLETS
@@ -479,7 +479,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
               </div>
 
               {/* Wallet Stats */}
-              <div className="bg-[#0a1419] border border-[#02b36d30] rounded-lg p-6">
+              <div className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg p-6">
                 <h3 className="text-lg font-bold text-[#e4fbf2] font-mono mb-4">WALLET STATISTICS</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center">
@@ -511,7 +511,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
 
           {activeTab === 'advanced' && (
             <div className="space-y-6">
-              <div className="bg-[#0a1419] border border-[#02b36d30] rounded-lg p-6">
+              <div className="bg-slate-700/60 backdrop-blur-sm border border-blue-500/30 rounded-lg p-6">
                 <h3 className="text-lg font-bold text-[#e4fbf2] font-mono mb-4 flex items-center gap-2">
                   <Zap size={20} className="text-[#02b36d]" />
                   ADVANCED SETTINGS
@@ -526,12 +526,12 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
                       type="password"
                       value={config.apiKey}
                       onChange={(e) => onConfigChange('apiKey', e.target.value)}
-                      className="w-full bg-[#091217] border border-[#02b36d40] rounded p-3 text-sm text-[#e4fbf2] focus:border-[#02b36d] focus:outline-none cyberpunk-input font-mono"
+                      className="w-full bg-slate-600/60 backdrop-blur-sm border border-blue-500/40 rounded p-3 text-sm text-slate-100 focus:border-blue-500 focus:outline-none glassmorphism-input font-mono"
                       placeholder="Enter API key for enhanced features"
                     />
                   </div>
                   
-                  <div className="bg-[#091217] border border-[#02b36d20] rounded p-4">
+                  <div className="bg-slate-600/60 backdrop-blur-sm border border-blue-500/20 rounded p-4">
                     <h4 className="text-sm font-bold text-[#e4fbf2] font-mono mb-2">SYSTEM INFORMATION</h4>
                     <div className="space-y-2 text-sm font-mono">
                       <div className="flex justify-between">
@@ -558,7 +558,7 @@ const EnhancedSettingsModal: React.FC<EnhancedSettingsModalProps> = ({
         <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-[#02b36d40]">
           <button
             onClick={onClose}
-            className="px-6 py-3 bg-[#091217] border border-[#02b36d40] hover:border-[#02b36d] rounded font-mono text-sm transition-all duration-300"
+            className="px-6 py-3 bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 hover:border-blue-500 rounded font-mono text-sm transition-all duration-300 glassmorphism-btn"
           >
             CANCEL
           </button>

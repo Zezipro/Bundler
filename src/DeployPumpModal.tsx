@@ -370,7 +370,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                   <div className="relative" onMouseEnter={() => setShowInfoTip(true)} onMouseLeave={() => setShowInfoTip(false)}>
                     <Info size={14} className="text-[#7ddfbd] cursor-help" />
                     {showInfoTip && (
-                      <div className="absolute left-0 bottom-full mb-2 p-2 bg-[#091217] border border-[#02b36d30] rounded shadow-lg text-xs text-[#e4fbf2] w-48 z-10 font-mono">
+                      <div className="absolute left-0 bottom-full mb-2 p-2 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded shadow-lg text-xs text-slate-100 w-48 z-10 font-mono">
                         This key is sensitive! Do not share.
                       </div>
                     )}
@@ -382,8 +382,8 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                   disabled={isGenerating}
                   className={`px-4 py-1.5 text-sm rounded-lg transition-all flex items-center gap-1 modal-btn-cyberpunk
                     ${isGenerating 
-                      ? 'bg-[#091217] text-[#7ddfbd] cursor-not-allowed' 
-                      : 'bg-[#091217] hover:bg-[#0a1419] border border-[#02b36d40] hover:border-[#02b36d] text-[#e4fbf2] shadow-lg hover:shadow-[#02b36d40] transform hover:-translate-y-0.5'
+                      ? 'bg-slate-800/30 text-blue-300 cursor-not-allowed'
+          : 'bg-slate-800/30 hover:bg-slate-700/40 border border-blue-400/30 hover:border-blue-400 text-slate-100 shadow-lg hover:shadow-blue-400/30 transform hover:-translate-y-0.5'
                     }`}
                 >
                   {isGenerating ? (
@@ -404,13 +404,13 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                   type="text"
                   value={mintPubkey}
                   onChange={(e) => setMintPubkey(e.target.value)}
-                  className="w-full pl-4 pr-4 py-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                  className="w-full pl-4 pr-4 py-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                   placeholder="ENTER OR GENERATE A MINT PUBKEY"
                 />
               </div>
             </div>
 
-            <div className="bg-[#050a0e] border border-[#02b36d40] rounded-lg shadow-lg modal-glow">
+            <div className="bg-slate-900/20 backdrop-blur-xl border border-blue-500/30 rounded-lg shadow-lg modal-glow">
               <div className="p-6 space-y-6 relative">
                 {/* Ambient grid background */}
                 <div className="absolute inset-0 z-0 opacity-10"
@@ -430,7 +430,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                       type="text"
                       value={tokenData.name}
                       onChange={(e) => setTokenData(prev => ({ ...prev, name: e.target.value }))}
-                      className="w-full bg-[#091217] border border-[#02b36d30] rounded-lg p-2.5 text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                      className="w-full bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg p-2.5 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                       placeholder="ENTER TOKEN NAME"
                     />
                   </div>
@@ -442,7 +442,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                       type="text"
                       value={tokenData.symbol}
                       onChange={(e) => setTokenData(prev => ({ ...prev, symbol: e.target.value }))}
-                      className="w-full bg-[#091217] border border-[#02b36d30] rounded-lg p-2.5 text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                      className="w-full bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg p-2.5 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                       placeholder="ENTER TOKEN SYMBOL"
                     />
                   </div>
@@ -467,8 +467,8 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                       disabled={isUploading}
                       className={`px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all ${
                         isUploading 
-                          ? 'bg-[#091217] text-[#7ddfbd70] cursor-not-allowed border border-[#02b36d20]' 
-                          : 'bg-[#091217] hover:bg-[#0a1419] border border-[#02b36d40] hover:border-[#02b36d] text-[#e4fbf2] shadow-lg hover:shadow-[#02b36d40] transform hover:-translate-y-0.5 modal-btn-cyberpunk'
+                          ? 'bg-slate-800/30 text-slate-500 cursor-not-allowed border border-blue-400/10'
+              : 'bg-slate-800/30 hover:bg-slate-700/40 border border-blue-400/30 hover:border-blue-400 text-slate-100 shadow-lg hover:shadow-blue-400/30 transform hover:-translate-y-0.5 modal-btn-cyberpunk'
                       }`}
                     >
                       {isUploading ? (
@@ -486,7 +486,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                     
                     {tokenData.file && (
                       <div className="flex items-center gap-3 flex-grow">
-                        <div className="h-12 w-12 rounded overflow-hidden border border-[#02b36d40] bg-[#091217] flex items-center justify-center">
+                        <div className="h-12 w-12 rounded overflow-hidden border border-blue-400/30 bg-slate-800/30 backdrop-blur-sm flex items-center justify-center">
                           <img 
                             src={tokenData.file}
                             alt="Logo Preview"
@@ -500,7 +500,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                         <button
                           type="button"
                           onClick={() => setTokenData(prev => ({ ...prev, file: '' }))}
-                          className="p-1.5 rounded-full hover:bg-[#091217] text-[#7ddfbd] hover:text-[#e4fbf2] transition-all"
+                          className="p-1.5 rounded-full hover:bg-slate-800/30 text-blue-300 hover:text-slate-100 transition-all"
                         >
                           <X size={14} />
                         </button>
@@ -509,7 +509,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                   </div>
                   
                   {isUploading && (
-                    <div className="w-full bg-[#091217] rounded-full h-1.5 mt-2">
+                    <div className="w-full bg-slate-800/30 backdrop-blur-sm rounded-full h-1.5 mt-2">
                       <div 
                         className="bg-[#02b36d] h-1.5 rounded-full transition-all duration-300 progress-bar-cyberpunk"
                         style={{ width: `${uploadProgress}%` }}
@@ -526,7 +526,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                   <textarea
                     value={tokenData.description}
                     onChange={(e) => setTokenData(prev => ({ ...prev, description: e.target.value }))}
-                    className="w-full bg-[#091217] border border-[#02b36d30] rounded-lg p-2.5 text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk min-h-24 font-mono"
+                    className="w-full bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg p-2.5 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk min-h-24 font-mono"
                     placeholder="DESCRIBE YOUR TOKEN"
                     rows={3}
                   />
@@ -542,7 +542,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                         type="text"
                         value={tokenData.telegram}
                         onChange={(e) => setTokenData(prev => ({ ...prev, telegram: e.target.value }))}
-                        className="w-full pl-9 pr-4 py-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                         placeholder="T.ME/YOURGROUP"
                       />
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -561,7 +561,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                         type="text"
                         value={tokenData.twitter}
                         onChange={(e) => setTokenData(prev => ({ ...prev, twitter: e.target.value }))}
-                        className="w-full pl-9 pr-4 py-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                         placeholder="@YOURHANDLE"
                       />
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -580,7 +580,7 @@ export const DeployPumpModal: React.FC<DeployPumpModalProps> = ({
                         type="text"
                         value={tokenData.website}
                         onChange={(e) => setTokenData(prev => ({ ...prev, website: e.target.value }))}
-                        className="w-full pl-9 pr-4 py-2.5 bg-[#091217] border border-[#02b36d30] rounded-lg text-[#e4fbf2] placeholder-[#7ddfbd70] focus:outline-none focus:ring-1 focus:ring-[#02b36d50] focus:border-[#02b36d] transition-all modal-input-cyberpunk font-mono"
+                        className="w-full pl-9 pr-4 py-2.5 bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 rounded-lg text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-400/50 focus:border-blue-400 transition-all modal-input-cyberpunk font-mono"
                         placeholder="HTTPS://YOURSITE.COM"
                       />
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

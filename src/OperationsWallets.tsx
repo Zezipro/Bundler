@@ -309,14 +309,14 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-[#05080a] border border-[#02b36d30] rounded-lg p-6 max-w-md w-full mx-4"
+              className="bg-slate-800/60 backdrop-blur-md border border-blue-500/40 glassmorphism-border rounded-lg p-6 max-w-md w-full mx-4"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-lg font-mono text-[#02b36d] tracking-wider">Fund Wallets</h2>
+                <h2 className="text-lg font-mono text-blue-400 tracking-wider">Fund Wallets</h2>
                 <button
                   onClick={closeFundModal}
-                  className="text-[#02b36d] hover:text-[#7ddfbd] transition-colors"
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <X size={20} />
                 </button>
@@ -330,14 +330,14 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                   whileTap="tap"
                   onClick={openDistributeFromFund}
                   className="w-full flex items-center gap-3 p-4 rounded-md
-                           bg-[#071015] border border-[#02b36d30] hover:border-[#02b36d50]
-                           text-[#02b36d] hover:text-[#7ddfbd] transition-all duration-300
-                           hover:shadow-md hover:shadow-[#02b36d15]"
+                           bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 hover:border-blue-500/60
+                           text-blue-400 hover:text-blue-300 transition-all duration-300
+                           hover:shadow-md hover:shadow-blue-500/15"
                 >
                   <Share2 size={20} />
                   <div className="text-left">
                     <div className="font-mono text-sm tracking-wider">Distribute SOL</div>
-                    <div className="text-xs text-[#02b36d80] mt-1">Send SOL from main wallet to multiple wallets</div>
+                    <div className="text-xs text-blue-400/60 mt-1">Send SOL from main wallet to multiple wallets</div>
                   </div>
                 </motion.button>
                 
@@ -348,14 +348,14 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                   whileTap="tap"
                   onClick={openMixerFromFund}
                   className="w-full flex items-center gap-3 p-4 rounded-md
-                           bg-[#071015] border border-[#02b36d30] hover:border-[#02b36d50]
-                           text-[#02b36d] hover:text-[#7ddfbd] transition-all duration-300
-                           hover:shadow-md hover:shadow-[#02b36d15]"
+                           bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 hover:border-blue-500/60
+                           text-blue-400 hover:text-blue-300 transition-all duration-300
+                           hover:shadow-md hover:shadow-blue-500/15"
                 >
                   <Share size={20} />
                   <div className="text-left">
                     <div className="font-mono text-sm tracking-wider">Mixer SOL</div>
-                    <div className="text-xs text-[#02b36d80] mt-1">Mix SOL between wallets for privacy</div>
+                    <div className="text-xs text-blue-400/60 mt-1">Mix SOL between wallets for privacy</div>
                   </div>
                 </motion.button>
               </div>
@@ -379,14 +379,14 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-[#05080a] border border-[#02b36d30] rounded-lg p-6 max-w-md w-full mx-4"
+              className="bg-slate-800/60 backdrop-blur-md border border-blue-500/40 glassmorphism-border rounded-lg p-6 max-w-md w-full mx-4"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-lg font-mono text-[#02b36d] tracking-wider">Quick Buy Settings</h2>
+                <h2 className="text-lg font-mono text-blue-400 tracking-wider">Quick Buy Settings</h2>
                 <button
                   onClick={() => setIsQuickBuySettingsOpen(false)}
-                  className="text-[#02b36d] hover:text-[#7ddfbd] transition-colors"
+                  className="text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <X size={20} />
                 </button>
@@ -396,10 +396,10 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <span className="text-sm font-mono text-[#02b36d] block mb-1">
+                      <span className="text-sm font-mono text-blue-400 block mb-1">
                         Quick Buy Feature
                       </span>
-                      <p className="text-xs text-[#02b36d80]">
+                      <p className="text-xs text-blue-400/60">
                         Show quick buy buttons in wallet rows
                       </p>
                     </div>
@@ -407,22 +407,22 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                     {/* Custom Toggle Switch */}
                     <button
                       onClick={() => setTempQuickBuyEnabled(!tempQuickBuyEnabled)}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#02b36d] focus:ring-offset-2 focus:ring-offset-[#071015] ${
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 ${
                         tempQuickBuyEnabled 
-                          ? 'bg-gradient-to-r from-[#02b36d] to-[#02c377]' 
-                          : 'bg-[#1a1f2e] border border-[#02b36d30]'
+                          ? 'bg-gradient-to-r from-blue-500 to-blue-600' 
+                        : 'bg-slate-700/60 border border-blue-500/40'
                       }`}
                     >
                       <span
                         className={`inline-block h-4 w-4 transform rounded-full transition-transform duration-200 ${
                           tempQuickBuyEnabled 
-                            ? 'translate-x-6 bg-[#051014] shadow-lg' 
-                            : 'translate-x-1 bg-[#02b36d60]'
+                            ? 'translate-x-6 bg-slate-900 shadow-lg' 
+                            : 'translate-x-1 bg-blue-400/60'
                         }`}
                       />
                       {/* Glow effect when enabled */}
                       {tempQuickBuyEnabled && (
-                        <div className="absolute inset-0 rounded-full bg-[#02b36d] opacity-20 blur-sm" />
+                        <div className="absolute inset-0 rounded-full bg-blue-500 opacity-20 blur-sm" />
                       )}
                     </button>
                   </div>
@@ -433,10 +433,10 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                   {/* Range Toggle */}
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <span className="text-sm font-mono text-[#02b36d] block mb-1">
+                      <span className="text-sm font-mono text-blue-400 block mb-1">
                         Random Amount Range
                       </span>
-                      <p className="text-xs text-[#02b36d80]">
+                      <p className="text-xs text-blue-400/60">
                         Use random amounts between min and max
                       </p>
                     </div>
@@ -444,17 +444,17 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                     <button
                       onClick={() => setTempUseQuickBuyRange(!tempUseQuickBuyRange)}
                       disabled={!tempQuickBuyEnabled}
-                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#02b36d] focus:ring-offset-2 focus:ring-offset-[#071015] disabled:opacity-50 disabled:cursor-not-allowed ${
+                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed ${
                         tempUseQuickBuyRange && tempQuickBuyEnabled
-                          ? 'bg-gradient-to-r from-[#02b36d] to-[#02c377]' 
-                          : 'bg-[#1a1f2e] border border-[#02b36d30]'
+                          ? 'bg-gradient-to-r from-blue-500 to-blue-600' 
+                          : 'bg-slate-700/60 border border-blue-500/40'
                       }`}
                     >
                       <span
                         className={`inline-block h-3 w-3 transform rounded-full transition-transform duration-200 ${
                           tempUseQuickBuyRange && tempQuickBuyEnabled
-                            ? 'translate-x-5 bg-[#051014] shadow-lg' 
-                            : 'translate-x-1 bg-[#02b36d60]'
+                            ? 'translate-x-5 bg-slate-900 shadow-lg' 
+                            : 'translate-x-1 bg-blue-400/60'
                         }`}
                       />
                     </button>
@@ -464,7 +464,7 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                   {tempUseQuickBuyRange ? (
                     <div className="space-y-3">
                       <div>
-                        <label className="block text-sm font-mono text-[#02b36d] mb-2">
+                        <label className="block text-sm font-mono text-blue-400 mb-2">
                           Minimum SOL Amount
                         </label>
                         <input
@@ -481,15 +481,15 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                             }
                           }}
                           disabled={!tempQuickBuyEnabled}
-                          className="w-full px-3 py-2 bg-[#071015] border border-[#02b36d30] rounded-md
-                                   text-[#e4fbf2] font-mono text-sm focus:border-[#02b36d] focus:outline-none
+                          className="w-full px-3 py-2 bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 rounded-md
+                                   text-slate-100 font-mono text-sm focus:border-blue-500 focus:outline-none
                                    transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                           placeholder="0.01"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-mono text-[#02b36d] mb-2">
+                        <label className="block text-sm font-mono text-blue-400 mb-2">
                           Maximum SOL Amount
                         </label>
                         <input
@@ -505,22 +505,22 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                             }
                           }}
                           disabled={!tempQuickBuyEnabled}
-                          className="w-full px-3 py-2 bg-[#071015] border border-[#02b36d30] rounded-md
-                                   text-[#e4fbf2] font-mono text-sm focus:border-[#02b36d] focus:outline-none
+                          className="w-full px-3 py-2 bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 rounded-md
+                                   text-slate-100 font-mono text-sm focus:border-blue-500 focus:outline-none
                                    transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                           placeholder="0.05"
                         />
                       </div>
                       
-                      <div className="bg-[#02b36d10] border border-[#02b36d20] rounded-md p-3">
-                        <p className="text-xs text-[#02b36d80]">
+                      <div className="bg-blue-500/10 border border-blue-500/20 rounded-md p-3">
+                        <p className="text-xs text-blue-400/60">
                           Each quick buy will use a random amount between {tempQuickBuyMinAmount.toFixed(3)} and {tempQuickBuyMaxAmount.toFixed(3)} SOL
                         </p>
                       </div>
                     </div>
                   ) : (
                     <div>
-                      <label className="block text-sm font-mono text-[#02b36d] mb-2">
+                      <label className="block text-sm font-mono text-blue-400 mb-2">
                         Fixed SOL Amount
                       </label>
                       <input
@@ -531,12 +531,12 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                         value={tempQuickBuyAmount}
                         onChange={(e) => setTempQuickBuyAmount(parseFloat(e.target.value) || 0.001)}
                         disabled={!tempQuickBuyEnabled}
-                        className="w-full px-3 py-2 bg-[#071015] border border-[#02b36d30] rounded-md
-                                 text-[#e4fbf2] font-mono text-sm focus:border-[#02b36d] focus:outline-none
+                        className="w-full px-3 py-2 bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 rounded-md
+                                 text-slate-100 font-mono text-sm focus:border-blue-500 focus:outline-none
                                  transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         placeholder="0.01"
                       />
-                      <p className="text-xs text-[#02b36d80] mt-1">
+                      <p className="text-xs text-blue-400/60 mt-1">
                         Fixed amount of SOL to spend when clicking quick buy buttons
                       </p>
                     </div>
@@ -550,8 +550,8 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                     whileHover="hover"
                     whileTap="tap"
                     onClick={() => setIsQuickBuySettingsOpen(false)}
-                    className="flex-1 py-2 px-4 rounded-md border border-[#02b36d30]
-                             text-[#02b36d] hover:text-[#7ddfbd] transition-colors duration-200"
+                    className="flex-1 py-2 px-4 rounded-md border border-blue-500/40
+                             text-blue-400 hover:text-blue-300 transition-colors duration-200"
                   >
                     Cancel
                   </motion.button>
@@ -566,8 +566,8 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                         ? (tempQuickBuyMinAmount <= 0 || tempQuickBuyMaxAmount <= 0 || tempQuickBuyMinAmount >= tempQuickBuyMaxAmount)
                         : tempQuickBuyAmount <= 0
                     )}
-                    className="flex-1 py-2 px-4 rounded-md bg-[#02b36d] text-[#051014]
-                             hover:bg-[#02c377] disabled:opacity-50 disabled:cursor-not-allowed
+                    className="flex-1 py-2 px-4 rounded-md bg-blue-500 text-slate-900
+                             hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed
                              transition-colors duration-200 font-mono"
                   >
                     Save
@@ -581,8 +581,8 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
       )}
 
       {/* Main controls bar - slimmer and more minimal */}
-      <div className="w-full mb-1 bg-[#05080a95] backdrop-blur-sm rounded-md p-0.5 
-                    border border-[#02b36d20]">
+      <div className="w-full mb-1 bg-slate-800/60 backdrop-blur-md rounded-md p-0.5 
+                    border border-blue-500/20">
         <div className="flex justify-between items-center">
           {/* Primary action buttons - without tooltips */}
           <div className="flex items-center gap-0.5 flex-1">
@@ -593,9 +593,9 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                 whileHover="hover"
                 whileTap="tap"
                 onClick={openWalletsModal}
-                className="flex items-center text-xs font-mono tracking-wider text-[#02b36d] 
-                           hover:text-[#7ddfbd] px-2 py-1 rounded bg-[#071015] border 
-                           border-[#02b36d30] hover:border-[#02b36d50] transition-colors duration-200"
+                className="flex items-center text-xs font-mono tracking-wider text-blue-400 
+                           hover:text-blue-300 px-2 py-1 rounded bg-slate-700/60 border 
+                           border-blue-500/40 hover:border-blue-500/60 transition-colors duration-200"
               >
                 <span>Start Here &gt;</span>
               </motion.button>
@@ -609,8 +609,8 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                   whileTap="tap"
                   onClick={action.onClick}
                   disabled={action.disabled}
-                  className="p-1.5 text-[#02b36d] hover:text-[#7ddfbd] disabled:opacity-50 
-                           bg-[#071015] border border-[#02b36d20] hover:border-[#02b36d40] rounded 
+                  className="p-1.5 text-blue-400 hover:text-blue-300 disabled:opacity-50 
+                           bg-slate-700/60 border border-blue-500/20 hover:border-blue-500/40 rounded 
                            transition-colors duration-200 flex-shrink-0 flex items-center justify-center"
                 >
                   <span>{action.icon}</span>
@@ -629,10 +629,10 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                 whileTap="tap"
                 onClick={openQuickBuySettings}
                 className={`flex items-center gap-1 px-2 py-1.5 text-xs font-mono tracking-wider
-                         bg-[#071015] border rounded transition-colors duration-200 ${
+                         bg-slate-700/60 border rounded transition-colors duration-200 ${
                   quickBuyEnabled 
-                    ? 'text-[#02b36d] hover:text-[#7ddfbd] border-[#02b36d20] hover:border-[#02b36d40]'
-                    : 'text-[#02b36d50] border-[#02b36d10] opacity-60'
+                    ? 'text-blue-400 hover:text-blue-300 border-blue-500/20 hover:border-blue-500/40'
+                    : 'text-blue-400/50 border-blue-500/10 opacity-60'
                 }`}
               >
                 <Zap size={12} />
@@ -655,8 +655,8 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
               whileTap="tap"
               onClick={toggleDrawer}
               className="ml-0.5 p-1.5 flex items-center justify-center rounded
-                       bg-gradient-to-r from-[#02b36d] to-[#018a54] 
-                       text-[#051014] hover:from-[#02c377] hover:to-[#01a35f]
+                       bg-gradient-to-r from-blue-500 to-blue-600 
+                       text-slate-900 hover:from-blue-400 hover:to-blue-500
                        transition-colors duration-200"
             >
               {isDrawerOpen ? <X size={14} /> : <Menu size={14} />}
@@ -673,15 +673,15 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="bg-[#05080a95] backdrop-blur-sm rounded-lg overflow-hidden
-                     border border-[#02b36d30] shadow-lg shadow-[#02b36d10]"
+            className="bg-slate-800/60 backdrop-blur-md rounded-lg overflow-hidden
+                     border border-blue-500/40 shadow-lg shadow-blue-500/10"
           >
             <div className="p-3">
               {/* Drawer header */}
-              <div className="flex justify-between items-center mb-3 pb-2 border-b border-[#02b36d20]">
+              <div className="flex justify-between items-center mb-3 pb-2 border-b border-blue-500/20">
                 <div className="flex items-center gap-2">
                   <motion.div 
-                    className="w-1 h-4 bg-[#02b36d]"
+                    className="w-1 h-4 bg-blue-500"
                     animate={{ 
                       height: [4, 16, 4],
                     }}
@@ -691,7 +691,7 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                       repeatType: "mirror" 
                     }}
                   />
-                  <span className="text-xs font-mono tracking-wider text-[#02b36d] uppercase">Wallet Operations</span>
+                  <span className="text-xs font-mono tracking-wider text-blue-400 uppercase">Wallet Operations</span>
                 </div>
               </div>
               
@@ -706,13 +706,13 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                     whileTap="tap"
                     onClick={op.onClick}
                     className="flex justify-between items-center w-full py-2 px-3 rounded-md
-                             bg-[#071015] border border-[#02b36d30] hover:border-[#02b36d50]
-                             text-[#02b36d] hover:text-[#7ddfbd] transition-all duration-300
-                             hover:shadow-md hover:shadow-[#02b36d15] relative overflow-hidden"
+                             bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 hover:border-blue-500/60
+                             text-blue-400 hover:text-blue-300 transition-all duration-300
+                             hover:shadow-md hover:shadow-blue-500/15 relative overflow-hidden"
                   >
                     {/* Subtle glow effect */}
                     <motion.div 
-                      className="absolute inset-0 bg-[#02b36d]"
+                      className="absolute inset-0 bg-blue-500"
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 0.05 }}
                     />
@@ -720,14 +720,14 @@ export const WalletOperationsButtons: React.FC<WalletOperationsButtonsProps> = (
                       <span>{op.icon}</span>
                       <span className="text-xs font-mono tracking-wider">{op.label}</span>
                     </div>
-                    <ChevronRight size={14} className="relative z-10 text-[#02b36d80]" />
+                    <ChevronRight size={14} className="relative z-10 text-blue-400/60" />
                   </motion.button>
                 ))}
               </div>
             </div>
             
             {/* Decorative bottom edge */}
-            <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#02b36d40] to-transparent"/>
+            <div className="h-1 w-full bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"/>
           </motion.div>
         )}
       </AnimatePresence>

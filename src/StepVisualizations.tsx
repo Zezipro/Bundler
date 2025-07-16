@@ -23,7 +23,7 @@ const StepVisualization: React.FC<StepVisualizationProps> = ({ step }) => {
 // Step 1: Configuration Visual
 const ConfigurationVisual: React.FC = () => {
   return (
-    <div className="relative w-full h-48 bg-[#0a1419] rounded border border-[#02b36d40] p-4 overflow-hidden">
+    <div className="relative w-full h-48 bg-slate-800/60 backdrop-blur-md rounded border border-blue-500/40 p-4 overflow-hidden">
       {/* Animated settings gear */}
       <div className="absolute right-6 top-6 animate-[spin_10s_linear_infinite]">
         <Settings size={24} className="text-[#02b36d]" />
@@ -31,23 +31,23 @@ const ConfigurationVisual: React.FC = () => {
 
       {/* RPC endpoint input mockup */}
       <div className="mt-4 mb-6">
-        <div className="text-xs text-[#7ddfbd] font-mono uppercase mb-2">RPC ENDPOINT</div>
-        <div className="w-full h-10 rounded bg-[#091217] border border-[#02b36d80] flex items-center px-3">
-          <div className="animate-pulse w-3/4 h-4 bg-[#02b36d30] rounded"></div>
+        <div className="text-xs text-slate-300 font-mono uppercase mb-2">RPC ENDPOINT</div>
+        <div className="w-full h-10 rounded bg-slate-700/60 backdrop-blur-sm border border-blue-500/80 flex items-center px-3">
+          <div className="animate-pulse w-3/4 h-4 bg-blue-400/30 rounded"></div>
         </div>
       </div>
 
       {/* Transaction fee input mockup */}
       <div className="mb-4">
-        <div className="text-xs text-[#7ddfbd] font-mono uppercase mb-2">TRANSACTION FEE</div>
-        <div className="w-full h-10 rounded bg-[#091217] border border-[#02b36d80] flex items-center px-3">
-          <div className="w-16 h-4 bg-[#02b36d30] rounded"></div>
-          <div className="ml-auto text-xs text-[#02b36d40]">SOL</div>
+        <div className="text-xs text-slate-300 font-mono uppercase mb-2">TRANSACTION FEE</div>
+        <div className="w-full h-10 rounded bg-slate-800/30 backdrop-blur-sm border border-blue-400/20 flex items-center px-3">
+          <div className="w-16 h-4 bg-blue-400/30 rounded"></div>
+          <div className="ml-auto text-xs text-blue-400/40">SOL</div>
         </div>
       </div>
 
       {/* Pulsing highlight effect */}
-      <div className="absolute inset-0 border-2 border-[#02b36d] rounded opacity-0 animate-[pulse_2s_ease-in-out_infinite]"></div>
+      <div className="absolute inset-0 border-2 border-blue-500 rounded opacity-0 animate-[glass-pulse_2s_ease-in-out_infinite]"></div>
     </div>
   );
 };
@@ -55,11 +55,11 @@ const ConfigurationVisual: React.FC = () => {
 // Step 2: Token Setup Visual
 const TokenSetupVisual: React.FC = () => {
   return (
-    <div className="relative w-full h-48 bg-[#0a1419] rounded border border-[#02b36d40] p-4 overflow-hidden">
+    <div className="relative w-full h-48 bg-slate-800/40 backdrop-blur-sm rounded border border-blue-400/30 p-4 overflow-hidden">
       {/* Token address input mockup */}
-      <div className="text-xs text-[#7ddfbd] font-mono uppercase mb-2">TOKEN ADDRESS</div>
-      <div className="w-full h-10 rounded bg-[#091217] border border-[#02b36d80] flex items-center px-3 relative overflow-hidden">
-        <div className="w-3/4 h-4 bg-[#02b36d30] rounded"></div>
+      <div className="text-xs text-slate-300 font-mono uppercase mb-2">TOKEN ADDRESS</div>
+      <div className="w-full h-10 rounded bg-slate-700/60 backdrop-blur-sm border border-blue-500/80 flex items-center px-3 relative overflow-hidden">
+        <div className="w-3/4 h-4 bg-blue-400/30 rounded"></div>
         
         {/* Animated typing effect */}
         <div className="absolute inset-0 flex items-center px-3">
@@ -69,14 +69,14 @@ const TokenSetupVisual: React.FC = () => {
 
       {/* Deploy token option */}
       <div className="mt-6 flex items-center">
-        <div className="w-10 h-10 rounded-full bg-[#091217] border border-[#02b36d60] flex items-center justify-center mr-4">
+        <div className="w-10 h-10 rounded-full bg-slate-700/60 backdrop-blur-sm border border-blue-500/60 flex items-center justify-center mr-4">
           <Rocket size={20} className="text-[#02b36d]" />
         </div>
         <div>
-          <div className="text-[#e4fbf2] text-sm">Deploy New Token</div>
-          <div className="text-[#7ddfbd] text-xs">Create your custom token</div>
+          <div className="text-slate-100 text-sm">Deploy New Token</div>
+          <div className="text-slate-300 text-xs">Create your custom token</div>
         </div>
-        <ArrowRight size={16} className="text-[#02b36d] ml-auto animate-[bounceX_1s_ease-in-out_infinite]" />
+        <ArrowRight size={16} className="text-blue-400 ml-auto animate-[bounceX_1s_ease-in-out_infinite]" />
       </div>
 
       {/* Pulsing rocket animation */}
@@ -93,7 +93,7 @@ const TokenSetupVisual: React.FC = () => {
 // Step 3: Trading Visual
 const TradingVisual: React.FC = () => {
   return (
-    <div className="relative w-full h-48 bg-[#0a1419] rounded border border-[#02b36d40] p-4 overflow-hidden">
+    <div className="relative w-full h-48 bg-slate-800/40 backdrop-blur-sm rounded border border-blue-400/30 p-4 overflow-hidden">
       {/* Price chart mockup */}
       <div className="w-full h-16 flex items-end space-x-1 mb-4">
         {[3, 5, 4, 7, 6, 8, 9, 8, 10, 12, 10, 14, 13, 15].map((height, i) => (
@@ -114,16 +114,16 @@ const TradingVisual: React.FC = () => {
         <button className="flex-1 bg-[#02b36d] text-black font-medium py-2 rounded text-sm font-mono">
           BUY
         </button>
-        <button className="flex-1 bg-[#091217] border border-[#02b36d40] text-[#02b36d] py-2 rounded text-sm font-mono">
+        <button className="flex-1 bg-slate-700/60 backdrop-blur-sm border border-blue-500/40 text-blue-400 py-2 rounded text-sm font-mono">
           SELL
         </button>
       </div>
 
       {/* Wallet balance mockup */}
       <div className="flex justify-between text-xs font-mono">
-        <div className="text-[#7ddfbd]">BALANCE:</div>
-        <div className="text-[#e4fbf2]"><span className="text-[#02b36d]">1.45</span> SOL</div>
-        <div className="text-[#e4fbf2]"><span className="text-[#02b36d]">25,000</span> TOKENS</div>
+        <div className="text-slate-300">BALANCE:</div>
+        <div className="text-slate-100"><span className="text-blue-400">1.45</span> SOL</div>
+        <div className="text-slate-100"><span className="text-blue-400">25,000</span> TOKENS</div>
       </div>
 
       {/* Trading activity indicator */}
@@ -139,17 +139,17 @@ const ProfitVisual: React.FC = () => {
       {/* Profit stats mockup */}
       <div className="flex justify-between mb-4">
         <div className="w-1/2 pr-2">
-          <div className="text-xs text-[#7ddfbd] font-mono uppercase mb-1">DAILY PROFIT</div>
-          <div className="text-lg text-[#02b36d] font-mono font-bold">+23.5%</div>
+          <div className="text-xs text-slate-300 font-mono uppercase mb-1">DAILY PROFIT</div>
+          <div className="text-lg text-blue-400 font-mono font-bold">+23.5%</div>
         </div>
         <div className="w-1/2 pl-2">
-          <div className="text-xs text-[#7ddfbd] font-mono uppercase mb-1">TOTAL PNL</div>
-          <div className="text-lg text-[#02b36d] font-mono font-bold">+1.25 SOL</div>
+          <div className="text-xs text-slate-300 font-mono uppercase mb-1">TOTAL PNL</div>
+          <div className="text-lg text-blue-400 font-mono font-bold">+1.25 SOL</div>
         </div>
       </div>
 
       {/* Portfolio value chart */}
-      <div className="relative w-full h-16 mb-4 bg-[#091217] rounded border border-[#02b36d20] overflow-hidden">
+      <div className="relative w-full h-16 mb-4 bg-slate-700/60 backdrop-blur-sm rounded border border-blue-500/20 overflow-hidden">
         <div 
           className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-r from-[#02b36d20] to-[#02b36d40]"
           style={{

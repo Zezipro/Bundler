@@ -74,9 +74,9 @@ const PresetButton = ({
           onChange={(e) => setEditValue(e.target.value.replace(/[^0-9.]/g, ''))}
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
-          className="w-full h-8 px-2 text-xs font-mono rounded border text-center
-                   bg-[#050a0e] text-[#e4fbf2] border-[#02b36d]
-                   focus:outline-none focus:ring-1 focus:ring-[#02b36d40]"
+          className="w-full px-2 text-xs font-mono rounded border text-center
+                   bg-slate-900/90 backdrop-blur-md text-slate-100 border-blue-500
+                   focus:outline-none focus:ring-1 focus:ring-blue-500/40"
         />
       </div>
     );
@@ -90,7 +90,7 @@ const PresetButton = ({
                 min-w-[48px] h-8 flex items-center justify-center
                 disabled:opacity-50 disabled:cursor-not-allowed
                 ${variant === 'buy' 
-                  ? 'bg-[#050a0e60] border-[#02b36d40] text-[#02b36d] hover:bg-[#02b36d20] hover:border-[#02b36d]' 
+                  ? 'bg-slate-800/60 backdrop-blur-sm border-blue-500/40 text-blue-400 hover:bg-blue-500/20 hover:border-blue-500' 
                   : 'bg-[#050a0e60] border-[#ff323240] text-[#ff3232] hover:bg-[#ff323220] hover:border-[#ff3232]'
                 }`}
     >
@@ -155,8 +155,8 @@ const TabButton = ({ label, isActive, onClick, onEdit, isEditMode }) => {
           onKeyDown={handleKeyDown}
           onBlur={handleSave}
           className="w-full px-2 py-1 text-xs font-mono rounded
-                   bg-[#050a0e] text-[#e4fbf2] border border-[#02b36d]
-                   focus:outline-none focus:ring-1 focus:ring-[#02b36d40]"
+                   bg-slate-900/90 backdrop-blur-md text-slate-100 border border-blue-500
+                   focus:outline-none focus:ring-1 focus:ring-blue-500/40"
         />
       </div>
     );
@@ -167,8 +167,8 @@ const TabButton = ({ label, isActive, onClick, onEdit, isEditMode }) => {
       onClick={handleClick}
       className={`flex-1 px-3 py-1.5 text-xs font-mono rounded transition-all duration-200
                 ${isActive 
-                  ? 'bg-[#02b36d20] border border-[#02b36d] text-[#02b36d]' 
-                  : 'bg-[#050a0e60] border border-[#02b36d20] text-[#7ddfbd60] hover:border-[#02b36d40] hover:text-[#7ddfbd]'
+                  ? 'bg-blue-500/20 border border-blue-500 text-blue-400'
+        : 'bg-slate-800/60 backdrop-blur-sm border border-blue-500/20 text-blue-300/60 hover:border-blue-500/40 hover:text-blue-300'
                 }
                 ${isEditMode ? 'cursor-text' : 'cursor-pointer'}`}
     >
@@ -342,8 +342,8 @@ const TradingCard = ({
             setIsDropdownOpen(!isDropdownOpen);
           }}
           className={`flex items-center justify-between px-1.5 py-0.5 rounded
-                   bg-[#050a0e60] text-[#b3f0d7] border border-[#02b36d40]
-                   hover:bg-[#02b36d20] hover:border-[#02b36d80]
+                   bg-slate-800/60 backdrop-blur-sm text-blue-200 border border-blue-500/40
+        hover:bg-blue-500/20 hover:border-blue-500/80
                    transition-all duration-300 text-[10px] font-mono min-w-[60px]
                    ${isDropdownOpen ? 'shadow-[0_0_10px_rgba(2,179,109,0.3)]' : ''}`}
         >
@@ -358,14 +358,14 @@ const TradingCard = ({
             )}
           </span>
           <div className={`transform transition-transform duration-300 ml-0.5 ${isDropdownOpen ? 'rotate-180' : ''}`}>
-            <ChevronDown size={10} className="text-[#02b36d]" />
+            <ChevronDown size={10} className="text-blue-400" />
           </div>
         </button>
 
         {isDropdownOpen && (
           <div 
-            className="fixed z-[9999] w-32 mt-1 rounded-md bg-[#050a0e]
-                      border border-[#02b36d40] shadow-lg shadow-[#00000080]"
+            className="fixed z-[9999] w-32 mt-1 rounded-md bg-slate-900/90 backdrop-blur-md
+            border border-blue-500/40 shadow-lg shadow-blue-500/20"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="py-0.5">
@@ -373,7 +373,7 @@ const TradingCard = ({
                 <button
                   key={dex.value}
                   className="w-full px-2 py-1 text-left text-[#b3f0d7] text-[10px] font-mono
-                         hover:bg-[#02b36d20] transition-colors duration-200 flex items-center gap-1"
+                         hover:bg-blue-500/20 transition-colors duration-200 flex items-center gap-1"
                   onClick={(e) => handleDexSelect(dex.value, e)}
                 >
                   {dex.value === 'auto' ? (
@@ -434,37 +434,37 @@ const TradingCard = ({
       style={{
         background: "linear-gradient(135deg, rgba(9,18,23,0.8) 0%, rgba(5,10,14,0.9) 100%)",
         backdropFilter: "blur(12px)",
-        border: "1px solid rgba(2,179,109,0.3)"
+        border: "1px solid rgba(59,130,246,0.4)"
       }}
     >
-      {/* Cyberpunk corner accents */}
+      {/* Glassmorphism corner accents */}
       <div className="absolute top-0 left-0 w-24 h-24 pointer-events-none">
-        <div className="absolute top-0 left-0 w-px h-8 bg-gradient-to-b from-[#02b36d] to-transparent"></div>
-        <div className="absolute top-0 left-0 w-8 h-px bg-gradient-to-r from-[#02b36d] to-transparent"></div>
+        <div className="absolute top-0 left-0 w-px h-8 bg-gradient-to-b from-blue-500 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-8 h-px bg-gradient-to-r from-blue-500 to-transparent"></div>
       </div>
       <div className="absolute top-0 right-0 w-24 h-24 pointer-events-none">
-        <div className="absolute top-0 right-0 w-px h-8 bg-gradient-to-b from-[#02b36d] to-transparent"></div>
-        <div className="absolute top-0 right-0 w-8 h-px bg-gradient-to-l from-[#02b36d] to-transparent"></div>
+        <div className="absolute top-0 right-0 w-px h-8 bg-gradient-to-b from-blue-500 to-transparent"></div>
+        <div className="absolute top-0 right-0 w-8 h-px bg-gradient-to-l from-blue-500 to-transparent"></div>
       </div>
       <div className="absolute bottom-0 left-0 w-24 h-24 pointer-events-none">
-        <div className="absolute bottom-0 left-0 w-px h-8 bg-gradient-to-t from-[#02b36d] to-transparent"></div>
-        <div className="absolute bottom-0 left-0 w-8 h-px bg-gradient-to-r from-[#02b36d] to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-px h-8 bg-gradient-to-t from-blue-500 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-8 h-px bg-gradient-to-r from-blue-500 to-transparent"></div>
       </div>
       <div className="absolute bottom-0 right-0 w-24 h-24 pointer-events-none">
-        <div className="absolute bottom-0 right-0 w-px h-8 bg-gradient-to-t from-[#02b36d] to-transparent"></div>
-        <div className="absolute bottom-0 right-0 w-8 h-px bg-gradient-to-l from-[#02b36d] to-transparent"></div>
+        <div className="absolute bottom-0 right-0 w-px h-8 bg-gradient-to-t from-blue-500 to-transparent"></div>
+        <div className="absolute bottom-0 right-0 w-8 h-px bg-gradient-to-l from-blue-500 to-transparent"></div>
       </div>
 
       {/* Main Tabs - Orders and Trading */}
       {!isFloatingCardOpen && (
-        <div className="flex bg-[#050a0e60] border-b border-[#02b36d20]">
+        <div className="flex bg-slate-800/60 backdrop-blur-sm border-b border-blue-500/20">
           {/* Orders Tab - Smaller */}
           <button
             onClick={() => setActiveMainTab('orders')}
             className={`px-3 py-2 text-xs font-mono tracking-wider transition-all duration-200 ${
               activeMainTab === 'orders'
-                ? 'bg-[#02b36d40] text-[#02b36d] border-r border-[#02b36d60]'
-                : 'bg-transparent text-[#7ddfbd40] hover:text-[#7ddfbd60] border-r border-[#02b36d20]'
+                ? 'bg-blue-500/40 text-blue-400 border-r border-blue-500/60'
+                : 'bg-transparent text-blue-300/40 hover:text-blue-300/60 border-r border-blue-500/20'
             }`}
           >
             <ClipboardList size={14} />
@@ -501,15 +501,15 @@ const TradingCard = ({
           </div>
           
           {/* Wallet Counter */}
-          <div className="flex items-center px-3 py-2 border-l border-[#02b36d20]">
-            <div className="flex items-center gap-1 text-xs font-mono text-[#7ddfbd60]">
-              <span className="text-[#02b36d]">{countActiveWallets(wallets)}</span>
+          <div className="flex items-center px-3 py-2 border-l border-blue-500/20">
+            <div className="flex items-center gap-1 text-xs font-mono text-blue-300/60">
+              <span className="text-blue-400">{countActiveWallets(wallets)}</span>
               <svg 
                 width="12" 
                 height="12" 
                 viewBox="0 0 24 24" 
                 fill="none" 
-                className="text-[#02b36d]"
+                className="text-blue-400"
               >
                 <path 
                   d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2h18zM3 10v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8H3zm13 4h2v2h-2v-2z" 
@@ -523,14 +523,14 @@ const TradingCard = ({
 
       {/* Order Type Tabs - Only show for trading tab */}
       {!isFloatingCardOpen && activeMainTab === 'trading' && (
-        <div className="flex items-center justify-between px-4 py-2 bg-[#050a0e40] border-b border-[#02b36d10]">
+        <div className="flex items-center justify-between px-4 py-2 bg-slate-800/40 backdrop-blur-sm border-b border-blue-500/10">
           <div className="flex gap-4">
             <button
               onClick={() => setOrderType('market')}
               className={`text-xs font-mono tracking-wider transition-all duration-200 ${
                 orderType === 'market'
-                  ? 'text-[#02b36d] border-b-2 border-[#02b36d] pb-1'
-                  : 'text-[#7ddfbd60] hover:text-[#7ddfbd] pb-1'
+                  ? 'text-white bg-blue-500 px-3 py-1 rounded shadow-md shadow-blue-500/40'
+                  : 'text-blue-400 hover:text-blue-300 px-3 py-1'
               }`}
             >
               MARKET
@@ -539,8 +539,8 @@ const TradingCard = ({
               onClick={() => setOrderType('limit')}
               className={`text-xs font-mono tracking-wider transition-all duration-200 ${
                 orderType === 'limit'
-                  ? 'text-[#02b36d] border-b-2 border-[#02b36d] pb-1'
-                  : 'text-[#7ddfbd60] hover:text-[#7ddfbd] pb-1'
+                  ? 'text-white bg-blue-500 px-3 py-1 rounded shadow-md shadow-blue-500/40'
+                  : 'text-blue-400 hover:text-blue-300 px-3 py-1'
               }`}
             >
               LIMIT
@@ -553,8 +553,8 @@ const TradingCard = ({
               <CustomSelect />
               <button
                 onClick={onOpenFloating}
-                className="p-1.5 rounded hover:bg-[#02b36d20] text-[#7ddfbd60] hover:text-[#02b36d] transition-all duration-200"
-                title="Detach"
+              className="p-1.5 rounded hover:bg-blue-500/20 text-[#7ddfbd60] hover:text-blue-400 transition-all duration-200"
+              title="Detach"
               >
                 <Move size={14} />
               </button>
@@ -565,7 +565,7 @@ const TradingCard = ({
 
       {/* Orders Tab Header - Only show for orders tab */}
       {!isFloatingCardOpen && activeMainTab === 'orders' && (
-        <div className="flex items-center justify-between px-4 py-2 bg-[#050a0e40] border-b border-[#02b36d10]">
+        <div className="flex items-center justify-between px-4 py-2 bg-slate-800/40 backdrop-blur-sm border-b border-blue-500/10">
           <div className="text-xs font-mono tracking-wider text-[#7ddfbd] uppercase">
             ACTIVE ORDERS
           </div>
@@ -574,7 +574,7 @@ const TradingCard = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onOpenFloating}
-              className="p-1.5 rounded hover:bg-[#02b36d20] text-[#7ddfbd60] hover:text-[#02b36d] transition-all duration-200"
+              className="p-1.5 rounded hover:bg-blue-500/20 text-[#7ddfbd60] hover:text-blue-400 transition-all duration-200"
               title="Detach"
             >
               <Move size={14} />
@@ -590,8 +590,8 @@ const TradingCard = ({
             /* Orders Content */
             <div className="space-y-3">
               <div className="text-center py-8">
-                <div className="text-[#7ddfbd60] text-sm font-mono mb-2">No active orders</div>
-                <div className="text-[#7ddfbd40] text-xs font-mono">Your limit orders will appear here</div>
+                <div className="text-blue-300/60 text-sm font-mono mb-2">No active orders</div>
+                <div className="text-blue-300/40 text-xs font-mono">Your limit orders will appear here</div>
               </div>
             </div>
           ) : (
@@ -601,10 +601,10 @@ const TradingCard = ({
           {orderType !== 'limit' && (
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-mono tracking-wider text-[#7ddfbd] uppercase">
+                <label className="text-xs font-mono tracking-wider text-blue-300 uppercase">
                   AMOUNT
                 </label>
-                <span className="text-xs text-[#7ddfbd60] font-mono">
+                <span className="text-xs text-blue-300/60 font-mono">
                   {activeTradeType === 'buy' ? 'SOL/WALLET' : '% TOKENS'}
                 </span>
               </div>
@@ -617,15 +617,15 @@ const TradingCard = ({
                     onChange={handleAmountChange}
                     placeholder="0.0"
                     disabled={!tokenAddress || isLoading}
-                    className="w-full px-2 py-2 bg-[#050a0e80] border border-[#02b36d40] rounded-lg 
-                             text-[#e4fbf2] placeholder-[#7ddfbd60] font-mono text-sm 
-                             focus:outline-none focus:border-[#02b36d] focus:ring-1 focus:ring-[#02b36d40] 
-                             transition-all duration-300 shadow-inner shadow-[#00000080]
+                    className="w-full px-2 py-2 bg-slate-800/80 backdrop-blur-sm border border-blue-500/40 rounded-lg 
+                             text-slate-100 placeholder-blue-300/40 font-mono text-sm 
+                             focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/40 
+                             transition-all duration-300 shadow-inner shadow-black/80
                              disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   {isLoading && (
                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                      <Loader2 size={16} className="animate-spin text-[#02b36d]" />
+                      <Loader2 size={16} className="animate-spin text-blue-400" />
                     </div>
                   )}
                 </div>
@@ -672,8 +672,8 @@ const TradingCard = ({
                 onClick={() => setIsEditMode(!isEditMode)}
                 className={`px-2 py-1 text-xs rounded transition-colors ${
                   isEditMode 
-                    ? 'bg-[#02b36d] hover:bg-[#01a35f] text-black' 
-                    : 'bg-[#050a0e60] border border-[#02b36d40] text-[#02b36d] hover:bg-[#02b36d20]'
+                    ? 'bg-blue-500 hover:bg-blue-600 text-white' 
+                    : 'bg-slate-800/60 backdrop-blur-sm border border-blue-500/40 text-blue-400 hover:bg-blue-500/20'
                 }`}
                 title={isEditMode ? 'Save changes' : 'Edit presets'}
               >
@@ -708,7 +708,7 @@ const TradingCard = ({
 
           {/* Limit Order Inputs - Work in Progress */}
           {orderType === 'limit' && (
-            <div className="space-y-3 border-[#02b36d20] relative">
+            <div className="space-y-3 border-blue-500/20 relative">
               {/* Work in Progress Banner */}
               <div className="bg-[#ff323220] border border-[#ff323240] rounded-lg p-3 mb-3">
                 <div className="flex items-center gap-2 mb-1">
@@ -725,12 +725,12 @@ const TradingCard = ({
               {/* Labels Row */}
               <div className="flex gap-2 opacity-50">
                 <div className="flex-1">
-                  <label className="text-xs font-mono tracking-wider text-[#7ddfbd60] uppercase">
+                  <label className="text-xs font-mono tracking-wider text-blue-300/60 uppercase">
                     SOL AMOUNT
                   </label>
                 </div>
                 <div className="flex-1">
-                  <label className="text-xs font-mono tracking-wider text-[#7ddfbd60] uppercase">
+                  <label className="text-xs font-mono tracking-wider text-blue-300/60 uppercase">
                     TOKEN AMOUNT
                   </label>
                 </div>
@@ -742,16 +742,16 @@ const TradingCard = ({
                   type="text"
                   placeholder="0.0"
                   disabled
-                  className="flex-1 min-w-0 px-2 py-2 bg-[#050a0e40] border border-[#02b36d20] rounded-lg 
-                           text-[#7ddfbd40] placeholder-[#7ddfbd40] font-mono text-sm 
+                  className="flex-1 min-w-0 px-2 py-2 bg-slate-800/40 backdrop-blur-sm border border-blue-500/20 rounded-lg 
+                           text-blue-300/40 placeholder-blue-300/40 font-mono text-sm 
                            cursor-not-allowed"
                 />
                 <input
                   type="text"
                   placeholder="0.0"
                   disabled
-                  className="flex-1 min-w-0 px-2 py-2 bg-[#050a0e40] border border-[#02b36d20] rounded-lg 
-                           text-[#7ddfbd40] placeholder-[#7ddfbd40] font-mono text-sm 
+                  className="flex-1 min-w-0 px-2 py-2 bg-slate-800/40 backdrop-blur-sm border border-blue-500/20 rounded-lg 
+                           text-blue-300/40 placeholder-blue-300/40 font-mono text-sm 
                            cursor-not-allowed"
                 />
               </div>
@@ -760,7 +760,7 @@ const TradingCard = ({
               <button
                 disabled
                 className="w-full px-4 py-2 text-sm font-mono tracking-wider rounded-lg 
-                         bg-[#02b36d20] text-[#7ddfbd40] 
+                         bg-blue-500/20 text-blue-300/40 
                          transition-all duration-300 relative overflow-hidden
                          opacity-50 cursor-not-allowed"
               >
@@ -773,7 +773,7 @@ const TradingCard = ({
         </div>
       ) : (
         <div className="p-8 text-center">
-          <p className="text-[#7ddfbd60] text-sm font-mono tracking-wider">
+          <p className="text-blue-300/60 text-sm font-mono tracking-wider">
             TRADING INTERFACE IS OPEN IN FLOATING MODE
           </p>
         </div>
