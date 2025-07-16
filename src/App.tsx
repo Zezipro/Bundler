@@ -614,7 +614,7 @@ const WalletManager: React.FC = () => {
 
       
       {/* Top Navigation */}
-      <nav className="relative border-b border-blue-500/30 px-4 py-1 backdrop-blur-md bg-gradient-to-r from-[#0a1419] to-[#050a0e] z-20 modern-card rounded-none border-l-0 border-r-0 border-t-0">
+      <nav className="relative border-b border-blue-500/30 px-4 py-1 backdrop-blur-md bg-transparent z-20 modern-card rounded-none border-l-0 border-r-0 border-t-0">
         <div className="flex items-center gap-2">
 
         <ServiceSelector />
@@ -625,14 +625,14 @@ const WalletManager: React.FC = () => {
               placeholder="TOKEN ADDRESS"
               value={state.tokenAddress}
               onChange={(e) => memoizedCallbacks.setTokenAddress(e.target.value)}
-              className="w-full bg-gradient-to-r from-[#0a1419] to-[#050a0e] border border-blue-500/30 rounded-md px-3 py-1 text-xs text-slate-100 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400/20 font-mono tracking-wider smooth-transition"
+              className="w-full bg-transparent border border-blue-500/30 rounded-md px-3 py-1 text-xs text-slate-100 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400/20 font-mono tracking-wider smooth-transition"
             />
             <div className="absolute right-3 top-1.5 text-blue-400/40 text-xs font-mono">SOL</div>
           </div>
           
           <WalletTooltip content="Paste from clipboard" position="bottom">
             <button
-              className="p-1.5 border border-blue-500/30 hover:border-blue-400 bg-gradient-to-br from-[#0a1419] to-[#050a0e] rounded-md smooth-transition hover:shadow-lg hover:shadow-blue-400/20"
+              className="p-1.5 border border-blue-500/30 hover:border-blue-400 bg-transparent rounded-md smooth-transition hover:shadow-lg hover:shadow-blue-400/20"
               onClick={async () => {
                 try {
                   const text = await navigator.clipboard.readText();
@@ -654,7 +654,7 @@ const WalletManager: React.FC = () => {
           
           <WalletTooltip content="Open Settings" position="bottom">
             <button 
-              className="p-1.5 border border-blue-500/30 hover:border-blue-400 bg-gradient-to-br from-[#0a1419] to-[#050a0e] rounded-md smooth-transition hover:shadow-lg hover:shadow-blue-400/20"
+              className="p-1.5 border border-blue-500/30 hover:border-blue-400 bg-transparent rounded-md smooth-transition hover:shadow-lg hover:shadow-blue-400/20"
               onClick={() => memoizedCallbacks.setIsSettingsOpen(true)}
             >
               <Settings size={16} className="text-blue-400" />

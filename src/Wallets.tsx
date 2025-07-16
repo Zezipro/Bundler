@@ -422,7 +422,7 @@ export const WalletsPage: React.FC<WalletsPageProps> = ({
   };
 
   return (
-    <div className="flex-1 bg-slate-900/90 backdrop-blur-md relative glassmorphism-bg">
+    <div className="flex-1 bg-transparent relative">
       {/* Cyberpunk scanline effect - pointer-events-none ensures it doesn't block clicks */}
       <div className="absolute top-0 left-0 w-full h-full cyberpunk-scanline pointer-events-none z-1 opacity-30"></div>
       

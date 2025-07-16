@@ -815,33 +815,8 @@ export const ActionsPage: React.FC<ActionsPageProps> = ({
   };
 
   return (
-    <div className="flex-1 overflow-y-auto bg-slate-900 p-4 md:p-6 relative">
-      {/* Background effects - glassmorphism style */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Pure glassmorphism background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95">
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-blue-500/5"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent"></div>
-        </div>
-        
-        {/* Glowing corner accents */}
-        <div className="absolute top-0 left-0 w-32 h-32 opacity-20">
-          <div className="absolute top-0 left-0 w-px h-16 bg-gradient-to-b from-blue-500 to-transparent"></div>
-          <div className="absolute top-0 left-0 w-16 h-px bg-gradient-to-r from-blue-500 to-transparent"></div>
-        </div>
-        <div className="absolute top-0 right-0 w-32 h-32 opacity-20">
-          <div className="absolute top-0 right-0 w-px h-16 bg-gradient-to-b from-blue-500 to-transparent"></div>
-          <div className="absolute top-0 right-0 w-16 h-px bg-gradient-to-l from-blue-500 to-transparent"></div>
-        </div>
-        <div className="absolute bottom-0 left-0 w-32 h-32 opacity-20">
-          <div className="absolute bottom-0 left-0 w-px h-16 bg-gradient-to-t from-blue-500 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 w-16 h-px bg-gradient-to-r from-blue-500 to-transparent"></div>
-        </div>
-        <div className="absolute bottom-0 right-0 w-32 h-32 opacity-20">
-          <div className="absolute bottom-0 right-0 w-px h-16 bg-gradient-to-t from-blue-500 to-transparent"></div>
-          <div className="absolute bottom-0 right-0 w-16 h-px bg-gradient-to-l from-blue-500 to-transparent"></div>
-        </div>
-      </div>
+    <div className="flex-1 overflow-y-auto bg-transparent p-4 md:p-6 relative">
+      {/* Background effects removed for transparency */}
       
       <div className="max-w-4xl mx-auto space-y-8 relative z-10">
         {/* Trading Card (unchanged) */}
